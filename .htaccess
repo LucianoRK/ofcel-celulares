@@ -1,0 +1,9 @@
+# this is my version (Nassim) of the htaccess file , I use this one in the root directory "/"
+# of the project and a second .htaccess in the public directory
+
+DirectoryIndex /public/index.php
+RewriteEngine on
+RewriteCond $1 !^(index\.php|images|assets|css|js|robots\.txt|favicon\.ico)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ ./public/index.php/$1 [L,QSA]
