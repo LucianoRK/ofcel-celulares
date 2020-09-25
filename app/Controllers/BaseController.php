@@ -47,10 +47,13 @@ class BaseController extends Controller
 	 * Carrega o template do sistema
 	 * @param string $escopo caminho da view
 	 */
-	public function template($escopo){
+	public function template($escopo, $dados = []){
 
 		echo view('template/header');
-		echo view($escopo);
+		echo view('template/navBar');
+		echo view('template/sideBar');
+		echo view($escopo, $dados);
+		echo view('home/functions');
 		echo view('template/footer');
 	}
 
