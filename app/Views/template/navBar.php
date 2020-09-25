@@ -17,12 +17,12 @@
         </div>
         <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
             <li class="nav-item dropdown">
-                <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="<?= base_url('img/profile.jpg') ?>" alt="user-img" width="36" class="img-circle"><span>Usuário</span></span>
+                <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="<?= base_url('public/img/profile.jpg') ?>" alt="user-img" width="36" class="img-circle"><span>Usuário</span></span>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li>
                         <div class="user-box">
-                            <div class="u-img"><img src="<?= base_url('img/profile.jpg') ?>" alt="user"></div>
+                            <div class="u-img"><img src="<?= base_url('public/img/profile.jpg') ?>" alt="user"></div>
                             <div class="u-text">
                                 <h4>Nome</h4>
                                 <p>Tipo usuário</p>
