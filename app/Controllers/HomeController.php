@@ -6,12 +6,10 @@ class HomeController extends BaseController
 {
 	public function __construct()
 	{
-		//
 	}
-	
 	/////////////////////////////
 	//                         //
-	//	        CRUD           //
+	//	        Paginas        //
 	//                         //
 	/////////////////////////////
 
@@ -20,8 +18,18 @@ class HomeController extends BaseController
 	 */
 	public function index()
 	{
-		$this->template('home', 'index');
+		if ($this->validarSessao()) {
+			return $this->template('home', 'index');
+		} else {
+			return redirect()->to('/');
+		}
 	}
+
+	/////////////////////////////
+	//                         //
+	//	        CRUD           //
+	//                         //
+	/////////////////////////////
 
 	/**
 	 * Mostra um item específico

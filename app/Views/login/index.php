@@ -75,10 +75,10 @@
                 </div>
                 <form class="form-signin" action="<?= base_url('login') ?>" method="post" >
                     <div class="form-label-group">
-                        <input type="text" id="login" class="form-control" placeholder="Digite seu login" autocomplete="false" required autofocus>
+                        <input type="text" id="login" name="login" class="form-control" placeholder="Digite seu login" autocomplete="false" required autofocus>
                     </div>
                     <div class="form-label-group">
-                        <input type="password" id="senha" class="form-control" placeholder="Digite sua senha" autocomplete="false" required>
+                        <input type="password" id="senha" name="senha" class="form-control" placeholder="Digite sua senha" autocomplete="false" required>
                     </div>
                     <?= csrf_field(); ?>
                     <button class="btn btn-lg btn-danger btn-block text-uppercase" type="submit">Entrar</button>

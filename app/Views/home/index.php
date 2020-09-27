@@ -1,0 +1,1 @@
+<?= var_dump($session->get('user'))?>

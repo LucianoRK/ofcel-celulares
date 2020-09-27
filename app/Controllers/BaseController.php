@@ -15,6 +15,7 @@ namespace App\Controllers;
  * @package CodeIgniter
  */
 
+use CodeIgniter\Config\Services;
 use CodeIgniter\Controller;
 
 class BaseController extends Controller
@@ -36,39 +37,86 @@ class BaseController extends Controller
 	{
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
+		$this->session = \Config\Services::session();
+	}
 
-		//--------------------------------------------------------------------
-		// Preload any models, libraries, etc, here.
-		//--------------------------------------------------------------------
-		// E.g.:
-		// $this->session = \Config\Services::session();
+	/**
+	 * validarSessao
+	 */
+	public function validarSessao()
+	{
+		if ($this->session->get('logado')) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
 	 * Carrega o template do sistema
+	 * 
 	 * @param string $escopo caminho da view
+	 * @param string $arquivo caminho da view
+	 * @param array  $dados Informação para a tela
 	 */
 	public function template($pasta, $arquivo, $dados = [])
 	{
 
-		echo view('template/header');
-		echo view('template/navBar');
-		echo view('template/sideBar');
+		$dados['session']       = $this->session;
+		$dados['responseFlash'] = $this->session->getFlashdata('responseFlash');
+
+		echo view('template/header', $dados);
+		echo view('template/navBar', $dados);
+		echo view('template/sideBar', $dados);
 		echo view($pasta . '/' . $arquivo, $dados);
-		echo view($pasta . '/functions');
-		echo view('template/footer');
+		echo view($pasta . '/functions', $dados);
+		echo view('template/footer', $dados);
 	}
 
 	/**
 	 * Carrega o template do sistema sem navbar e sidebar
+	 * 
 	 * @param string $escopo caminho da view
+	 * @param string $arquivo caminho da view
+	 * @param array  $dados Informação para a tela
+	 * 
 	 */
 	public function template_publico($pasta, $arquivo, $dados = [])
 	{
+		$dados['session']       = $this->session;
+		$dados['responseFlash'] = $this->session->getFlashdata('responseFlash');
 
-		echo view('template/header');
+		echo view('template/header', $dados);
 		echo view($pasta . '/' . $arquivo, $dados);
-		echo view($pasta . '/functions');
-		echo view('template/footer');
+		echo view($pasta . '/functions', $dados);
+		echo view('template/footer', $dados);
+	}
+
+	/**
+	 * Gera a criptografia das senhas do sistema
+	 * 
+	 * @param string $senha
+	 */
+	public function criptografia($senha)
+	{
+		$hash = getenv('hashSistema');
+
+		for ($i = 0; $i < 20; $i++) {
+			$senha = sha1($hash . $senha);
+		}
+
+		return $senha;
+	}
+
+	/**
+	 * Gera o retorno flash para o cliente
+	 * 
+	 * @param string $mensagem
+	 * @param string $tipo  success, error, info
+	 * @param int    $tempo tempo da sessão flashdata
+	 */
+	public function setFlashdata($mensagem = null, $tipo = 'info', $tempo = 300)
+	{
+		$this->session->setFlashdata('responseFlash', ['tipo' => $tipo, 'mensagem' => $mensagem], $tempo);
 	}
 }

@@ -2,6 +2,7 @@
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
+$session = Services::session();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
@@ -31,7 +32,13 @@ $routes->setAutoRoute(true);
 // Home
 $routes->get('/', 'LoginController::index');
 $routes->post('/login', 'LoginController::login');
+$routes->get('/logout', 'LoginController::logout');
 $routes->get('/home', 'HomeController::index');
+
+
+
+
+
 
 // Usuário
 
