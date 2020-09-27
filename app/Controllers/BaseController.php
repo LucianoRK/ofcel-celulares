@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 /**
@@ -47,14 +48,27 @@ class BaseController extends Controller
 	 * Carrega o template do sistema
 	 * @param string $escopo caminho da view
 	 */
-	public function template($escopo, $dados = []){
+	public function template($pasta, $arquivo, $dados = [])
+	{
 
 		echo view('template/header');
 		echo view('template/navBar');
 		echo view('template/sideBar');
-		echo view($escopo, $dados);
-		echo view('home/functions');
+		echo view($pasta . '/' . $arquivo, $dados);
+		echo view($pasta . '/functions');
 		echo view('template/footer');
 	}
 
+	/**
+	 * Carrega o template do sistema sem navbar e sidebar
+	 * @param string $escopo caminho da view
+	 */
+	public function template_publico($pasta, $arquivo, $dados = [])
+	{
+
+		echo view('template/header');
+		echo view($pasta . '/' . $arquivo, $dados);
+		echo view($pasta . '/functions');
+		echo view('template/footer');
+	}
 }

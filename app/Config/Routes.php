@@ -29,7 +29,9 @@ $routes->setAutoRoute(true);
  */
 
 // Home
-$routes->get('/', 'HomeController::index');
+$routes->get('/', 'LoginController::index');
+$routes->post('/login', 'LoginController::login');
+$routes->get('/home', 'HomeController::index');
 
 // Usuário
 

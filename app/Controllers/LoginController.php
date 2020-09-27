@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
-class HomeController extends BaseController
+use CodeIgniter\HTTP\Request;
+
+class LoginController extends BaseController
 {
 	public function __construct()
 	{
@@ -20,7 +22,15 @@ class HomeController extends BaseController
 	 */
 	public function index()
 	{
-		$this->template('home', 'index');
+		$this->template_publico('login', 'index');
+    }
+    
+	public function login()
+	{
+        //$senha = $this->request->getVar('senha');
+
+        
+        return redirect()->to('home');
 	}
 
 	/**
