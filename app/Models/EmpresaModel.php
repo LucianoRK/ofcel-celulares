@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UsuarioModel extends Model
+class EmpresaModel extends Model
 {
-    protected $table      = 'usuario';
-    protected $primaryKey = 'usuario_id';
+    protected $table      = 'empresa';
+    protected $primaryKey = 'empresa_id';
     protected $protectFields = false;
     //protected $allowedFields = ['name', 'email'];
 
@@ -25,8 +25,8 @@ class UsuarioModel extends Model
     //protected $validationMessages = [];
     //protected $skipValidation     = false;
 
-    /**
-	 * Pega todos os usuários
+      /**
+	 *  get
 	 * 
 	 * @param array $dados Informação para a tela
 	 * @param bool  $first Se quiser so traser o primeniro registro
@@ -44,7 +44,7 @@ class UsuarioModel extends Model
     }
 
 	/**
-	 * Get de de usuários
+	 * getById
 	 * 
 	 * @param string $escopo caminho da view
 	 * @param string $arquivo caminho da view
@@ -54,4 +54,23 @@ class UsuarioModel extends Model
     {
         return $this->where($dados)->find($id);
     } 
+
+	/**
+	 * getEmpresasUsuario 
+	 * 
+	 * @param int $usuario_id 
+	 */
+    public function getEmpresasUsuario($usuario_id)
+    {
+        $this->select('
+            empresa.empresa_id,
+            empresa.nome,
+            empresa.telefone,
+            ue.principal
+        ');
+        $this->where('ue.usuario_id', $usuario_id);
+        $this->join('usuario_empresa ue', 'ue.empresa_id = empresa.empresa_id');
+        
+        return $this->find();
+    }  
 }

@@ -2405,7 +2405,6 @@ body {
     width: 260px;
     height: 55px;
     line-height: 55px;
-    border-right: 1px solid #eee;
     color: #333333;
     z-index: 1001;
     font-size: 18px;
@@ -2549,7 +2548,7 @@ body {
 }
 
 .sidebar .nav .nav-item.active a:before {
-    background: #1d7af3;
+    background: #e41212;
     opacity: 1 !important;
     position: absolute;
     z-index: 1;
@@ -2561,7 +2560,7 @@ body {
 }
 
 .sidebar .nav .nav-item.active:hover a:before {
-    background: #1d7af3;
+    background: #e41212;
     opacity: 1 !important;
     position: absolute;
     z-index: 1;
@@ -2573,7 +2572,7 @@ body {
 }
 
 .sidebar .nav .nav-item.active a i {
-    color: #4d7cfe;
+    color: #e41212;
 }
 
 .sidebar .nav .nav-item a {
@@ -2595,7 +2594,7 @@ body {
 }
 
 .sidebar .nav .nav-item:hover a:before {
-    background: #1d7af3;
+    background: #e41212;
     opacity: 0.7;
     position: absolute;
     z-index: 1;

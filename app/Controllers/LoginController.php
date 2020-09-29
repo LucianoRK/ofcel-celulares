@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\EmpresaModel;
 use App\Models\UsuarioModel;
 use CodeIgniter\CLI\Console;
 use CodeIgniter\HTTP\Request;
@@ -53,6 +54,7 @@ class LoginController extends BaseController
 	{
 		//Modelos
 		$usuarioModel = new UsuarioModel();
+		$empresaModel = new EmpresaModel();
 
 		//Requests
 		$request = $this->request->getVar();
@@ -72,12 +74,30 @@ class LoginController extends BaseController
 			];
 
 			//Pega os dados do usuário para gravar na sessão
-			$dadosUsuario = $usuarioModel->login($parametros);
+			$dadosUsuario = $usuarioModel->get($parametros, true);
 
 			if ($dadosUsuario) {
+				$dadosEmpresas   = $empresaModel->getEmpresasUsuario($dadosUsuario['usuario_id']);	
+				$dadosEmpresa    = [];			
+				$dadosPermissao  = [];
+
+				foreach($dadosEmpresas as $dadoEmpresas){
+					if($dadoEmpresas['principal'] == 1){
+						$dadosEmpresa  = $dadoEmpresas;
+					}
+				}
+
+				if(!$dadosEmpresa){
+					$this->setFlashdata('O usuário não tem empresa principal', 'error');
+					return redirect()->to('/');
+				}
+
 				$sessionData = [
-					'user'  => $dadosUsuario,
-					'logado' => TRUE
+					'usuario'   => $dadosUsuario,
+					'empresa'   => $dadosEmpresa,
+					'empresas'  => $dadosEmpresas,
+					'permissao' => $dadosPermissao,
+					'logado'    => TRUE
 				];
 
 				//Grava na sessão as informações
@@ -89,7 +109,7 @@ class LoginController extends BaseController
 				return redirect()->to('/');
 			}
 		}else{
-			$this->setFlashdata('Preencha login e senha', 'error');
+			$this->setFlashdata('Usuário ou senha inconrreto', 'error');
 			return redirect()->to('/');
 		}
 	}

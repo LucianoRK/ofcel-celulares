@@ -35,9 +35,8 @@ $routes->post('/login', 'LoginController::login');
 $routes->get('/logout', 'LoginController::logout');
 $routes->get('/home', 'HomeController::index');
 
-
-
-
+//Empresa
+$routes->get('/empresa/trocarEmpresa/(:num)', 'EmpresaController::trocarEmpresa/$1');
 
 
 // Usuário

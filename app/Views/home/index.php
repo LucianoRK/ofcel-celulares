@@ -1,1 +1,6 @@
-<?= var_dump($session->get('user'))?>
+<?= var_dump($session->get('empresa')) ?>
+<script>
+    $(document).ready(function() {
+       
+    });
+</script>

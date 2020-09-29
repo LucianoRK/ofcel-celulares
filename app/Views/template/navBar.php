@@ -10,24 +10,10 @@
                 </button>
                 <button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
             </div>
-
-
             <nav class="navbar navbar-header navbar-expand-lg">
-                <div class="container-fluid">
-                    <!--
-                    <form class="navbar-left navbar-form nav-search " action="">
-                        <div class="input-group">
-                            <input type="text" placeholder="Buscar ..." class="form-control">
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                    <i class="la la-search search-icon"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </form>
-                    -->
+               
                     <div class="navbar-nav topbar-nav">
-                        Nome da Empresa
+                        <i class="la la-university la-2x"></i> <span style="font-size: 20px;"> <?= $session->get('empresa')['nome'] ?></span>
                     </div>
                     <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                         <li class="nav-item dropdown">
@@ -43,16 +29,26 @@
                                         </div>
                                     </div>
                                 </li>
+                                <?php if (count($session->get('empresas')) > 1) : ?>
+                                    <div class="dropdown-divider"></div>
+                                    <?php foreach ($session->get('empresas') as $empresaSelect) : ?>
+                                        <?php if ($session->get('empresa')['empresa_id'] != $empresaSelect['empresa_id']) : ?>
+                                            <a class="dropdown-item" href="empresa/trocarEmpresa/<?= $empresaSelect['empresa_id'] ?>">
+                                                <i class="la la-university"></i> <?= $empresaSelect['nome'] ?>
+                                            </a>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#"><i class="ti-user"></i> Meu perfil</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#"><i class="ti-settings"></i> Configurações</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fa fa-power-off"></i> Sair</a>
+                                <a class="dropdown-item" href="logout"><i class="fa fa-power-off"></i> Sair</a>
                             </ul>
                             <!-- /.dropdown-user -->
                         </li>
                     </ul>
-                </div>
+         
             </nav>
         </div>

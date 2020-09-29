@@ -113,10 +113,11 @@ class BaseController extends Controller
 	 * 
 	 * @param string $mensagem
 	 * @param string $tipo  success, error, info
+	 * @param string $variavel Nome da variavel
 	 * @param int    $tempo tempo da sessão flashdata
 	 */
-	public function setFlashdata($mensagem = null, $tipo = 'info', $tempo = 300)
+	public function setFlashdata($mensagem = '', $tipo = 'info', $variavel = 'responseFlash' ,$tempo = 300)
 	{
-		$this->session->setFlashdata('responseFlash', ['tipo' => $tipo, 'mensagem' => $mensagem], $tempo);
+		$this->session->setFlashdata($variavel, ['tipo' => $tipo, 'mensagem' => $mensagem], $tempo);
 	}
 }

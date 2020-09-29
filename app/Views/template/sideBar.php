@@ -3,7 +3,7 @@
         <ul class="nav">
             <li class="nav-item active">
                 <a href="">
-                    <i class="la la-dashboard"></i>
+                    <i class="la la-home"></i>
                     <p>HOME</p>
                     <!--<span class="badge badge-count">5</span> -->
                 </a>
@@ -11,21 +11,21 @@
 
             <li class="nav-item">
                 <a href="">
-                    <i class="la la-dashboard"></i>
+                    <i class="la la-cart-plus"></i>
                     <p>VENDAS</p>
                     <!--<span class="badge badge-count">5</span> -->
                 </a>
             </li>
             <li class="nav-item">
                 <a href="">
-                    <i class="la la-dashboard"></i>
+                    <i class="la la-mobile"></i>
                     <p>O.S</p>
                     <!--<span class="badge badge-count">5</span> -->
                 </a>
             </li>
             <li class="nav-item">
                 <a href="">
-                    <i class="la la-dashboard"></i>
+                    <i class="la la-money"></i>
                     <p>CAIXA</p>
                     <!--<span class="badge badge-count">5</span> -->
                 </a>
@@ -33,21 +33,21 @@
             <hr>
             <li class="nav-item">
                 <a href="">
-                    <i class="la la-dashboard"></i>
+                    <i class="la la-group"></i>
                     <p>CLIENTES</p>
                     <!--<span class="badge badge-count">5</span> -->
                 </a>
             </li>
             <li class="nav-item">
                 <a href="">
-                    <i class="la la-dashboard"></i>
+                    <i class="la la-dropbox"></i>
                     <p>ESTOQUE</p>
                     <!--<span class="badge badge-count">5</span> -->
                 </a>
             </li>
             <li class="nav-item">
                 <a class="" data-toggle="collapse" href="#collapseProdutos" aria-expanded="true">
-                    <i class="la la-dashboard"></i>
+                    <i class="la la-cubes"></i>
                     <p>PRODUTOS</p>
                     <!--<span class="badge badge-count">5</span> -->
                 </a>
@@ -74,28 +74,21 @@
             <hr>
             <li class="nav-item">
                 <a href="">
-                    <i class="la la-dashboard"></i>
-                    <p>EMPRESAS</p>
-                    <!--<span class="badge badge-count">5</span> -->
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="">
-                    <i class="la la-dashboard"></i>
+                    <i class="la la-user"></i>
                     <p>USUÁRIOS</p>
                     <!--<span class="badge badge-count">5</span> -->
                 </a>
             </li>
             <li class="nav-item">
                 <a href="">
-                    <i class="la la-dashboard"></i>
+                    <i class="la la-unlock"></i>
                     <p>PERMISSÕES</p>
                     <!--<span class="badge badge-count">5</span> -->
                 </a>
             </li>
             <li class="nav-item">
                 <a class="" data-toggle="collapse" href="#collapseRelatorios" aria-expanded="true">
-                    <i class="la la-dashboard"></i>
+                    <i class="la la-pie-chart"></i>
                     <p>RELATÓRIOS</p>
                     <!--<span class="badge badge-count">5</span> -->
                 </a>
