@@ -31,6 +31,7 @@ class EmpresaController extends BaseController
             if($empresas['empresa_id'] == $id){
                 $sessaoCompleta['empresa'] = $empresas;
                 $this->session->set($sessaoCompleta);
+                $this->setFlashdata('Empresa alterada para '.$this->session->get('empresa')['nome'] , 'success');
             }
         }
         return redirect()->to('/');

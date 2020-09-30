@@ -6,6 +6,7 @@ class HomeController extends BaseController
 {
 	public function __construct()
 	{
+		
 	}
 	/////////////////////////////
 	//                         //
@@ -18,11 +19,7 @@ class HomeController extends BaseController
 	 */
 	public function index()
 	{
-		if ($this->validarSessao()) {
-			return $this->template('home', 'index');
-		} else {
-			return redirect()->to('/');
-		}
+		return $this->template('home', 'index');
 	}
 
 	/////////////////////////////

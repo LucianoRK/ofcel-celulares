@@ -10,14 +10,16 @@ class Filters extends BaseConfig
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
-		'throttle' => \App\Filters\Throttle::class
+		'throttle' => \App\Filters\Throttle::class,
+		'sessao' => \App\Filters\Sessao::class
 	];
 
 	// Always applied before every request
 	public $globals = [
 		'before' => [
 			'honeypot',
-			'csrf'
+			'csrf',
+			'sessao'
 		],
 		'after'  => [
 			'toolbar',
@@ -29,7 +31,8 @@ class Filters extends BaseConfig
 	// (GET, POST, etc) as BEFORE filters only
 	//     like: 'post' => ['CSRF', 'throttle'],
 	public $methods = [
-		//'post' => ['throttle'],
+		'get' => ['sessao'],
+		'post' => ['sessao']
 	];
 
 	// List filter aliases and any before/after uri patterns

@@ -4,9 +4,6 @@ namespace App\Controllers;
 
 use App\Models\EmpresaModel;
 use App\Models\UsuarioModel;
-use CodeIgniter\CLI\Console;
-use CodeIgniter\HTTP\Request;
-
 
 class LoginController extends BaseController
 {
@@ -25,7 +22,7 @@ class LoginController extends BaseController
 	 */
 	public function index()
 	{
-		if ($this->validarSessao()) {
+		if ($this->session->get('logado')) {
 			return $this->template('home', 'index');
 		} else {
 			return $this->template_publico('login', 'index');
@@ -102,10 +99,16 @@ class LoginController extends BaseController
 
 				//Grava na sessão as informações
 				$this->session->set($sessionData);
-
+				//Salva o log
+				$this->logAcesso(1, json_encode($dadosUsuario), $this->request->getIPAddress());
+				
 				return redirect()->to('home');
 			} else {
+				//Salva o log
+				$this->logAcesso(2, json_encode($request), $this->request->getIPAddress());
+				//Mensagem de retorno
 				$this->setFlashdata('Usuário ou senha inconrreto', 'error');
+
 				return redirect()->to('/');
 			}
 		}else{
@@ -116,9 +119,6 @@ class LoginController extends BaseController
 
 	/**
 	* Faz o logout do sistema
-	* 
-	* @param string $usuario 
-	* @param string $senha
 	*/
 	public function logout()
 	{

@@ -15,6 +15,7 @@ namespace App\Controllers;
  * @package CodeIgniter
  */
 
+use App\Models\LogAcessoModel;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Controller;
 
@@ -41,25 +42,13 @@ class BaseController extends Controller
 	}
 
 	/**
-	 * validarSessao
-	 */
-	public function validarSessao()
-	{
-		if ($this->session->get('logado')) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
 	 * Carrega o template do sistema
 	 * 
 	 * @param string $escopo caminho da view
 	 * @param string $arquivo caminho da view
 	 * @param array  $dados Informação para a tela
 	 */
-	public function template($pasta, $arquivo, $dados = [])
+	protected function template($pasta, $arquivo, $dados = [])
 	{
 
 		$dados['session']       = $this->session;
@@ -81,7 +70,7 @@ class BaseController extends Controller
 	 * @param array  $dados Informação para a tela
 	 * 
 	 */
-	public function template_publico($pasta, $arquivo, $dados = [])
+	protected function template_publico($pasta, $arquivo, $dados = [])
 	{
 		$dados['session']       = $this->session;
 		$dados['responseFlash'] = $this->session->getFlashdata('responseFlash');
@@ -97,7 +86,7 @@ class BaseController extends Controller
 	 * 
 	 * @param string $senha
 	 */
-	public function criptografia($senha)
+	protected function criptografia($senha)
 	{
 		$hash = getenv('hashSistema');
 
@@ -116,8 +105,36 @@ class BaseController extends Controller
 	 * @param string $variavel Nome da variavel
 	 * @param int    $tempo tempo da sessão flashdata
 	 */
-	public function setFlashdata($mensagem = '', $tipo = 'info', $variavel = 'responseFlash' ,$tempo = 300)
+	protected function setFlashdata($mensagem = '', $tipo = 'info', $variavel = 'responseFlash' ,$tempo = 300)
 	{
 		$this->session->setFlashdata($variavel, ['tipo' => $tipo, 'mensagem' => $mensagem], $tempo);
+	}
+
+	/**
+	 * Log Acesso
+	 * 
+	 * @param int    $status
+	 * @param string $ip
+	 * @param array  $dados
+	 */
+	protected function logAcesso($status, $dados ,$ip)
+	{
+		$log = new LogAcessoModel();
+		$dadosLog = [
+			'status' => !empty($status) ? $status : null,
+			'ip'     => !empty($ip)     ? $ip     : null,
+			'dados'  => !empty($dados)  ? $dados  : null
+		];
+		$log->save($dadosLog);
+	}
+
+	/**
+	 * Log 
+	 * 
+	 * @param array  $dados
+	 */
+	protected function log($dados)
+	{
+		
 	}
 }
