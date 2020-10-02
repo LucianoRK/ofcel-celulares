@@ -18,12 +18,14 @@
     <script src="<?= base_url('js/plugin/bootstrap-toggle/bootstrap-toggle.min.js') ?>"></script>
     <script src="<?= base_url('js/plugin/jquery-mapael/jquery.mapael.min.js') ?>"></script>
     <script src="<?= base_url('js/plugin/jquery-mapael/maps/world_countries.min.js') ?>"></script>
+    <script src="<?= base_url('js/plugin/jquery-mask/jquery-mask.js') ?>"></script>
     <script src="<?= base_url('js/plugin/chart-circle/circles.min.js') ?>"></script>
     <script src="<?= base_url('js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
     <script src="<?= base_url('js/plugin/sweetalert/sweetalert.js') ?>"></script>
-    <script src="<?= base_url('js/ready.min.js') ?>"></script>
+    <script src="<?= base_url('js/ready.js') ?>"></script>
 </head>
 
+<?= csrf_field(); ?>
 
 <script>
 
@@ -56,10 +58,15 @@
         })
     }
 
+    function csrf() {
+        let token = $('[name=csrf_name]').val()
+        let data  = {<?= getenv('app.CSRFTokenName') ?> : token}
+        
+        return data;
+    }
 
 
     $(document).ready(() => {
         responseFlash()
-
     });
 </script>

@@ -1,12 +1,6 @@
-$(function() {
-    $('[data-toggle="tooltip"]').tooltip()
-});
-
-jQuery(document).ready(function() {
+function template() {
     jQuery('.scrollbar-inner').scrollbar();
-});
-
-$(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip()
 
     var toggle_sidebar = false,
         toggle_topbar = false,
@@ -52,5 +46,26 @@ $(document).ready(function() {
         $target = $(this).attr('data-target');
         $($target).prop('checked', $(this).prop("checked"));
     })
+}
 
+function mask() {
+    $('.maskDate').mask('11/11/1111');
+    $('.maskTime').mask('00:00:00');
+    $('.maskDateTime').mask('99/99/9999 00:00:00');
+    $('.maskCep').mask('99999-999');
+    $('.maskTelefone').mask("(99) 9999-9999#").focusout(function(event) {
+        if ($(this).val().length == 15) {
+            $(this).unmask();
+            $(this).mask('(99) 99999-9999');
+        } else {
+            $(this).unmask();
+            $(this).mask('(99) 9999-9999');
+        }
+    })
+}
+
+
+$(document).ready(function() {
+    template()
+    mask()
 });

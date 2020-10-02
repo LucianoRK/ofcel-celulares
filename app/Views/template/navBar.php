@@ -24,7 +24,7 @@
                                     <div class="user-box">
                                         <div class="u-img"><img src="<?= base_url('img/profile.jpg') ?>" alt="user"></div>
                                         <div class="u-text">
-                                            <h4>Nome</h4>
+                                            <h4><?= $session->get('usuario')['nome'] ?></h4>
                                             <p>Tipo usuário</p>
                                         </div>
                                     </div>
@@ -44,7 +44,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#"><i class="ti-settings"></i> Configurações</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="logout"><i class="fa fa-power-off"></i> Sair</a>
+                                <a class="dropdown-item" href="<?= base_url('logout')?>"><i class="fa fa-power-off"></i> Sair</a>
                             </ul>
                             <!-- /.dropdown-user -->
                         </li>

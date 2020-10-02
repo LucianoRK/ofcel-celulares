@@ -2,7 +2,7 @@
     <div class="scrollbar-inner sidebar-wrapper">
         <ul class="nav">
             <li class="nav-item active">
-                <a href="">
+                <a href="/">
                     <i class="la la-home"></i>
                     <p>HOME</p>
                     <!--<span class="badge badge-count">5</span> -->
@@ -73,7 +73,7 @@
             </li>
             <hr>
             <li class="nav-item">
-                <a href="">
+                <a href="<?= base_url('usuario')?>">
                     <i class="la la-user"></i>
                     <p>USUÁRIOS</p>
                     <!--<span class="badge badge-count">5</span> -->
@@ -116,5 +116,5 @@
     </div>
 </div>
 <div class="main-panel">
-    <div class="content" style="height: 400px;">
+    <div class="content">
         <div class="container-fluid">

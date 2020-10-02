@@ -29,18 +29,43 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
-// Home
+/**
+ * --------------------------------------------------------------------
+ * Home
+ * --------------------------------------------------------------------
+ */
+// Páginas
 $routes->get('/', 'LoginController::index');
 $routes->post('/login', 'LoginController::login');
-$routes->get('/logout', 'LoginController::logout');
 $routes->get('/home', 'HomeController::index');
 
-//Empresa
+//Funcionalidades
+$routes->get('/logout', 'LoginController::logout');
+
+/**
+ * --------------------------------------------------------------------
+ * Empresa
+ * --------------------------------------------------------------------
+ */
+// Páginas
+
+// Funcionalidades
 $routes->get('/empresa/trocarEmpresa/(:num)', 'EmpresaController::trocarEmpresa/$1');
 
+/**
+ * --------------------------------------------------------------------
+ * Usuário
+ * --------------------------------------------------------------------
+ */
 
-// Usuário
+// Páginas
+$routes->get('/usuario', 'UsuarioController::index');
+$routes->get('/usuario/create', 'UsuarioController::create');
+$routes->get('/usuario/edit/(:num)', 'UsuarioController::edit/$1');
 
+// Funcionalidades
+$routes->post('/usuario/store', 'UsuarioController::store');
+$routes->post('/usuario/update/(:num)', 'UsuarioController::update/$1');
 
 
 
