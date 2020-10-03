@@ -1,4 +1,6 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -6,8 +8,7 @@ $session = Services::session();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
-if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
-{
+if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
 	require SYSTEMPATH . 'Config/Routes.php';
 }
 
@@ -70,6 +71,16 @@ $routes->post('/usuario/verificarLoginRepetido', 'UsuarioController::verificarLo
 $routes->post('/usuario/ativarUsuario', 'UsuarioController::ativarUsuario');
 $routes->post('/usuario/desativarUsuario', 'UsuarioController::desativarUsuario');
 
+/**
+ * --------------------------------------------------------------------
+ * Usuário
+ * --------------------------------------------------------------------
+ */
+
+// Páginas
+$routes->get('/permissao', 'PermissaoController::index');
+$routes->get('/permissao/edit/(:num)', 'PermissaoController::edit/$1');
+
 
 
 /**
@@ -85,7 +96,6 @@ $routes->post('/usuario/desativarUsuario', 'UsuarioController::desativarUsuario'
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
-if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
-{
+if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

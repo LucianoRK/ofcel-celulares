@@ -1,4 +1,4 @@
-<?= var_dump($session->get('empresa')) ?>
+<?= var_dump($session->get('permissao')) ?>
 <script>
     $(document).ready(function() {
        

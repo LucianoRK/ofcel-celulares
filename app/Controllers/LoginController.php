@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\EmpresaModel;
+use App\Models\PermissaoUsuarioTipoModel;
 use App\Models\UsuarioModel;
 
 class LoginController extends BaseController
@@ -50,8 +51,9 @@ class LoginController extends BaseController
 	public function login()
 	{
 		//Modelos
-		$usuarioModel = new UsuarioModel();
-		$empresaModel = new EmpresaModel();
+		$usuarioModel 		  = new UsuarioModel();
+		$empresaModel 		  = new EmpresaModel();
+		$permissaoUsuarioTipo = new PermissaoUsuarioTipoModel();
 
 		//Requests
 		$request = $this->request->getVar();
@@ -70,31 +72,53 @@ class LoginController extends BaseController
 				'senha' => $this->criptografia($request['senha'])
 			];
 
-			//Pega os dados do usuário para gravar na sessão
+			//Pega os dados do usuário
 			$dadosUsuario = $usuarioModel->get($parametros, true);
 
 			if ($dadosUsuario) {
-				$dadosEmpresas   = $empresaModel->getEmpresasUsuario($dadosUsuario['usuario_id']);	
-				$dadosEmpresa    = [];			
-				$dadosPermissao  = [];
+				//Carrega os dados base
+				$dadosEmpresas               = $empresaModel->getEmpresasUsuario($dadosUsuario['usuario_id']);	
+				$dadosPermissaoArray         = $permissaoUsuarioTipo->get(['usuario_tipo_id' => $dadosUsuario['usuario_tipo_id']]);
+				$dadosPermissaoSistemaArray  = $permissaoUsuarioTipo->get();
+				$dadosEmpresa                = [];
+				$dadosPermissao              = [];//Permissões do usuário
+				$dadosPermissaoSistema       = [];//Permissões registradas no sistema (tabela permissao)
+				
+				//Monta o array de permissões do usuário
+				if($dadosPermissaoArray){
+					foreach($dadosPermissaoArray as $permissao){	
+						array_push($dadosPermissao, $permissao['rota']);
+					}
+				}
 
+				//Monta o array de todas as permissões do sistema
+				if($dadosPermissaoSistemaArray){
+					foreach($dadosPermissaoSistemaArray as $permissao){	
+						array_push($dadosPermissaoSistema, $permissao['rota']);
+					}
+				}
+
+				//Verifica a empresa principal
 				foreach($dadosEmpresas as $dadoEmpresas){
 					if($dadoEmpresas['principal'] == '1'){
 						$dadosEmpresa  = $dadoEmpresas;
 					}
 				}
 
+				//Verifica se tem empresa principal
 				if(!$dadosEmpresa){
 					$this->setFlashdata('O usuário não tem empresa principal', 'error');
 					return redirect()->to('/');
 				}
 
+				//Monta o array da sessão
 				$sessionData = [
-					'usuario'   => $dadosUsuario,
-					'empresa'   => $dadosEmpresa,
-					'empresas'  => $dadosEmpresas,
-					'permissao' => $dadosPermissao,
-					'logado'    => TRUE
+					'usuario'   	   => $dadosUsuario,
+					'empresa'   	   => $dadosEmpresa,
+					'empresas'  	   => $dadosEmpresas,
+					'permissao' 	   => $dadosPermissao,
+					'permissaoSistema' => $dadosPermissaoSistema,
+					'logado'           => TRUE
 				];
 
 				//Grava na sessão as informações

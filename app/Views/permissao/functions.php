@@ -1,0 +1,6 @@
+<script>
+
+    $(document).ready(() => {
+      
+    })
+</script>

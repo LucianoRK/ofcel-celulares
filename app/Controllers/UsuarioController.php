@@ -6,11 +6,13 @@ use App\Models\EmpresaModel;
 use App\Models\UsuarioEmpresaModel;
 use App\Models\UsuarioModel;
 use App\Models\UsuarioTipoModel;
+use CodeIgniter\Config\Services;
 
 class UsuarioController extends BaseController
 {
 	public function __construct()
 	{
+
 	}
 
 	/////////////////////////////
@@ -30,7 +32,7 @@ class UsuarioController extends BaseController
 		//Carrega as variáveis
 		$dados['usuariosAtivo']    = $usuario->get();
 		$dados['usuariosInativos'] = $usuario->getDeleted();
-
+		
 		return $this->template('usuario', 'index', $dados);
 	}
 

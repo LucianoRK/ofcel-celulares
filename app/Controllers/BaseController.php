@@ -18,6 +18,8 @@ namespace App\Controllers;
 use App\Models\LogAcessoModel;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Controller;
+use CodeIgniter\CodeIgniter\HTTP\Response;
+use CodeIgniter\HTTP\RedirectResponse;
 
 class BaseController extends Controller
 {
@@ -38,7 +40,7 @@ class BaseController extends Controller
 	{
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
-		$this->session = \Config\Services::session();
+		$this->session = Services::session();
 	}
 
 	/**
@@ -98,6 +100,22 @@ class BaseController extends Controller
 	}
 
 	/**
+	 * permissao
+	 * 
+	 * @param string $senha
+	 */
+	protected function permissao($permissaoId)
+	{
+		$permissoesUsuario = $this->session->get('permissao');
+
+		if (in_array($permissaoId, $permissoesUsuario)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	/**
 	 * Gera o retorno flash para o cliente
 	 * 
 	 * @param string $mensagem
@@ -105,7 +123,7 @@ class BaseController extends Controller
 	 * @param string $variavel Nome da variavel
 	 * @param int    $tempo tempo da sessão flashdata
 	 */
-	protected function setFlashdata($mensagem = '', $tipo = 'info', $variavel = 'responseFlash' ,$tempo = 300)
+	protected function setFlashdata($mensagem = '', $tipo = 'info', $variavel = 'responseFlash', $tempo = 300)
 	{
 		$this->session->setFlashdata($variavel, ['tipo' => $tipo, 'mensagem' => $mensagem], $tempo);
 	}
@@ -117,7 +135,7 @@ class BaseController extends Controller
 	 * @param string $ip
 	 * @param array  $dados
 	 */
-	protected function logAcesso($status, $dados ,$ip)
+	protected function logAcesso($status, $dados, $ip)
 	{
 		$log = new LogAcessoModel();
 		$dadosLog = [
@@ -135,6 +153,5 @@ class BaseController extends Controller
 	 */
 	protected function log($dados)
 	{
-		
 	}
 }

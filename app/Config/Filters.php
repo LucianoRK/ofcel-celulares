@@ -11,14 +11,16 @@ class Filters extends BaseConfig
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
 		'throttle' => \App\Filters\Throttle::class,
-		'sessao' => \App\Filters\Sessao::class
+		'sessao' => \App\Filters\Sessao::class,
+		'permissao' => \App\Filters\Permissao::class
 	];
 
 	// Always applied before every request
 	public $globals = [
 		'before' => [
 			'honeypot',
-			'sessao'
+			'sessao',
+			'permissao',
 			//'csrf'
 		],
 		'after'  => [
@@ -31,7 +33,7 @@ class Filters extends BaseConfig
 	// (GET, POST, etc) as BEFORE filters only
 	//     like: 'post' => ['CSRF', 'throttle'],
 	public $methods = [
-		'get' => ['sessao'],
+		'get' => ['sessao', 'permissao'],
 		'post' => ['sessao']
 	];
 
