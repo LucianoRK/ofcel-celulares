@@ -79,7 +79,7 @@ class LoginController extends BaseController
 				$dadosPermissao  = [];
 
 				foreach($dadosEmpresas as $dadoEmpresas){
-					if($dadoEmpresas['principal'] == 1){
+					if($dadoEmpresas['principal'] == '1'){
 						$dadosEmpresa  = $dadoEmpresas;
 					}
 				}

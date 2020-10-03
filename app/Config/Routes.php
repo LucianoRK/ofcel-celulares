@@ -66,6 +66,9 @@ $routes->get('/usuario/edit/(:num)', 'UsuarioController::edit/$1');
 // Funcionalidades
 $routes->post('/usuario/store', 'UsuarioController::store');
 $routes->post('/usuario/update/(:num)', 'UsuarioController::update/$1');
+$routes->post('/usuario/verificarLoginRepetido', 'UsuarioController::verificarLoginRepetido');
+$routes->post('/usuario/ativarUsuario', 'UsuarioController::ativarUsuario');
+$routes->post('/usuario/desativarUsuario', 'UsuarioController::desativarUsuario');
 
 
 

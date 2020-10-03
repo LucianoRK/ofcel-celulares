@@ -43,6 +43,18 @@ class UsuarioModel extends Model
       
     }
 
+    /**
+	 * Pega todos os usuários desativados
+	 * 
+	 * @param array $dados Informação para a tela
+	 */
+    public function getDeleted($dados = [])
+    {
+        $this->where($dados);
+
+        return $this->onlyDeleted()->find();
+    }
+
 	/**
 	 * Get de de usuários
 	 * 

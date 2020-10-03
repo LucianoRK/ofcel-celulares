@@ -7,6 +7,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <link rel="stylesheet" href="<?= base_url('css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('css/dataTables.css') ?>">
 
     <script src="<?= base_url('js/core/jquery.3.2.1.min.js') ?>"></script>
     <script src="<?= base_url('js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') ?>"></script>
@@ -22,12 +23,12 @@
     <script src="<?= base_url('js/plugin/chart-circle/circles.min.js') ?>"></script>
     <script src="<?= base_url('js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
     <script src="<?= base_url('js/plugin/sweetalert/sweetalert.js') ?>"></script>
+    <script src="<?= base_url('js/plugin/dataTables/dataTables.js') ?>"></script>
     <script src="<?= base_url('js/ready.js') ?>"></script>
 </head>
 
-<?= csrf_field(); ?>
-
 <script>
+    var BASE_URL = '<?= base_url() ?>'
 
     function responseFlash() {
         responseFlashMensagem = '<?= $responseFlash['mensagem'] ?>'
@@ -58,15 +59,51 @@
         })
     }
 
-    function csrf() {
-        let token = $('[name=csrf_name]').val()
-        let data  = {<?= getenv('app.CSRFTokenName') ?> : token}
-        
-        return data;
+    function dataTable() {
+        $('.dataTable').DataTable({
+            "language": {
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sSearch": "Pesquisar",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                },
+                "select": {
+                    "rows": {
+                        "_": "Selecionado %d linhas",
+                        "0": "Nenhuma linha selecionada",
+                        "1": "Selecionado 1 linha"
+                    }
+                },
+                "buttons": {
+                    "copy": "Copiar para a área de transferência",
+                    "copyTitle": "Cópia bem sucedida",
+                    "copySuccess": {
+                        "1": "Uma linha copiada com sucesso",
+                        "_": "%d linhas copiadas com sucesso"
+                    }
+                }
+            }
+        });
     }
-
 
     $(document).ready(() => {
         responseFlash()
+        dataTable()
     });
 </script>

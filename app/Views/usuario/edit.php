@@ -35,6 +35,7 @@
                 <div class="form-group col-md-6">
                     <label for="login">Login</label>
                     <input type="text" class="form-control form-control-lg" id="login" name="login" minlength="4" required value="<?= $usuario['login'] ?>">
+                    <input type="hidden" class="form-control form-control-lg" id="loginAtual" name="loginAtual"  value="<?= $usuario['login'] ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="senha">Senha <small>(será alterada apenas se preenchida)</small></label>
@@ -51,7 +52,7 @@
             <div class="form-row">
                 <table class="table table-striped">
                     <thead>
-                        <th>#</th>
+                        <th class="d-none d-md-block">#</th>
                         <th>Empresa</th>
                         <th class="text-center">Pertence</th>
                         <th class="text-center">Principal</th>
@@ -59,7 +60,7 @@
                     <tbody>
                         <?php foreach ($empresas as $key => $empresa) : ?>
                             <tr class="linhaTabela">
-                                <td><?= $empresa['empresa_id'] ?></td>
+                                <td class="d-none d-md-block"><?= $empresa['empresa_id'] ?></td>
                                 <td><?= $empresa['nome'] ?></td>
                                 <td class="text-center"><input type="checkbox" class="empresas" name="empresas[]" data-toggle="toggle" data-onstyle="danger" value="<?= $empresa['empresa_id'] ?>" <?= !empty($usuarioEmpresas[$key]['empresa_id']) ? 'checked' : ''; ?>></td>
                                 <td class="text-center"><input type="checkbox" class="empresaPrincipal" name="empresaPrincipal[]" data-toggle="toggle" data-onstyle="danger" value="<?= $empresa['empresa_id'] ?>" <?= !empty($usuarioEmpresas[$key]['principal']) ? 'checked' : ''; ?>></td>

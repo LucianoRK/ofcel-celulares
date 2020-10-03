@@ -51,7 +51,7 @@
             <div class="form-row">
                 <table class="table table-striped">
                     <thead>
-                        <th>#</th>
+                        <th class="d-none d-md-block">#</th>
                         <th>Empresa</th>
                         <th class="text-center">Pertence</th>
                         <th class="text-center">Principal</th>
@@ -59,7 +59,7 @@
                     <tbody>
                         <?php foreach($empresas as $empresa): ?>
                         <tr class="linhaTabela">
-                            <td><?= $empresa['empresa_id'] ?></td>
+                            <td class="d-none d-md-block"><?= $empresa['empresa_id'] ?></td>
                             <td><?= $empresa['nome'] ?></td>
                             <td class="text-center"><input type="checkbox" class="empresas" name="empresas[]" data-toggle="toggle" data-onstyle="danger" value="<?= $empresa['empresa_id'] ?>"></td>
                             <td class="text-center"><input type="checkbox" class="empresaPrincipal" name="empresaPrincipal[]" data-toggle="toggle" data-onstyle="danger" value="<?= $empresa['empresa_id'] ?>"></td>

@@ -24,7 +24,14 @@ class UsuarioController extends BaseController
 	 */
 	public function index()
 	{
-		return $this->template('usuario', 'index');
+		//Carrega os modelos
+		$usuario = new UsuarioModel();
+
+		//Carrega as variáveis
+		$dados['usuariosAtivo']    = $usuario->get();
+		$dados['usuariosInativos'] = $usuario->getDeleted();
+
+		return $this->template('usuario', 'index', $dados);
 	}
 
 	/**
@@ -257,6 +264,40 @@ class UsuarioController extends BaseController
 
 		//Get dados
 		$dados = $usuarioModel->get(['login' => $request['login']], true);
+
+		return $this->response->setJSON($dados);
+	}
+
+	/**
+	 * Remove ou desabilita o dado
+	 */
+	public function desativarUsuario()
+	{
+		//Get request
+		$request = $this->request->getVar();
+
+		//Carrega os modelos
+		$usuarioModel  = new UsuarioModel();
+
+		//deleta o usuário (safe mode)
+		$dados = $usuarioModel->delete($request['usuarioId']);
+
+		return $this->response->setJSON($dados);
+	}
+
+	/**
+	 * Remove ou desabilita o dado
+	 */
+	public function ativarUsuario()
+	{
+		//Get request
+		$request = $this->request->getVar();
+
+		//Carrega os modelos
+		$usuarioModel  = new UsuarioModel();
+
+		//deleta o usuário (safe mode)
+		$dados = $usuarioModel->update($request['usuarioId'], ['deleted_at' => null]);
 
 		return $this->response->setJSON($dados);
 	}
