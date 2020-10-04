@@ -24,8 +24,12 @@ class LoginController extends BaseController
 	 */
 	public function index()
 	{
+		$empresas    = new EmpresaModel();
+		//Carrega as variáveis
+		$dados['empresas']    = $empresas->get();
+
 		if ($this->session->get('logado')) {
-			return $this->template('home', 'index');
+			return $this->template('home', 'index', $dados);
 		} else {
 			return $this->template_publico('login', 'index');
 		}
@@ -44,11 +48,11 @@ class LoginController extends BaseController
 	/////////////////////////////
 
 	/**
-	* Faz o login no sistema
-	* 
-	* @param string $usuario 
-	* @param string $senha
-	*/
+	 * Faz o login no sistema
+	 * 
+	 * @param string $usuario 
+	 * @param string $senha
+	 */
 	public function login()
 	{
 		//Modelos
@@ -79,36 +83,36 @@ class LoginController extends BaseController
 
 			if ($dadosUsuario) {
 				//Carrega os dados base
-				$dadosEmpresas               = $empresaModel->getEmpresasUsuario($dadosUsuario['usuario_id']);	
+				$dadosEmpresas               = $empresaModel->getEmpresasUsuario($dadosUsuario['usuario_id']);
 				$dadosPermissaoArray         = $permissaoUsuarioTipo->get(['usuario_tipo_id' => $dadosUsuario['usuario_tipo_id']]);
 				$dadosPermissaoSistemaArray  = $permissao->get();
 				$dadosEmpresa                = [];
-				$dadosPermissao              = [];//Permissões do usuário
-				$dadosPermissaoSistema       = [];//Permissões registradas no sistema (tabela permissao)
-				
+				$dadosPermissao              = []; //Permissões do usuário
+				$dadosPermissaoSistema       = []; //Permissões registradas no sistema (tabela permissao)
+
 				//Monta o array de permissões do usuário
-				if($dadosPermissaoArray){
-					foreach($dadosPermissaoArray as $permissao){	
+				if ($dadosPermissaoArray) {
+					foreach ($dadosPermissaoArray as $permissao) {
 						array_push($dadosPermissao, $permissao['rota']);
 					}
 				}
 
 				//Monta o array de todas as permissões do sistema
-				if($dadosPermissaoSistemaArray){
-					foreach($dadosPermissaoSistemaArray as $permissao){	
+				if ($dadosPermissaoSistemaArray) {
+					foreach ($dadosPermissaoSistemaArray as $permissao) {
 						array_push($dadosPermissaoSistema, $permissao['rota']);
 					}
 				}
 
 				//Verifica a empresa principal
-				foreach($dadosEmpresas as $dadoEmpresas){
-					if($dadoEmpresas['principal'] == '1'){
+				foreach ($dadosEmpresas as $dadoEmpresas) {
+					if ($dadoEmpresas['principal'] == '1') {
 						$dadosEmpresa  = $dadoEmpresas;
 					}
 				}
 
 				//Verifica se tem empresa principal
-				if(!$dadosEmpresa){
+				if (!$dadosEmpresa) {
 					$this->setFlashdata('O usuário não tem empresa principal', 'error');
 					return redirect()->to('/');
 				}
@@ -127,7 +131,7 @@ class LoginController extends BaseController
 				$this->session->set($sessionData);
 				//Salva o log
 				$this->logAcesso(1, json_encode($dadosUsuario), $this->request->getIPAddress());
-				
+
 				return redirect()->to('home');
 			} else {
 				//Salva o log
@@ -137,15 +141,15 @@ class LoginController extends BaseController
 
 				return redirect()->to('/');
 			}
-		}else{
+		} else {
 			$this->setFlashdata('Usuário ou senha inconrreto', 'error');
 			return redirect()->to('/');
 		}
 	}
 
 	/**
-	* Faz o logout do sistema
-	*/
+	 * Faz o logout do sistema
+	 */
 	public function logout()
 	{
 		$this->session->destroy();

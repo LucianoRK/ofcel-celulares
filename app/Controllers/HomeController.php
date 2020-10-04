@@ -2,11 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Models\EmpresaModel;
+
 class HomeController extends BaseController
 {
 	public function __construct()
 	{
-		
 	}
 	/////////////////////////////
 	//                         //
@@ -19,7 +20,11 @@ class HomeController extends BaseController
 	 */
 	public function index()
 	{
-		return $this->template('home', 'index');
+		$empresas    = new EmpresaModel();
+		//Carrega as variáveis
+		$dados['empresas']    = $empresas->get();
+
+		return $this->template('home', 'index', $dados);
 	}
 
 	/////////////////////////////
@@ -28,7 +33,7 @@ class HomeController extends BaseController
 	//                         //
 	/////////////////////////////
 
-	
+
 	/////////////////////////////
 	//                         //
 	//	   Outras funções      //

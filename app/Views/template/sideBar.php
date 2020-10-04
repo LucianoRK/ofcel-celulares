@@ -99,7 +99,7 @@
                     </a>
                 </li>
             <?php endif; ?>
-            <?php if ($base->permissao('PermissaoController/index')) : ?>
+            <?php if ($base->permissao('RelatorioController/index')) : ?>
                 <li class="nav-item">
                     <a class="" data-toggle="collapse" href="#collapseRelatorios" aria-expanded="true">
                         <i class="la la-pie-chart"></i>
