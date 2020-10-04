@@ -55,6 +55,7 @@ class BaseController extends Controller
 
 		$dados['session']       = $this->session;
 		$dados['responseFlash'] = $this->session->getFlashdata('responseFlash');
+		$dados['base']          = $this;
 
 		echo view('template/header', $dados);
 		echo view('template/navBar', $dados);
@@ -104,13 +105,13 @@ class BaseController extends Controller
 	 * 
 	 * @param string $senha
 	 */
-	protected function permissao($permissaoId)
+	public function permissao($permissao = false)
 	{
 		$permissoesUsuario = $this->session->get('permissao');
 
-		if (in_array($permissaoId, $permissoesUsuario)) {
+		if (in_array($permissao, $permissoesUsuario)) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -154,4 +155,6 @@ class BaseController extends Controller
 	protected function log($dados)
 	{
 	}
+
+
 }

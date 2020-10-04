@@ -35,7 +35,7 @@
                 <div class="form-group col-md-6">
                     <label for="login">Login</label>
                     <input type="text" class="form-control form-control-lg" id="login" name="login" minlength="4" required value="<?= $usuario['login'] ?>">
-                    <input type="hidden" class="form-control form-control-lg" id="loginAtual" name="loginAtual"  value="<?= $usuario['login'] ?>">
+                    <input type="hidden" class="form-control form-control-lg" id="loginAtual" name="loginAtual" value="<?= $usuario['login'] ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="senha">Senha <small>(será alterada apenas se preenchida)</small></label>
@@ -62,8 +62,23 @@
                             <tr class="linhaTabela">
                                 <td class="d-none d-md-block"><?= $empresa['empresa_id'] ?></td>
                                 <td><?= $empresa['nome'] ?></td>
-                                <td class="text-center"><input type="checkbox" class="empresas" name="empresas[]" data-toggle="toggle" data-onstyle="danger" value="<?= $empresa['empresa_id'] ?>" <?= !empty($usuarioEmpresas[$key]['empresa_id']) ? 'checked' : ''; ?>></td>
-                                <td class="text-center"><input type="checkbox" class="empresaPrincipal" name="empresaPrincipal[]" data-toggle="toggle" data-onstyle="danger" value="<?= $empresa['empresa_id'] ?>" <?= !empty($usuarioEmpresas[$key]['principal']) ? 'checked' : ''; ?>></td>
+                                <?php
+                                //Seta o checked como false
+                                $checkedEmpresa   = false;
+                                $checkedPrincipal = false;
+                                //Percorre pela empresa do usuario
+                                foreach ($usuarioEmpresas as $usuarioEmpresa) {
+                                    //Se encontrar a informação nos 2 arrays marca como checked
+                                    if ($empresa['empresa_id'] == $usuarioEmpresa['empresa_id']) {
+                                        $checkedEmpresa = true;
+                                        if ($usuarioEmpresa['principal'] == '1') {
+                                            $checkedPrincipal = true;
+                                        }
+                                    }
+                                }
+                                ?>
+                                <td class="text-center"><input type="checkbox" class="empresas" name="empresas[]" data-toggle="toggle" data-onstyle="danger" value="<?= $empresa['empresa_id'] ?>" <?= $checkedEmpresa ? 'checked' : ''; ?>></td>
+                                <td class="text-center"><input type="checkbox" class="empresaPrincipal" name="empresaPrincipal[]" data-toggle="toggle" data-onstyle="danger" value="<?= $empresa['empresa_id'] ?>" <?= $checkedPrincipal ? 'checked' : ''; ?>></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

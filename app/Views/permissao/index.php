@@ -26,11 +26,13 @@
                                     <td><?= $usuario['usuario_tipo_id'] ?></td>
                                     <td><?= $usuario['nome'] ?></td>
                                     <td class="text-center">
-                                        <a href="<?= base_url('/permissao/edit/' . $usuario['usuario_tipo_id']) ?>">
-                                            <button class="btn btn-primary text-white" title="Editar">
-                                                <i class="la la-edit la-2x"></i>
-                                            </button>
-                                        </a>
+                                        <?php if ($base->permissao('PermissaoController/edit')) : ?>
+                                            <a href="<?= base_url('/permissao/edit/' . $usuario['usuario_tipo_id']) ?>">
+                                                <button class="btn btn-primary text-white" title="Editar">
+                                                    <i class="la la-edit la-2x"></i>
+                                                </button>
+                                            </a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

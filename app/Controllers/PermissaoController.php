@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\PermissaoModel;
 use App\Models\PermissaoUsuarioTipoModel;
 use App\Models\UsuarioTipoModel;
 
@@ -61,10 +62,13 @@ class PermissaoController extends BaseController
 	public function edit($id)
 	{
 		//Carrega os modelos
-		$permissoes  = new PermissaoUsuarioTipoModel();
-	
+		$permissoes          = new PermissaoUsuarioTipoModel();
+		$permissoesSistema   = new PermissaoModel();
+
 		//Carrega as variáveis
-		$dados['permissoes']  = $permissoes->get(['usuario_tipo_id' => $id]);
+		$dados['permissoesSistema']  = $permissoesSistema->get();
+		$dados['permissoes']         = $permissoes->get(['usuario_tipo_id' => $id]);
+		$dados['usurioTipoId']       = $id;
 
 		return $this->template('permissao', 'edit', $dados);
 	}
@@ -74,6 +78,32 @@ class PermissaoController extends BaseController
 	 */
 	public function update($id)
 	{
+		//Carrega os modelos
+		$permissoes  = new PermissaoUsuarioTipoModel();
+
+		//Get request
+		$request = $this->request->getVar();
+
+		//limpa as informações de empresa
+		$permissoes->where('usuario_tipo_id', $id)->delete();
+
+		if (!empty($request['permissoes'])) {
+			foreach ($request['permissoes'] as $key => $permissao) {
+				//Prepara os dados da permissão
+				$dadosPermissao = [
+					'usuario_tipo_id'   => $id,
+					'permissao_id'   	=> !empty($permissao) ? $permissao  : null,
+				];
+
+				//Salva as empresas do usuário
+				$permissoes->save($dadosPermissao);
+			}
+
+			//Mensagem de retorno
+			$this->setFlashdata('Permissões alteradas com sucesso !', 'success');
+
+			return redirect()->to('/permissao');
+		}
 	}
 
 	/**

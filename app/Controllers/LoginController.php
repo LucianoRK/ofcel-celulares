@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\EmpresaModel;
+use App\Models\PermissaoModel;
 use App\Models\PermissaoUsuarioTipoModel;
 use App\Models\UsuarioModel;
 
@@ -54,6 +55,7 @@ class LoginController extends BaseController
 		$usuarioModel 		  = new UsuarioModel();
 		$empresaModel 		  = new EmpresaModel();
 		$permissaoUsuarioTipo = new PermissaoUsuarioTipoModel();
+		$permissao            = new PermissaoModel();
 
 		//Requests
 		$request = $this->request->getVar();
@@ -79,7 +81,7 @@ class LoginController extends BaseController
 				//Carrega os dados base
 				$dadosEmpresas               = $empresaModel->getEmpresasUsuario($dadosUsuario['usuario_id']);	
 				$dadosPermissaoArray         = $permissaoUsuarioTipo->get(['usuario_tipo_id' => $dadosUsuario['usuario_tipo_id']]);
-				$dadosPermissaoSistemaArray  = $permissaoUsuarioTipo->get();
+				$dadosPermissaoSistemaArray  = $permissao->get();
 				$dadosEmpresa                = [];
 				$dadosPermissao              = [];//Permissões do usuário
 				$dadosPermissaoSistema       = [];//Permissões registradas no sistema (tabela permissao)

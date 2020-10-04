@@ -39,7 +39,6 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'LoginController::index');
 $routes->post('/login', 'LoginController::login');
 $routes->get('/home', 'HomeController::index');
-
 //Funcionalidades
 $routes->get('/logout', 'LoginController::logout');
 
@@ -63,7 +62,6 @@ $routes->get('/empresa/trocarEmpresa/(:num)', 'EmpresaController::trocarEmpresa/
 $routes->get('/usuario', 'UsuarioController::index');
 $routes->get('/usuario/create', 'UsuarioController::create');
 $routes->get('/usuario/edit/(:num)', 'UsuarioController::edit/$1');
-
 // Funcionalidades
 $routes->post('/usuario/store', 'UsuarioController::store');
 $routes->post('/usuario/update/(:num)', 'UsuarioController::update/$1');
@@ -73,13 +71,15 @@ $routes->post('/usuario/desativarUsuario', 'UsuarioController::desativarUsuario'
 
 /**
  * --------------------------------------------------------------------
- * Usuário
+ * Permissões
  * --------------------------------------------------------------------
  */
 
 // Páginas
 $routes->get('/permissao', 'PermissaoController::index');
 $routes->get('/permissao/edit/(:num)', 'PermissaoController::edit/$1');
+// Funcionalidades
+$routes->post('/permissao/update/(:num)', 'PermissaoController::update/$1');
 
 
 

@@ -33,7 +33,7 @@
                                     <div class="dropdown-divider"></div>
                                     <?php foreach ($session->get('empresas') as $empresaSelect) : ?>
                                         <?php if ($session->get('empresa')['empresa_id'] != $empresaSelect['empresa_id']) : ?>
-                                            <a class="dropdown-item" href="empresa/trocarEmpresa/<?= $empresaSelect['empresa_id'] ?>">
+                                            <a class="dropdown-item" href="<?= base_url('empresa/trocarEmpresa/'.$empresaSelect['empresa_id'])?>">
                                                 <i class="la la-university"></i> <?= $empresaSelect['nome'] ?>
                                             </a>
                                         <?php endif; ?>
