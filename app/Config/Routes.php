@@ -79,7 +79,7 @@ $routes->post('/usuario/desativarUsuario', 'UsuarioController::desativarUsuario'
 $routes->get('/permissao', 'PermissaoController::index');
 $routes->get('/permissao/edit/(:num)', 'PermissaoController::edit/$1');
 // Funcionalidades
-$routes->post('/permissao/update/(:num)', 'PermissaoController::update/$1');
+$routes->post('/permissao/update', 'PermissaoController::update');
 
 
 

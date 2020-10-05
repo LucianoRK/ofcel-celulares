@@ -74,9 +74,9 @@ class PermissaoController extends BaseController
 	}
 
 	/**
-	 * Salva a atualização do dado
+	 * Salva a atualização de permissões do usuário
 	 */
-	public function update($id)
+	public function update()
 	{
 		//Carrega os modelos
 		$permissoes  = new PermissaoUsuarioTipoModel();
@@ -84,26 +84,21 @@ class PermissaoController extends BaseController
 		//Get request
 		$request = $this->request->getVar();
 
-		//limpa as informações de empresa
-		$permissoes->where('usuario_tipo_id', $id)->delete();
+		if ($request['checked'] == 'true') {
+			//Monta os dados
+			$dadosPermissao = [
+				'usuario_tipo_id'   => $request['usuarioTipo'],
+				'permissao_id'   	=> $request['permissaoId']
+			];
 
-		if (!empty($request['permissoes'])) {
-			foreach ($request['permissoes'] as $key => $permissao) {
-				//Prepara os dados da permissão
-				$dadosPermissao = [
-					'usuario_tipo_id'   => $id,
-					'permissao_id'   	=> !empty($permissao) ? $permissao  : null,
-				];
-
-				//Salva as empresas do usuário
-				$permissoes->save($dadosPermissao);
-			}
-
-			//Mensagem de retorno
-			$this->setFlashdata('Permissões alteradas com sucesso !', 'success');
-
-			return redirect()->to('/permissao');
+			//Salva permissões do usuário
+			$permissoes->save($dadosPermissao);
+		} else {
+			//limpa as informações de permissão
+			$permissoes->where('usuario_tipo_id', $request['usuarioTipo'])->where('permissao_id', $request['permissaoId'])->delete();
 		}
+
+		return $this->response->setJSON(true);
 	}
 
 	/**

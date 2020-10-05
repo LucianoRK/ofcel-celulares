@@ -113,7 +113,7 @@
     <div class="col-lg-6">
         <div class="card">
             <div class="card-header bg-danger">
-                <div class="card-title text-light">O.S <?= $session->get('empresa')['nome'] ?> ( Hoje )</div>
+                <div class="card-title text-light"><i class="la la-mobile"></i> O.S <?= $session->get('empresa')['nome'] ?> ( Hoje )</div>
             </div>
             <div class="card-body">
                 <table class="table">
@@ -138,7 +138,7 @@
     <div class="col-lg-6">
         <div class="card">
             <div class="card-header bg-danger">
-                <div class="card-title text-light">Todas as O.S ( Hoje )</div>
+                <div class="card-title text-light"><i class="la la-mobile"></i> Todas as O.S ( Hoje )</div>
             </div>
             <div class="card-body">
                 <table class="table">
@@ -161,7 +161,7 @@
     <div class="col-lg-6">
         <div class="card">
             <div class="card-header bg-primary">
-                <div class="card-title text-light">Caixa <?= $session->get('empresa')['nome'] ?> ( Hoje )</div>
+                <div class="card-title text-light"><i class="la la-money"></i> Caixa <?= $session->get('empresa')['nome'] ?> ( Hoje )</div>
             </div>
             <div class="card-body">
                 <table class="table">
@@ -186,7 +186,7 @@
     <div class="col-lg-6">
         <div class="card">
             <div class="card-header bg-primary">
-                <div class="card-title text-light">Todos os caixas ( Hoje )</div>
+                <div class="card-title text-light"><i class="la la-money"></i> Todos os caixas ( Hoje )</div>
             </div>
             <div class="card-body">
                 <table class="table">
