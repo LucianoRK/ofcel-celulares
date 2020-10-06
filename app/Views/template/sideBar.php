@@ -37,7 +37,7 @@
             <?php endif; ?>
             <?php if ($base->permissao('ClienteController/index')) : ?>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="<?= base_url('cliente') ?>">
                         <i class="la la-group"></i>
                         <p>CLIENTES</p>
                         <!--<span class="badge badge-count">5</span> -->

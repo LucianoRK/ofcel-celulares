@@ -81,6 +81,19 @@ $routes->get('/permissao/edit/(:num)', 'PermissaoController::edit/$1');
 // Funcionalidades
 $routes->post('/permissao/update', 'PermissaoController::update');
 
+/**
+ * --------------------------------------------------------------------
+ * Clentes
+ * --------------------------------------------------------------------
+ */
+
+// Páginas
+$routes->get('/cliente', 'ClienteController::index');
+$routes->get('/cliente/edit/(:num)', 'ClienteController::edit/$1');
+$routes->get('/cliente/create', 'ClienteController::create');
+// Funcionalidades
+$routes->post('/cliente/store', 'ClienteController::store');
+$routes->post('/cliente/update/(:num)', 'ClienteController::update/$1');
 
 
 /**
