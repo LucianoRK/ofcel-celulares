@@ -70,7 +70,14 @@ class ClienteController extends BaseController
                 'telefone'         => !empty($request['telefone'])       ? $request['telefone']                    : null,
                 'email'            => !empty($request['email'])          ? $request['email']                       : null,
                 'data_nascimento'  => !empty($request['dataNascimento']) ? $request['dataNascimento']              : null,
-                'observacao'       => !empty($request['observacao'])     ? $request['observacao']                  : null
+                'observacao'       => !empty($request['observacao'])     ? $request['observacao']                  : null,
+                'cep'              => !empty($request['cep'])            ? $request['cep']                         : null,
+                'cidade'           => !empty($request['cidade'])         ? $request['cidade']                      : null,
+                'uf'               => !empty($request['uf'])             ? $request['uf']                          : null,
+                'bairro'           => !empty($request['bairro'])         ? $request['bairro']                      : null,
+                'rua'              => !empty($request['rua'])            ? $request['rua']                         : null,
+                'numero'           => !empty($request['numero'])         ? $request['numero']                      : null,
+                'complemento'      => !empty($request['complemento'])    ? $request['complemento']                 : null
             ];
             //Salva o cliente
             $clienteModel ->save($dadosUsuario);
@@ -126,7 +133,14 @@ class ClienteController extends BaseController
                 'telefone'         => !empty($request['telefone'])       ? $request['telefone']                    : null,
                 'email'            => !empty($request['email'])          ? $request['email']                       : null,
                 'data_nascimento'  => !empty($request['dataNascimento']) ? $request['dataNascimento']              : null,
-                'observacao'       => !empty($request['observacao'])     ? $request['observacao']                  : null
+                'observacao'       => !empty($request['observacao'])     ? $request['observacao']                  : null,
+                'cep'              => !empty($request['cep'])            ? $request['cep']                         : null,
+                'cidade'           => !empty($request['cidade'])         ? $request['cidade']                      : null,
+                'uf'               => !empty($request['uf'])             ? $request['uf']                          : null,
+                'bairro'           => !empty($request['bairro'])         ? $request['bairro']                      : null,
+                'rua'              => !empty($request['rua'])            ? $request['rua']                         : null,
+                'numero'           => !empty($request['numero'])         ? $request['numero']                      : null,
+                'complemento'      => !empty($request['complemento'])    ? $request['complemento']                 : null
             ];
             //Salva o cliente
             $clienteModel ->save($dadosUsuario);

@@ -12,8 +12,8 @@
         <div class="card-body">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="documento">CPF / CNPJ</label>
-                    <input type="text" class="form-control form-control-lg" maxlength="15" id="documento" name="documento">
+                    <label for="documento" class="cpfCnpjTroca">CPF</label>
+                    <input type="text" class="form-control form-control-lg cpf cpfCnpj" maxlength="20" id="documento" name="documento" >
                 </div>
                 <div class="form-group col-md-6">
                     <label for="nome">Nome</label>
@@ -46,27 +46,27 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="cep">CEP</label>
-                    <input type="text" class="form-control form-control-lg" id="cep" name="cep">
+                    <input type="text" class="form-control form-control-lg maskCep" id="cep" name="cep" maxlength="12">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="cidade">Cidade</label>
-                    <input type="text" class="form-control form-control-lg" id="cidade" name="cidade">
+                    <input type="text" class="form-control form-control-lg" id="cidade" name="cidade" >
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="estado">Estado</label>
-                    <input type="text" class="form-control form-control-lg" id="estado" name="estado">
+                    <label for="uf">UF</label>
+                    <input type="text" class="form-control form-control-lg" id="uf" name="uf" maxlength="2">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="bairro">Bairro</label>
                     <input type="text" class="form-control form-control-lg" id="bairro" name="bairro">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="rua">rua</label>
+                    <label for="rua">Rua</label>
                     <input type="text" class="form-control form-control-lg" id="rua" name="rua">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="numero">Número</label>
-                    <input type="text" class="form-control form-control-lg" id="numero" name="numero">
+                    <input type="text" class="form-control form-control-lg numero" id="numero" name="numero">
                 </div>
                 <div class="form-group col-md-12">
                     <label for="rua">Complemento</label>

@@ -84,9 +84,46 @@
         })
     }
 
+    /**
+     * Desativa o usuário
+     */
+    function buscaCep() {
+        $("#cep").on("blur", function() {
+            let cep = $(this).val().replaceAll('.', '').replaceAll('-', '');
+            let cepOriginal = $('#cepOriginal').val();
+            if (cep.length > 0 && cep != cepOriginal) {
+                //Verifica se o usuário a ser desativado é != do usuárioda sessão
+                $.post(BASE_URL + "/buscaCep",
+                    data = {
+                        cep: cep
+                    }, (resp) => {
+                        //Verifica se veio a informação da api
+                        if (resp && resp.cep != undefined) {
+                            $("#cidade").val(resp.localidade)
+                            $("#uf").val(resp.uf)
+                            $("#bairro").val(resp.bairro)
+                            $("#rua").val(resp.logradouro)
+                            $("#complemento").val('')
+                            $("#numero").val('')
+                            toast('success', 'Informações completada com sucesso !')
+                        } else {
+                            $("#cidade").val('')
+                            $("#uf").val('')
+                            $("#bairro").val('')
+                            $("#rua").val('')
+                            $("#complemento").val('')
+                            $("#numero").val('')
+                            toast('error', 'Não foi possível completar os campos de endereço !')
+                        }
+                    });
+            }
+        })
+    }
+
     $(document).ready(() => {
         verificarLoginRepetido()
         ativarUsuario()
         desativarUsuario()
+        buscaCep()
     })
 </script>

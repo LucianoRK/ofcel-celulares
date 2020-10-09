@@ -158,7 +158,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-header bg-primary">
                 <div class="card-title text-light"><i class="la la-money"></i> Caixa <?= $session->get('empresa')['nome'] ?> ( Hoje )</div>
@@ -168,6 +168,14 @@
                     <tbody>
                         <tr>
                             <td><strong class='text-success'>Dinheiro</strong> </td>
+                            <td class="text-right">R$ 0,00</td>
+                        </tr>
+                        <tr>
+                            <td><strong class='text-info'>Débito</strong> </td>
+                            <td class="text-right">R$ 0,00</td>
+                        </tr>
+                        <tr>
+                            <td><strong class='text-warning'>Crédito</strong> </td>
                             <td class="text-right">R$ 0,00</td>
                         </tr>
                         <tr>
@@ -183,7 +191,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-header bg-primary">
                 <div class="card-title text-light"><i class="la la-money"></i> Todos os caixas ( Hoje )</div>
@@ -195,13 +203,17 @@
                             <tr>
                                 <td><strong><?= $empresa['nome'] ?> </strong> </td>
                                 <td class="text-enter text-success" title="Em dinheiro">R$ 0,00</td>
-                                <td class="text-right text-danger" title="Outros">R$ 0,00</td>
+                                <td class="text-right text-info" title="Débito">R$ 0,00</td>
+                                <td class="text-right text-warning" title="Crédito">R$ 0,00</td>
+                                <td class="text-right text-danger"  title="Outros">R$ 0,00</td>
                                 <td class="text-right" title="Total <?= $empresa['nome'] ?>">R$ 0,00</td>
                             </tr>
                         <?php endforeach ?>
                         <tr>
                             <td><strong>Total</strong> </td>
                             <td class="text-enter text-success" title="Em dinheiro"><strong>R$ 0,00</strong></td>
+                            <td class="text-right text-info" title="Débito"><strong>R$ 0,00</strong></td>
+                            <td class="text-right text-warning" title="Crédito"><strong>R$ 0,00</strong></td>
                             <td class="text-right text-danger" title="Outros"><strong>R$ 0,00</strong></td>
                             <td class="text-right" title="Total"><strong class="h6">R$ 0,00</strong></td>
                         </tr>

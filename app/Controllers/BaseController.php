@@ -58,6 +58,7 @@ class BaseController extends Controller
 		$dados['base']          = $this;
 
 		echo view('template/header', $dados);
+		echo view('template/functions', $dados);
 		echo view('template/navBar', $dados);
 		echo view('template/sideBar', $dados);
 		echo view($pasta . '/' . $arquivo, $dados);
@@ -79,6 +80,7 @@ class BaseController extends Controller
 		$dados['responseFlash'] = $this->session->getFlashdata('responseFlash');
 
 		echo view('template/header', $dados);
+		echo view('template/functions', $dados);
 		echo view($pasta . '/' . $arquivo, $dados);
 		echo view($pasta . '/functions', $dados);
 		echo view('template/footer', $dados);
@@ -156,5 +158,32 @@ class BaseController extends Controller
 	{
 	}
 
+	/**
+	 * Log 
+	 * 
+	 * @param array  $dados
+	 */
+	public function buscaCep()
+	{
 
+		//Get request
+		$request = $this->request->getVar();
+		if (strlen($request['cep']) == 8) {
+			//Monta a url
+			$url = env('buscaCep') . $request['cep'] . '/json';
+			//Busca os dados
+			$result = file_get_contents($url);
+
+			if ($result) {
+				// faz o parse do resultado
+				$dados = json_decode($result);
+			} else {
+				$dados = false;
+			}
+		}else{
+			$dados = false;
+		}
+
+		return $this->response->setJSON($dados);
+	}
 }

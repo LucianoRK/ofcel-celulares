@@ -41,6 +41,8 @@ $routes->post('/login', 'LoginController::login');
 $routes->get('/home', 'HomeController::index');
 //Funcionalidades
 $routes->get('/logout', 'LoginController::logout');
+$routes->get('/logout', 'LoginController::logout');
+$routes->post('/buscaCep', 'BaseController::buscaCep');
 
 /**
  * --------------------------------------------------------------------
