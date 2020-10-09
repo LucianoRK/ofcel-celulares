@@ -64,7 +64,7 @@ class ClienteController extends BaseController
             $clienteModel         = new ClienteModel();
         
             //Prepara os dados do Usuário
-            $dadosUsuario = [
+            $dadosCliente = [
                 'nome'             => !empty($request['nome'])           ? $request['nome']                        : null,
                 'documento'        => !empty($request['documento'])      ? $request['documento']                   : null,
                 'telefone'         => !empty($request['telefone'])       ? $request['telefone']                    : null,
@@ -77,10 +77,10 @@ class ClienteController extends BaseController
                 'bairro'           => !empty($request['bairro'])         ? $request['bairro']                      : null,
                 'rua'              => !empty($request['rua'])            ? $request['rua']                         : null,
                 'numero'           => !empty($request['numero'])         ? $request['numero']                      : null,
-                'complemento'      => !empty($request['complemento'])    ? $request['complemento']                 : null
+                'complemento'      => !empty($request['complemento'])    ? trim($request['complemento'])           : null
             ];
             //Salva o cliente
-            $clienteModel ->save($dadosUsuario);
+            $clienteModel ->save($dadosCliente);
  
             //Mensagem de retorno
             $this->setFlashdata('Cliente cadastrado com sucesso !', 'success');
@@ -126,7 +126,7 @@ class ClienteController extends BaseController
             $clienteModel = new ClienteModel();
         
             //Prepara os dados do Usuário
-            $dadosUsuario = [
+            $dadosCliente = [
                 'cliente_id'       => $id,
                 'nome'             => !empty($request['nome'])           ? $request['nome']                        : null,
                 'documento'        => !empty($request['documento'])      ? $request['documento']                   : null,
@@ -140,10 +140,10 @@ class ClienteController extends BaseController
                 'bairro'           => !empty($request['bairro'])         ? $request['bairro']                      : null,
                 'rua'              => !empty($request['rua'])            ? $request['rua']                         : null,
                 'numero'           => !empty($request['numero'])         ? $request['numero']                      : null,
-                'complemento'      => !empty($request['complemento'])    ? $request['complemento']                 : null
+                'complemento'      => !empty($request['complemento'])    ? trim($request['complemento'])           : null
             ];
             //Salva o cliente
-            $clienteModel ->save($dadosUsuario);
+            $clienteModel ->save($dadosCliente);
  
             //Mensagem de retorno
             $this->setFlashdata('Cliente alterado com sucesso !', 'success');

@@ -71,9 +71,7 @@
                 </div>
                 <div class="form-group col-md-12">
                     <label for="rua">Complemento</label>
-                    <textarea class="form-control form-control-lg" id="complemento" name="complemento">
-                        <?= $cliente['complemento'] ?>
-                    </textarea>
+                    <textarea class="form-control form-control-lg" id="complemento" name="complemento"><?= $cliente['complemento'] ?></textarea>
                 </div>
             </div>
         </div>
