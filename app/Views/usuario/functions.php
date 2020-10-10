@@ -25,7 +25,7 @@
      * Ativa o usuário
      */
     function ativarUsuario() {
-        $(".ativarUsuario").on("click", function() {
+        $(".dataTable").on("click", ".ativarUsuario", function() {
             let usuarioId = $(this).val();
             Swal.fire({
                 icon: 'info',
@@ -54,7 +54,7 @@
      * Desativa o usuário
      */
     function desativarUsuario() {
-        $(".desativarUsuario").on("click", function() {
+        $(".dataTable").on("click", ".desativarUsuario", function() {
             let usuarioId = $(this).val();
             let usuarioSessao = '<?= $session->get('usuario')['usuario_id'] ?>'
             //Verifica se o usuário a ser desativado é != do usuárioda sessão

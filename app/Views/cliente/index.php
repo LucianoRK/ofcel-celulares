@@ -26,7 +26,7 @@
                         <th>Nome</th>
                         <th>Documento</th>
                         <th>Telefone</th>
-                        <th class="text-center">Ações</th>
+                        <th class="text-center"></th>
                     </thead>
                     <tbody>
                         <?php if ($clientes) : ?>
@@ -36,7 +36,7 @@
                                     <td><?= $cliente['nome'] ?></td>
                                     <td><?= $cliente['documento'] ?></td>
                                     <td><?= $cliente['telefone'] ?></td>
-                                    <td class="text-center">
+                                    <td class="text-right">
                                         <?php if ($base->permissao('ClienteController/edit')) : ?>
                                             <a href="<?= base_url('/cliente/edit/' . $cliente['cliente_id']) ?>">
                                                 <button class="btn btn-primary text-white" title="Editar">

@@ -6,7 +6,6 @@ use App\Models\EmpresaModel;
 use App\Models\UsuarioEmpresaModel;
 use App\Models\UsuarioModel;
 use App\Models\UsuarioTipoModel;
-use CodeIgniter\Config\Services;
 
 class UsuarioController extends BaseController
 {

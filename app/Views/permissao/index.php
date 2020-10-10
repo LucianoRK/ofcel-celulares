@@ -17,7 +17,7 @@
                     <thead>
                         <th>#</th>
                         <th>Nome</th>
-                        <th class="text-center">Ações</th>
+                        <th class="text-center"></th>
                     </thead>
                     <tbody>
                         <?php if ($usuarioTipo) : ?>
@@ -25,7 +25,7 @@
                                 <tr class="linhaTabela">
                                     <td><?= $usuario['usuario_tipo_id'] ?></td>
                                     <td><?= $usuario['nome'] ?></td>
-                                    <td class="text-center">
+                                    <td class="text-right">
                                         <?php if ($base->permissao('PermissaoController/edit')) : ?>
                                             <a href="<?= base_url('/permissao/edit/' . $usuario['usuario_tipo_id']) ?>">
                                                 <button class="btn btn-primary text-white" title="Editar">

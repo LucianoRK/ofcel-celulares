@@ -97,6 +97,22 @@ $routes->get('/cliente/create', 'ClienteController::create');
 $routes->post('/cliente/store', 'ClienteController::store');
 $routes->post('/cliente/update/(:num)', 'ClienteController::update/$1');
 
+/**
+ * --------------------------------------------------------------------
+ * Marcas
+ * --------------------------------------------------------------------
+ */
+
+// Páginas
+$routes->get('/marca', 'MarcaController::index');
+$routes->get('/marca/edit/(:num)', 'MarcaController::edit/$1');
+$routes->get('/marca/create', 'MarcaController::create');
+// Funcionalidades
+$routes->post('/marca/store', 'MarcaController::store');
+$routes->post('/marca/update/', 'MarcaController::update');
+$routes->post('/marca/ativarMarca', 'MarcaController::ativarMarca');
+$routes->post('/marca/desativarMarca', 'MarcaController::desativarMarca');
+
 
 /**
  * --------------------------------------------------------------------

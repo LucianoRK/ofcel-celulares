@@ -67,11 +67,13 @@
                                     <span class="link-collapse">PRODUTOS</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <span class="link-collapse">MARCA</span>
-                                </a>
-                            </li>
+                            <?php if ($base->permissao('EstoqueController/index')) : ?>
+                                <li>
+                                    <a href="<?= base_url('marca') ?>">
+                                        <span class="link-collapse">MARCA</span>
+                                    </a>
+                                </li>
+                            <?php endif ?>
                             <li>
                                 <a href="#">
                                     <span class="link-collapse">CATEGORIAS</span>

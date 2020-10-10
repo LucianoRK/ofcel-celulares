@@ -28,7 +28,7 @@
                         <th>#</th>
                         <th>Nome</th>
                         <th>Telefone</th>
-                        <th class="text-center">Ações</th>
+                        <th class="text-center"></th>
                     </thead>
                     <tbody>
                         <?php if ($usuariosAtivo) : ?>
@@ -37,7 +37,7 @@
                                     <td><?= $usuario['usuario_id'] ?></td>
                                     <td><?= $usuario['nome'] ?></td>
                                     <td><?= $usuario['telefone'] ?></td>
-                                    <td class="text-center">
+                                    <td class="text-right">
                                         <?php if ($base->permissao('UsuarioController/edit')) : ?>
                                             <a href="<?= base_url('/usuario/edit/' . $usuario['usuario_id']) ?>">
                                                 <button class="btn btn-primary text-white" title="Editar">
@@ -63,7 +63,7 @@
                         <th>#</th>
                         <th>Nome</th>
                         <th>Telefone</th>
-                        <th class="text-center">Ações</th>
+                        <th class="text-center"></th>
                     </thead>
                     <tbody>
                         <?php if ($usuariosInativos) : ?>
@@ -72,7 +72,7 @@
                                     <td><?= $usuario['usuario_id'] ?></td>
                                     <td><?= $usuario['nome'] ?></td>
                                     <td><?= $usuario['telefone'] ?></td>
-                                    <td class="text-center">
+                                    <td class="text-right">
                                         <?php if ($base->permissao('UsuarioController/edit')) : ?>
                                             <a href="<?= base_url('/usuario/edit/' . $usuario['usuario_id']) ?>">
                                                 <button class="btn btn-primary text-white" title="Editar">
