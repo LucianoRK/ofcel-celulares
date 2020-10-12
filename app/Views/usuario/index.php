@@ -73,13 +73,6 @@
                                     <td><?= $usuario['nome'] ?></td>
                                     <td><?= $usuario['telefone'] ?></td>
                                     <td class="text-right">
-                                        <?php if ($base->permissao('UsuarioController/edit')) : ?>
-                                            <a href="<?= base_url('/usuario/edit/' . $usuario['usuario_id']) ?>">
-                                                <button class="btn btn-primary text-white" title="Editar">
-                                                    <i class="la la-edit la-2x"></i>
-                                                </button>
-                                            </a>
-                                        <?php endif; ?>
                                         <?php if ($base->permissao('UsuarioController/ativarUsuario')) : ?>
                                             <button class="btn btn-success text-white ativarUsuario" value="<?= $usuario['usuario_id'] ?>" title="Ativar">
                                                 <i class="la la-arrow-circle-o-up la-2x"></i>

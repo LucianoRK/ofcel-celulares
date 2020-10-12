@@ -16,8 +16,8 @@
                 <table class="table table-striped dataTable w-100 ">
                     <thead>
                         <th class="d-none d-md-block">#</th>
-                        <th>Módulo - Permissão</th>
-                        <th class="text-center">Permitir</th>
+                        <th>Permissões</th>
+                        <th class="text-center"></th>
                     </thead>
                     <tbody>
                         <?php
@@ -25,7 +25,7 @@
                             <tr class="linhaTabela">
                                 <td class="d-none d-md-block"><?= $permissaoSistema['permissao_id'] ?></td>
                                 <td><?= $permissaoSistema['nome'] ?></td>
-                                <td class="text-center">
+                                <td class="text-right">
                                     <?php
                                     $checked = false;
                                     foreach ($permissoes as $permissao) {

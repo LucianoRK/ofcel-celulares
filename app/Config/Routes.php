@@ -49,10 +49,12 @@ $routes->post('/buscaCep', 'BaseController::buscaCep');
  * Empresa
  * --------------------------------------------------------------------
  */
+$routes->group('empresa', function ($routes) {
 // Páginas
 
 // Funcionalidades
-$routes->get('/empresa/trocarEmpresa/(:num)', 'EmpresaController::trocarEmpresa/$1');
+$routes->get('trocarEmpresa/(:num)', 'EmpresaController::trocarEmpresa/$1');
+});
 
 /**
  * --------------------------------------------------------------------
@@ -60,16 +62,18 @@ $routes->get('/empresa/trocarEmpresa/(:num)', 'EmpresaController::trocarEmpresa/
  * --------------------------------------------------------------------
  */
 
-// Páginas
-$routes->get('/usuario', 'UsuarioController::index');
-$routes->get('/usuario/create', 'UsuarioController::create');
-$routes->get('/usuario/edit/(:num)', 'UsuarioController::edit/$1');
-// Funcionalidades
-$routes->post('/usuario/store', 'UsuarioController::store');
-$routes->post('/usuario/update/(:num)', 'UsuarioController::update/$1');
-$routes->post('/usuario/verificarLoginRepetido', 'UsuarioController::verificarLoginRepetido');
-$routes->post('/usuario/ativarUsuario', 'UsuarioController::ativarUsuario');
-$routes->post('/usuario/desativarUsuario', 'UsuarioController::desativarUsuario');
+$routes->group('usuario', function ($routes) {
+	// Páginas
+	$routes->get('/', 'UsuarioController::index');
+	$routes->get('create', 'UsuarioController::create');
+	$routes->get('edit/(:num)', 'UsuarioController::edit/$1');
+	// Funcionalidades
+	$routes->post('store', 'UsuarioController::store');
+	$routes->post('update/(:num)', 'UsuarioController::update/$1');
+	$routes->post('verificarLoginRepetido', 'UsuarioController::verificarLoginRepetido');
+	$routes->post('ativarUsuario', 'UsuarioController::ativarUsuario');
+	$routes->post('desativarUsuario', 'UsuarioController::desativarUsuario');
+});
 
 /**
  * --------------------------------------------------------------------
@@ -77,41 +81,62 @@ $routes->post('/usuario/desativarUsuario', 'UsuarioController::desativarUsuario'
  * --------------------------------------------------------------------
  */
 
-// Páginas
-$routes->get('/permissao', 'PermissaoController::index');
-$routes->get('/permissao/edit/(:num)', 'PermissaoController::edit/$1');
-// Funcionalidades
-$routes->post('/permissao/update', 'PermissaoController::update');
-
+$routes->group('permissao', function ($routes) {
+	// Páginas
+	$routes->get('/', 'PermissaoController::index');
+	$routes->get('edit/(:num)', 'PermissaoController::edit/$1');
+	// Funcionalidades
+	$routes->post('update', 'PermissaoController::update');
+});
 /**
  * --------------------------------------------------------------------
  * Clentes
  * --------------------------------------------------------------------
  */
-
-// Páginas
-$routes->get('/cliente', 'ClienteController::index');
-$routes->get('/cliente/edit/(:num)', 'ClienteController::edit/$1');
-$routes->get('/cliente/create', 'ClienteController::create');
-// Funcionalidades
-$routes->post('/cliente/store', 'ClienteController::store');
-$routes->post('/cliente/update/(:num)', 'ClienteController::update/$1');
+$routes->group('cliente', function ($routes) {
+	// Páginas
+	$routes->get('/', 'ClienteController::index');
+	$routes->get('edit/(:num)', 'ClienteController::edit/$1');
+	$routes->get('create', 'ClienteController::create');
+	// Funcionalidades
+	$routes->post('store', 'ClienteController::store');
+	$routes->post('update/(:num)', 'ClienteController::update/$1');
+});
 
 /**
  * --------------------------------------------------------------------
  * Marcas
  * --------------------------------------------------------------------
  */
+$routes->group('marca', function ($routes) {
+	// Páginas
+	$routes->get('/', 'MarcaController::index');
+	$routes->get('edit/(:num)', 'MarcaController::edit/$1');
+	$routes->get('create', 'MarcaController::create');
+	// Funcionalidades
+	$routes->post('store', 'MarcaController::store');
+	$routes->post('update', 'MarcaController::update');
+	$routes->post('ativarMarca', 'MarcaController::ativarMarca');
+	$routes->post('desativarMarca', 'MarcaController::desativarMarca');
+});
 
-// Páginas
-$routes->get('/marca', 'MarcaController::index');
-$routes->get('/marca/edit/(:num)', 'MarcaController::edit/$1');
-$routes->get('/marca/create', 'MarcaController::create');
-// Funcionalidades
-$routes->post('/marca/store', 'MarcaController::store');
-$routes->post('/marca/update/', 'MarcaController::update');
-$routes->post('/marca/ativarMarca', 'MarcaController::ativarMarca');
-$routes->post('/marca/desativarMarca', 'MarcaController::desativarMarca');
+
+/**
+ * --------------------------------------------------------------------
+ * Categorias
+ * --------------------------------------------------------------------
+ */
+$routes->group('categoria', function ($routes) {
+	// Páginas
+	$routes->get('/', 'CategoriaController::index');
+	$routes->get('edit/(:num)', 'CategoriaController::edit/$1');
+	$routes->get('create', 'CategoriaController::create');
+	// Funcionalidades
+	$routes->post('store', 'CategoriaController::store');
+	$routes->post('update', 'CategoriaController::update');
+	$routes->post('ativarCategoria', 'CategoriaController::ativarCategoria');
+	$routes->post('desativarCategoria', 'CategoriaController::desativarCategoria');
+});
 
 
 /**

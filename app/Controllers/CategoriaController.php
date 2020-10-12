@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Models\MarcaModel;
+use App\Models\CategoriaModel;
 
-class MarcaController extends BaseController
+class CategoriaController extends BaseController
 {
 	public function __construct()
 	{
@@ -22,13 +22,13 @@ class MarcaController extends BaseController
 	public function index()
 	{
 		//Carrega os modelos
-		$marcaModel = new MarcaModel();
+		$categoriaModel = new CategoriaModel();
 
 		//Carrega as variáveis
-		$dados['marcasAtivo']    = $marcaModel->get();
-		$dados['marcasInativo']  = $marcaModel->getDeleted();
+		$dados['categoriasAtiva']    = $categoriaModel->get();
+		$dados['categoriasInativa'] = $categoriaModel->getDeleted();
 
-		return $this->template('marca', 'index', $dados);
+		return $this->template('categoria', 'index', $dados);
 	}
 
 	/**
@@ -61,24 +61,25 @@ class MarcaController extends BaseController
 
 		if ($this->validate($rules)) {
 			//Carrega os modelos
-			$marcaModel  = new MarcaModel();
+			$categoriaModel  = new CategoriaModel();
 
-			//Prepara os dados 
-			$dadosMarca = [
+			//Prepara os dados
+			$dadosCategoria = [
 				'nome'  => !empty($request['nome']) ? $request['nome'] : null
 			];
-			//Salva os dados
-			$marcaModel->save($dadosMarca);
+
+			//Salva 
+			$categoriaModel->save($dadosCategoria);
 
 			//Mensagem de retorno
-			$this->setFlashdata('Marca cadastrada com sucesso !', 'success');
+			$this->setFlashdata('Categoria cadastrada com sucesso !', 'success');
 
-			return redirect()->to('/marca');
+			return redirect()->to('/categoria');
 		} else {
 			//Mensagem de retorno
 			$this->setFlashdata('Preencha todos os campos obrigatório !', 'error');
 
-			return redirect()->to('/marca');
+			return redirect()->to('/categoria');
 		}
 	}
 
@@ -101,30 +102,30 @@ class MarcaController extends BaseController
 		//Rules
 		$rules = [
 			'nome' => 'required',
-			'marcaId' => 'required'
+			'categoriaId' => 'required'
 		];
 
 		if ($this->validate($rules)) {
 			//Carrega os modelos
-			$marcaModel  = new MarcaModel();
+			$categoriaModel  = new CategoriaModel();
 
-			//Prepara os dados 
-			$dadosMarca = [
-				'marca_id' => $request['marcaId'],
+			//Prepara os dados
+			$dadosCategoria = [
+				'categoria_id' => $request['categoriaId'],
 				'nome'  => !empty($request['nome']) ? $request['nome'] : null
 			];
 			//Salva os dados
-			$marcaModel->save($dadosMarca);
+			$categoriaModel->save($dadosCategoria);
 
 			//Mensagem de retorno
-			$this->setFlashdata('Marca editada com sucesso !', 'success');
+			$this->setFlashdata('Categoria editada com sucesso !', 'success');
 
-			return redirect()->to('/marca');
+			return redirect()->to('/categoria');
 		} else {
 			//Mensagem de retorno
 			$this->setFlashdata('Preencha todos os campos obrigatório !', 'error');
 
-			return redirect()->to('/marca');
+			return redirect()->to('/categoria');
 		}
 	}
 
@@ -146,16 +147,16 @@ class MarcaController extends BaseController
 	/**
 	 * Remove ou desabilita o dado
 	 */
-	public function desativarMarca()
+	public function desativarCategoria()
 	{
 		//Get request
 		$request = $this->request->getVar();
 
 		//Carrega os modelos
-		$marcaModel  = new MarcaModel();
+		$categoriaModel  = new CategoriaModel();
 
 		//deleta (safe mode)
-		$dados = $marcaModel->delete($request['marcaId']);
+		$dados = $categoriaModel->delete($request['categoriaId']);
 
 		return $this->response->setJSON($dados);
 	}
@@ -163,16 +164,16 @@ class MarcaController extends BaseController
 	/**
 	 * Remove ou desabilita o dado
 	 */
-	public function ativarMarca()
+	public function ativarCategoria()
 	{
 		//Get request
 		$request = $this->request->getVar();
 
 		//Carrega os modelos
-		$marcaModel  = new MarcaModel();
+		$categoriaModel  = new CategoriaModel();
 
 		//deleta (safe mode)
-		$dados = $marcaModel->update($request['marcaId'], ['deleted_at' => null]);
+		$dados = $categoriaModel->update($request['categoriaId'], ['deleted_at' => null]);
 
 		return $this->response->setJSON($dados);
 	}

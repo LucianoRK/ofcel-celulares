@@ -14,10 +14,12 @@
         });
     }
 
+     /**
+     * Mostra o campo de editar marca
+     */
     function mostrarCampoEditarMarca() {
         $('.dataTable').on('click', '.btnEditarMarca', function() {
             targetOffset = $('.cardEditarMarca').offset().top;
-            
             $('html, body').animate({
                 scrollTop: targetOffset - 100
             }, 500);
@@ -76,7 +78,7 @@
                             marcaId: marcaId
                         }, (resp) => {
                             if (resp) {
-                                toast('success', 'Usuário desativado com sucesso !')
+                                toast('success', 'Marca desativada com sucesso !')
                                 window.location.href = BASE_URL + "/marca";
                             }
                         });

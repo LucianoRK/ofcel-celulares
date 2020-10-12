@@ -12,8 +12,8 @@
         <div class="card-body">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="documento" class="cpfCnpjTroca"><?= strlen($cliente['documento']) >= 11 ? 'CPF' : 'CNPJ'  ?></label>
-                    <input type="text" class="form-control form-control-lg  <?= strlen($cliente['documento']) >= 11 ? 'cpf' : 'cnpj'  ?> cpfCnpj" maxlength="15" id="documento" name="documento" value="<?= $cliente['documento'] ?>">
+                    <label for="documento" class="cpfCnpjTroca"><?= strlen($cliente['documento']) <= 14 ? 'CPF' : 'CNPJ'  ?></label>
+                    <input type="text" class="form-control form-control-lg  <?= strlen($cliente['documento']) <= 14 ? 'cpf' : 'cnpj'  ?> cpfCnpj" maxlength="15" id="documento" name="documento" value="<?= $cliente['documento'] ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="nome">Nome</label>
