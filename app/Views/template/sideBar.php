@@ -75,11 +75,18 @@
                                 </li>
                             <?php endif ?>
                             <?php if ($base->permissao('CategoriaController/index')) : ?>
-                            <li>
-                                <a href="<?= base_url('categoria') ?>">
-                                    <span class="link-collapse">CATEGORIAS</span>
-                                </a>
-                            </li>
+                                <li>
+                                    <a href="<?= base_url('categoria') ?>">
+                                        <span class="link-collapse">CATEGORIAS</span>
+                                    </a>
+                                </li>
+                            <?php endif ?>
+                            <?php if ($base->permissao('SubcategoriaController/index')) : ?>
+                                <li>
+                                    <a href="<?= base_url('subcategoria') ?>">
+                                        <span class="link-collapse">SUBCATEGORIAS</span>
+                                    </a>
+                                </li>
                             <?php endif ?>
                         </ul>
                     </div>

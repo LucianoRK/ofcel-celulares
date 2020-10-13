@@ -50,10 +50,10 @@ $routes->post('/buscaCep', 'BaseController::buscaCep');
  * --------------------------------------------------------------------
  */
 $routes->group('empresa', function ($routes) {
-// Páginas
+	// Páginas
 
-// Funcionalidades
-$routes->get('trocarEmpresa/(:num)', 'EmpresaController::trocarEmpresa/$1');
+	// Funcionalidades
+	$routes->get('trocarEmpresa/(:num)', 'EmpresaController::trocarEmpresa/$1');
 });
 
 /**
@@ -120,7 +120,6 @@ $routes->group('marca', function ($routes) {
 	$routes->post('desativarMarca', 'MarcaController::desativarMarca');
 });
 
-
 /**
  * --------------------------------------------------------------------
  * Categorias
@@ -136,6 +135,23 @@ $routes->group('categoria', function ($routes) {
 	$routes->post('update', 'CategoriaController::update');
 	$routes->post('ativarCategoria', 'CategoriaController::ativarCategoria');
 	$routes->post('desativarCategoria', 'CategoriaController::desativarCategoria');
+});
+
+/**
+ * --------------------------------------------------------------------
+ * Subcategorias
+ * --------------------------------------------------------------------
+ */
+$routes->group('subcategoria', function ($routes) {
+	// Páginas
+	$routes->get('/', 'SubcategoriaController::index');
+	$routes->get('edit/(:num)', 'SubcategoriaController::edit/$1');
+	$routes->get('create', 'SubcategoriaController::create');
+	// Funcionalidades
+	$routes->post('store', 'SubcategoriaController::store');
+	$routes->post('update', 'SubcategoriaController::update');
+	$routes->post('ativarSubcategoria', 'SubcategoriaController::ativarSubcategoria');
+	$routes->post('desativarSubcategoria', 'SubcategoriaController::desativarSubcategoria');
 });
 
 

@@ -22,10 +22,10 @@
     <div class="card-body">
         <form class="form-inline" action="<?= base_url('categoria/store') ?>" method="post">
             <label for="nome" class="col-sm-2 col-form-label col-form-label-lg">Nova Categoria</label>
-            <div class="col-md-9">
+            <div class="form-group col-md-9">
                 <input type="text" class="form-control form-control-lg w-100" id="nome" name="nome" required>
             </div>
-            <div class="col-md-1 text-right">
+            <div class="form-group col-md-1 text-right">
                 <button type="submit" class="btn btn-success text-white" title="Salvar">
                     <i class="la la-check-square la-2x"></i>
                 </button>
@@ -38,11 +38,11 @@
     <div class="card-body">
         <form class="form-inline" action="<?= base_url('categoria/update') ?>" method="post">
             <label for="nome" class="col-sm-2 col-form-label col-form-label-lg">Editar Categoria</label>
-            <div class="col-md-9 inputsEditarCategoria">
+            <div class="form-group col-md-9 inputsEditarCategoria">
                 <input type="text" class="form-control form-control-lg w-100" id="categoriaNomeEdit" name="nome" required>
                 <input type="hidden" class="form-control form-control-lg w-100" id="categoriaId" name="categoriaId" required>
             </div>
-            <div class="col-md-1 text-right">
+            <div class="form-group col-md-1 text-right">
                 <button class="btn btn-success text-white" title="Salvar">
                     <i class="la la-check-square la-2x"></i>
                 </button>
