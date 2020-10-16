@@ -46,31 +46,24 @@
             <?php endif; ?>
             <?php if ($base->permissao('EstoqueController/index')) : ?>
                 <li class="nav-item">
-                    <a href="">
+                    <a class="" data-toggle="collapse" href="#collapseProdutos" aria-expanded="true">
                         <i class="la la-dropbox"></i>
                         <p>ESTOQUE</p>
                         <!--<span class="badge badge-count">5</span> -->
                     </a>
-                </li>
-            <?php endif; ?>
-            <?php if ($base->permissao('ProdutoController/index')) : ?>
-                <li class="nav-item">
-                    <a class="" data-toggle="collapse" href="#collapseProdutos" aria-expanded="true">
-                        <i class="la la-cubes"></i>
-                        <p>PRODUTOS</p>
-                        <!--<span class="badge badge-count">5</span> -->
-                    </a>
                     <div class="collapse in" id="collapseProdutos">
                         <ul class="nav">
-                            <li>
-                                <a href="#">
-                                    <span class="link-collapse">PRODUTOS</span>
-                                </a>
-                            </li>
+                            <?php if ($base->permissao('ProdutoController/index')) : ?>
+                                <li>
+                                    <a href="<?= base_url('produto') ?>">
+                                        <span class="link-collapse">PRODUTOS</span>
+                                    </a>
+                                </li>
+                            <?php endif ?>
                             <?php if ($base->permissao('MarcaController/index')) : ?>
                                 <li>
                                     <a href="<?= base_url('marca') ?>">
-                                        <span class="link-collapse">MARCA</span>
+                                        <span class="link-collapse">MARCAS</span>
                                     </a>
                                 </li>
                             <?php endif ?>

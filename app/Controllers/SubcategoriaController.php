@@ -183,4 +183,21 @@ class SubcategoriaController extends BaseController
 
 		return $this->response->setJSON($dados);
 	}
+
+	/**
+	 * Remove ou desabilita o dado
+	 */
+	public function getByCategoria()
+	{
+		//Get request
+		$request = $this->request->getVar();
+
+		//Carrega os modelos
+		$subcategoriaModel  = new SubcategoriaModel();
+
+		//deleta (safe mode)
+		$dados   = $subcategoriaModel->get(['subcategoria.categoria_id' => $request['categoria']]);
+
+		return $this->response->setJSON($dados);
+	}
 }

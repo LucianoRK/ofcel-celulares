@@ -105,6 +105,23 @@ $routes->group('cliente', function ($routes) {
 
 /**
  * --------------------------------------------------------------------
+ * Produtos
+ * --------------------------------------------------------------------
+ */
+$routes->group('produto', function ($routes) {
+	// Páginas
+	$routes->get('/', 'ProdutoController::index');
+	$routes->get('edit/(:num)', 'ProdutoController::edit/$1');
+	$routes->get('create', 'ProdutoController::create');
+	// Funcionalidades
+	$routes->post('store', 'ProdutoController::store');
+	$routes->post('update/(:num)', 'ProdutoController::update/$1');
+	$routes->post('ativarProduto', 'ProdutoController::ativarProduto');
+	$routes->post('desativarProduto', 'ProdutoController::desativarProduto');
+});
+
+/**
+ * --------------------------------------------------------------------
  * Marcas
  * --------------------------------------------------------------------
  */
@@ -152,6 +169,7 @@ $routes->group('subcategoria', function ($routes) {
 	$routes->post('update', 'SubcategoriaController::update');
 	$routes->post('ativarSubcategoria', 'SubcategoriaController::ativarSubcategoria');
 	$routes->post('desativarSubcategoria', 'SubcategoriaController::desativarSubcategoria');
+	$routes->post('getByCategoria', 'SubcategoriaController::getByCategoria');
 });
 
 

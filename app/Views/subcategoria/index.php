@@ -27,7 +27,7 @@
                 <input type="text" class="form-control form-control-lg w-100" id="nome" name="nome" required>
             </div>
             <div class="form-group col-md-4 inputsEditarSubcategoria">
-                <select class="form-control form-control-lg" id="categoria" name="categoria" required>
+                <select class="form-control form-control-lg w-100" id="categoria" name="categoria" required>
                     <option></option>
                     <?php foreach ($categorias as $categoria) : ?>
                         <option value="<?= $categoria['categoria_id'] ?>"><?= $categoria['nome'] ?></option>
@@ -52,7 +52,7 @@
                 <input type="hidden" class="form-control form-control-lg" id="subcategoriaId" name="subcategoriaId" required>
             </div>
             <div class="form-group col-md-4 inputsEditarSubcategoria">
-                <select class="form-control form-control-lg" id="categoria" name="categoria" required>
+                <select class="form-control form-control-lg w-100" id="categoria" name="categoria" required>
                     <option id="OptionCategoria"></option>
                     <?php foreach ($categorias as $categoria) : ?>
                         <option value="<?= $categoria['categoria_id'] ?>"><?= $categoria['nome'] ?></option>
