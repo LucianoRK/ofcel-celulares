@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UsuarioModel extends Model
+class EstoqueModel extends Model
 {
-    protected $table      = 'usuario';
-    protected $primaryKey = 'usuario_id';
+    protected $table      = 'estoque';
+    protected $primaryKey = 'estoque_id';
     protected $protectFields = false;
     //protected $allowedFields = ['name', 'email'];
 
@@ -44,7 +44,7 @@ class UsuarioModel extends Model
     }
 
     /**
-	 * Pega todos os desativados
+	 * Pega todos os  desativados
 	 * 
 	 * @param array $dados Informação para a tela
 	 */

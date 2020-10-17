@@ -20,6 +20,7 @@
     <script src="<?= base_url('js/plugin/jquery-mapael/jquery.mapael.min.js') ?>"></script>
     <script src="<?= base_url('js/plugin/jquery-mapael/maps/world_countries.min.js') ?>"></script>
     <script src="<?= base_url('js/plugin/jquery-mask/jquery-mask.js') ?>"></script>
+    <script src="<?= base_url('js/plugin/jquery-mask/jquery-maskMoney.js') ?>"></script>
     <script src="<?= base_url('js/plugin/chart-circle/circles.min.js') ?>"></script>
     <script src="<?= base_url('js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
     <script src="<?= base_url('js/plugin/sweetalert/sweetalert.js') ?>"></script>

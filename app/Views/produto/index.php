@@ -41,8 +41,8 @@
                                     <td><?= $produto['categoriaNome'] ?></td>
                                     <td><?= $produto['subcategoriaNome'] ?></td>
                                     <td><?= $produto['descricao'] ?></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?= $produto['valor_venda'] ?></td>
+                                    <td><?= $produto['quantidade'] ?></td>
                                     <td class="text-right">
                                         <?php if ($base->permissao('ProdutoController/edit')) : ?>
                                             <a href="<?= base_url('/produto/edit/' . $produto['produto_id']) ?>">
@@ -82,8 +82,8 @@
                                     <td><?= $produto['categoriaNome'] ?></td>
                                     <td><?= $produto['subcategoriaNome'] ?></td>
                                     <td><?= $produto['descricao'] ?></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?= $produto['valor_venda'] ?></td>
+                                    <td><?= $produto['quantidade'] ?></td>
                                     <td class="text-right">
                                         <?php if ($base->permissao('ProdutoController/edit')) : ?>
                                             <a href="<?= base_url('/produto/edit/' . $produto['produto_id']) ?>">

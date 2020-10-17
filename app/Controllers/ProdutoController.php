@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\CategoriaModel;
+use App\Models\EmpresaModel;
+use App\Models\EstoqueModel;
 use App\Models\MarcaModel;
 use App\Models\ProdutoModel;
 use App\Models\SubcategoriaModel;
@@ -27,9 +29,12 @@ class ProdutoController extends BaseController
         //Carrega os modelos
         $produtoModel  = new ProdutoModel();
 
+        //Sessao
+        $empresa = $this->session->get('empresa');
+
         //Carrega as variáveis
-        $dados['produtosAtivo']    = $produtoModel->get();
-        $dados['produtosInativo']  = $produtoModel->getDeleted();
+        $dados['produtosAtivo']    = $produtoModel->get(['e.empresa_id' => $empresa['empresa_id']]);
+        $dados['produtosInativo']  = $produtoModel->getDeleted(['e.empresa_id' => $empresa['empresa_id']]);
 
         return $this->template('produto', 'index', $dados);
     }
@@ -48,12 +53,14 @@ class ProdutoController extends BaseController
     public function create()
     {
         //Carrega os modelos
+        $empresas       = new EmpresaModel();
         $marcaModel     = new MarcaModel();
         $categoriaModel = new CategoriaModel();
 
         //Carrega as variáveis
-        $dados['marcas']     = $marcaModel->get();
+        $dados['marcas']      = $marcaModel->get();
         $dados['categorias']  = $categoriaModel->get();
+        $dados['empresas']    = $empresas->get();
 
         return $this->template('produto', 'create', $dados);
     }
@@ -77,6 +84,7 @@ class ProdutoController extends BaseController
         if ($this->validate($rules)) {
             //Carrega os modelos
             $produtoModel  = new ProdutoModel();
+            $estoqueModel  = new EstoqueModel();
 
             //Prepara os dados do Usuário
             $dadosProduto = [
@@ -87,6 +95,23 @@ class ProdutoController extends BaseController
             ];
             //Salva o cliente
             $produtoModel->save($dadosProduto);
+            //Pega o id inserido			
+            $produtoId = $produtoModel->getInsertID();
+            //Estoque
+            if (!empty($request['empresas'])) {
+                foreach ($request['empresas'] as $key => $empresa) {
+                    //Prepara os dados da empresa
+                    $dadosEstoque = [
+                        'empresa_id'    => !empty($empresa)                      ? $empresa                       : null,
+                        'produto_id'    => !empty($produtoId)                    ? $produtoId                     : null,
+                        'quantidade'    => !empty($request['quantidades'][$key]) ? $request['quantidades'][$key]  : null,
+                        'valor_venda'   => !empty($request['valores'][$key])     ? $request['valores'][$key]      : null,
+                    ];
+
+                    //Salva as empresas do usuário
+                    $estoqueModel->save($dadosEstoque);
+                }
+            }
 
             //Mensagem de retorno
             $this->setFlashdata('Produto cadastrado com sucesso !', 'success');

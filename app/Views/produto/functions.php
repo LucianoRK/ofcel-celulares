@@ -85,7 +85,35 @@
         })
     }
 
+    /**
+     * scripts do campo quantidade
+     */
+    function quantidadeScripts() {
+        $(".quantidade").on("focus", function() {
+            if($(this).val() == 0){
+                $(this).val('')
+            }
+        })
+        $(".quantidade").on("blur", function() {
+            if($(this).val() == ''){
+                $(this).val(0)
+            }
+        })
+    }
+
+    /**
+     * scripts do campo valor
+     */
+    function valorScripts() {
+        $(".copiarValor").on("click", function() {
+            let valorCopiado = $(this).parent().find('.valor').val()
+            $('.valor').val(valorCopiado)
+        })
+    }
+
     $(document).ready(() => {
+        valorScripts()
+        quantidadeScripts()
         buscaSubCategorias()
         desativarProduto()
         ativarProduto()

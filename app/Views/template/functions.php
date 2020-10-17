@@ -143,6 +143,8 @@
         $('.maskDateTime').mask('99/99/9999 00:00:00');
         $('.maskCep').mask('99999-999');
 
+        $('.dinheiro').maskMoney({ allowZero: true, showSymbol: true, symbol: "", decimal: ",", thousands: "." })
+
         $('.maskTelefone').mask("(99) 9999-9999#").focusout(function(event) {
             if ($(this).val().length == 15) {
                 $(this).unmask();

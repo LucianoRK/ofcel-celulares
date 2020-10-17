@@ -38,11 +38,14 @@ class ProdutoModel extends Model
             m.nome as marcaNome,
             c.nome as categoriaNome,
             sc.nome as subcategoriaNome,
+            e.valor_venda,
+            e.quantidade
         ");
-        $this->where($dados);
         $this->join('marca as m', 'm.marca_id = produto.marca_id');
         $this->join('categoria as c', 'c.categoria_id = produto.categoria_id');
         $this->join('subcategoria as sc', 'sc.subcategoria_id = produto.subcategoria_id');
+        $this->join('estoque as e', 'e.produto_id = produto.produto_id');
+        $this->where($dados);
 
         if ($first) {
             return $this->first();
@@ -63,11 +66,14 @@ class ProdutoModel extends Model
             m.nome as marcaNome,
             c.nome as categoriaNome,
             sc.nome as subcategoriaNome,
+            e.valor_venda,
+            e.quantidade
         ");
-        $this->where($dados);
         $this->join('marca as m', 'm.marca_id = produto.marca_id');
         $this->join('categoria as c', 'c.categoria_id = produto.categoria_id');
         $this->join('subcategoria as sc', 'sc.subcategoria_id = produto.subcategoria_id');
+        $this->join('estoque as e', 'e.produto_id = produto.produto_id');
+        $this->where($dados);
 
         return $this->onlyDeleted()->find();
     }
