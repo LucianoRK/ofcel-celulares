@@ -58,6 +58,8 @@
                     <tbody>
                         <?php foreach ($empresas as $empresa) : ?>
                             <tr class="linhaTabela">
+
+                                
                                 <td class="d-none d-md-block"><?= $empresa['empresa_id'] ?></td>
                                 <td><?= $empresa['nome'] ?></td>
                                 <td class="text-center">

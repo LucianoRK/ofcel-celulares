@@ -20,6 +20,7 @@ use CodeIgniter\Config\Services;
 use CodeIgniter\Controller;
 use CodeIgniter\CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\RedirectResponse;
+use PHPUnit\Framework\MockObject\Rule\AnyParameters;
 
 class BaseController extends Controller
 {
@@ -180,10 +181,40 @@ class BaseController extends Controller
 			} else {
 				$dados = false;
 			}
-		}else{
+		} else {
 			$dados = false;
 		}
 
 		return $this->response->setJSON($dados);
+	}
+
+	/** 
+	 * 
+	 * @param string $valor
+	 */
+	public function sqlToReal($valor)
+	{
+		return number_format($valor, 2, ",", ".");
+	}
+
+	/** 
+	 * 
+	 * @param $var
+	 */
+	public function realToSql($valor)
+	{
+		return str_replace(',', '.',str_replace('.', '', $valor));
+	}
+
+	/** 
+	 * Função usada para debugar o sistema (Contém die())
+	 * 
+	 * @param $var
+	 */
+	public function debug($var)
+	{
+		echo '<pre>';
+		var_dump($var);
+		die();
 	}
 }

@@ -29,8 +29,8 @@
                         <th>Categoria</th>
                         <th>Subcategoria</th>
                         <th>Descrição</th>
-                        <th>Preço Venda</th>
-                        <th>Quantidade</th>
+                        <th class="text-center">Valor de Venda</th>
+                        <th class="text-center">Quantidade</th>
                         <th class="text-center"></th>
                     </thead>
                     <tbody>
@@ -41,8 +41,8 @@
                                     <td><?= $produto['categoriaNome'] ?></td>
                                     <td><?= $produto['subcategoriaNome'] ?></td>
                                     <td><?= $produto['descricao'] ?></td>
-                                    <td><?= $produto['valor_venda'] ?></td>
-                                    <td><?= $produto['quantidade'] ?></td>
+                                    <td class="text-center"><?= $base->sqlToReal($produto['valor_venda']) ?></td>
+                                    <td class="text-center"><?= $produto['quantidade'] ?></td>
                                     <td class="text-right">
                                         <?php if ($base->permissao('ProdutoController/edit')) : ?>
                                             <a href="<?= base_url('/produto/edit/' . $produto['produto_id']) ?>">
@@ -70,8 +70,8 @@
                         <th>Categoria</th>
                         <th>Subcategoria</th>
                         <th>Descrição</th>
-                        <th>Preço Venda</th>
-                        <th>Quantidade</th>
+                        <th class="text-center">Valor de Venda</th>
+                        <th class="text-center">Quantidade</th>
                         <th class="text-center"></th>
                     </thead>
                     <tbody>
@@ -82,8 +82,8 @@
                                     <td><?= $produto['categoriaNome'] ?></td>
                                     <td><?= $produto['subcategoriaNome'] ?></td>
                                     <td><?= $produto['descricao'] ?></td>
-                                    <td><?= $produto['valor_venda'] ?></td>
-                                    <td><?= $produto['quantidade'] ?></td>
+                                    <td class="text-center"><?= $base->sqlToReal($produto['valor_venda']) ?></td>
+                                    <td class="text-center"><?= $produto['quantidade'] ?></td>
                                     <td class="text-right">
                                         <?php if ($base->permissao('ProdutoController/edit')) : ?>
                                             <a href="<?= base_url('/produto/edit/' . $produto['produto_id']) ?>">

@@ -29,12 +29,12 @@ class ProdutoController extends BaseController
         //Carrega os modelos
         $produtoModel  = new ProdutoModel();
 
-        //Sessao
-        $empresa = $this->session->get('empresa');
+        //Sessão
+        $empresaSessao = $this->session->get('empresa');
 
         //Carrega as variáveis
-        $dados['produtosAtivo']    = $produtoModel->get(['e.empresa_id' => $empresa['empresa_id']]);
-        $dados['produtosInativo']  = $produtoModel->getDeleted(['e.empresa_id' => $empresa['empresa_id']]);
+        $dados['produtosAtivo']    = $produtoModel->get(['e.empresa_id' => $empresaSessao['empresa_id']]);
+        $dados['produtosInativo']  = $produtoModel->getDeleted(['e.empresa_id' => $empresaSessao['empresa_id']]);
 
         return $this->template('produto', 'index', $dados);
     }
@@ -53,14 +53,14 @@ class ProdutoController extends BaseController
     public function create()
     {
         //Carrega os modelos
-        $empresas       = new EmpresaModel();
+        $empresaModel   = new EmpresaModel();
         $marcaModel     = new MarcaModel();
         $categoriaModel = new CategoriaModel();
 
         //Carrega as variáveis
         $dados['marcas']      = $marcaModel->get();
         $dados['categorias']  = $categoriaModel->get();
-        $dados['empresas']    = $empresas->get();
+        $dados['empresas']    = $empresaModel->get();
 
         return $this->template('produto', 'create', $dados);
     }
@@ -102,10 +102,10 @@ class ProdutoController extends BaseController
                 foreach ($request['empresas'] as $key => $empresa) {
                     //Prepara os dados da empresa
                     $dadosEstoque = [
-                        'empresa_id'    => !empty($empresa)                      ? $empresa                       : null,
-                        'produto_id'    => !empty($produtoId)                    ? $produtoId                     : null,
-                        'quantidade'    => !empty($request['quantidades'][$key]) ? $request['quantidades'][$key]  : null,
-                        'valor_venda'   => !empty($request['valores'][$key])     ? $request['valores'][$key]      : null,
+                        'empresa_id'    => !empty($empresa)                      ? $empresa                                      : null,
+                        'produto_id'    => !empty($produtoId)                    ? $produtoId                                    : null,
+                        'quantidade'    => !empty($request['quantidades'][$key]) ? $request['quantidades'][$key]                 : 0,
+                        'valor_venda'   => !empty($request['valores'][$key])     ? $this->realToSql($request['valores'][$key])   : 0.00,
                     ];
 
                     //Salva as empresas do usuário
@@ -131,16 +131,20 @@ class ProdutoController extends BaseController
     public function edit($id)
     {
         //Carrega os modelos
+        $empresaModel       = new EmpresaModel();
         $produtoModel       = new ProdutoModel();
         $marcaModel         = new MarcaModel();
         $categoriaModel     = new CategoriaModel();
         $subcategoriaModel  = new SubcategoriaModel();
+        $estoqueModel       = new EstoqueModel();
 
         //Carrega as variáveis
+        $dados['empresas']      = $empresaModel->get();
         $dados['produto']       = $produtoModel->getById($id);
         $dados['marcas']        = $marcaModel->get();
         $dados['categorias']    = $categoriaModel->get();
         $dados['subcategorias'] = $subcategoriaModel->get(['subcategoria.categoria_id' => $dados['produto']['categoria_id']]);
+        $dados['estoque']       = $estoqueModel->get(['produto_id' => $dados['produto']['produto_id']]);
 
         return $this->template('produto', 'edit', $dados);
     }
@@ -164,6 +168,7 @@ class ProdutoController extends BaseController
         if ($this->validate($rules)) {
             //Carrega os modelos
             $produtoModel = new ProdutoModel();
+            $estoqueModel = new EstoqueModel();
 
             //Prepara os dados do Usuário
             $dadosCliente = [
@@ -175,6 +180,24 @@ class ProdutoController extends BaseController
             ];
             //Salva o cliente
             $produtoModel->save($dadosCliente);
+
+            //Estoque
+            if (!empty($request['empresas'])) {
+                foreach ($request['empresas'] as $key => $empresa) {
+                    //Prepara os dados da empresa
+                    
+                    $dadosEstoque = [
+                        'estoque_id'    => $request['estoque'][$key],
+                        'empresa_id'    => !empty($empresa)                      ? $empresa                       : null,
+                        'produto_id'    => !empty($id)                           ? $id                            : null,
+                        'quantidade'    => !empty($request['quantidades'][$key]) ? $request['quantidades'][$key]  : 0,
+                        'valor_venda'   => !empty($request['valores'][$key])     ? $this->realToSql($request['valores'][$key])      : 0.00,
+                    ];
+
+                    //Salva as empresas do usuário
+                    $estoqueModel->save($dadosEstoque);
+                }
+            }
 
             //Mensagem de retorno
             $this->setFlashdata('Produto alterado com sucesso !', 'success');
