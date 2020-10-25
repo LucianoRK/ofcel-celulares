@@ -10,7 +10,7 @@
             </li>
             <?php if ($base->permissao('VendaController/index')) : ?>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="<?= base_url('venda') ?>">
                         <i class="la la-cart-plus"></i>
                         <p>VENDAS</p>
                         <!--<span class="badge badge-count">5</span> -->

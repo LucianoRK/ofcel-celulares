@@ -166,7 +166,6 @@ class BaseController extends Controller
 	 */
 	public function buscaCep()
 	{
-
 		//Get request
 		$request = $this->request->getVar();
 		if (strlen($request['cep']) == 8) {
@@ -216,5 +215,14 @@ class BaseController extends Controller
 		echo '<pre>';
 		var_dump($var);
 		die();
+	}
+	/** 
+	 * Seta o valor como nulo caso venha vazio
+	 * 
+	 * @param $var
+	 */
+	public function validarEmpty($var)
+	{
+		return !empty($var) ? $var : null;
 	}
 }

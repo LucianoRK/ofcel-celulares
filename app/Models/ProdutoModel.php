@@ -38,6 +38,7 @@ class ProdutoModel extends Model
             m.nome as marcaNome,
             c.nome as categoriaNome,
             sc.nome as subcategoriaNome,
+            e.estoque_id,
             e.valor_venda,
             e.quantidade
         ");

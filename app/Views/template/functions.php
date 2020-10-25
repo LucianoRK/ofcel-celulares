@@ -143,7 +143,13 @@
         $('.maskDateTime').mask('99/99/9999 00:00:00');
         $('.maskCep').mask('99999-999');
 
-        $('.dinheiro').maskMoney({ allowZero: true, showSymbol: true, symbol: "", decimal: ",", thousands: "." })
+        $('.dinheiro').maskMoney({
+            allowZero: true,
+            showSymbol: true,
+            symbol: "",
+            decimal: ",",
+            thousands: "."
+        })
 
         $('.maskTelefone').mask("(99) 9999-9999#").focusout(function(event) {
             if ($(this).val().length == 15) {
@@ -278,6 +284,23 @@
         resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
         if (resultado != digitos.charAt(1)) return false;
         return true;
+    }
+
+    /**
+     * Transforma real em valor para sql
+     */
+    function realToSql(valor) {
+        valor = valor.replace(".", "");
+        return valor.replace(",", ".");
+    }
+
+    /**
+     * Transforma valor sql em real
+     */
+    function sqlToReal(valor) {
+        return valor.toLocaleString('pt-br', {
+            minimumFractionDigits: 2
+        });
     }
 
     $(document).ready(function() {

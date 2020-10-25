@@ -118,6 +118,7 @@ $routes->group('produto', function ($routes) {
 	$routes->post('update/(:num)', 'ProdutoController::update/$1');
 	$routes->post('ativarProduto', 'ProdutoController::ativarProduto');
 	$routes->post('desativarProduto', 'ProdutoController::desativarProduto');
+	$routes->post('verificarQuantidadeProdutoEstoque', 'ProdutoController::verificarQuantidadeProdutoEstoque');
 });
 
 /**
@@ -170,6 +171,24 @@ $routes->group('subcategoria', function ($routes) {
 	$routes->post('ativarSubcategoria', 'SubcategoriaController::ativarSubcategoria');
 	$routes->post('desativarSubcategoria', 'SubcategoriaController::desativarSubcategoria');
 	$routes->post('getByCategoria', 'SubcategoriaController::getByCategoria');
+});
+
+/**
+ * --------------------------------------------------------------------
+ * Vendas
+ * --------------------------------------------------------------------
+ */
+$routes->group('venda', function ($routes) {
+	// Páginas
+	$routes->get('/', 'VendaController::index');
+	$routes->get('edit/(:num)', 'VendaController::edit/$1');
+	$routes->get('create', 'VendaController::create');
+	// Funcionalidades
+	$routes->post('store', 'VendaController::store');
+	$routes->post('update', 'VendaController::update');
+	$routes->post('ativarVenda', 'VendaController::ativarVenda');
+	$routes->post('desativarVenda', 'VendaController::desativarVenda');
+	$routes->post('getByCategoria', 'VendaController::getByCategoria');
 });
 
 

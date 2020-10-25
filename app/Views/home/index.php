@@ -5,7 +5,7 @@
 </style>
 <div class="row">
     <div class="col-sm-4">
-        <a href="#">
+        <a href="<?= base_url('/venda/create') ?>">
             <div class="card card-stats card-success">
                 <div class="card-body ">
                     <div class="row">

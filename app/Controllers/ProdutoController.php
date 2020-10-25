@@ -185,7 +185,7 @@ class ProdutoController extends BaseController
             if (!empty($request['empresas'])) {
                 foreach ($request['empresas'] as $key => $empresa) {
                     //Prepara os dados da empresa
-                    
+
                     $dadosEstoque = [
                         'estoque_id'    => $request['estoque'][$key],
                         'empresa_id'    => !empty($empresa)                      ? $empresa                       : null,
@@ -257,5 +257,24 @@ class ProdutoController extends BaseController
         $dados = $produtoModel->update($request['produtoId'], ['deleted_at' => null]);
 
         return $this->response->setJSON($dados);
+    }
+
+    public function verificarQuantidadeProdutoEstoque()
+    {
+        //Get request
+        $request = $this->request->getVar();
+        //Carrega os modelos
+        $produtoModel  = new ProdutoModel();
+        //Sessão
+        $empresaSessao = $this->session->get('empresa');
+        //parametros
+        $parametros = [
+            'e.empresa_id' => $empresaSessao['empresa_id'],
+            'produto.produto_id' => $request['produtoId']
+        ];
+        //Faz a busca no db
+        $produto = $produtoModel->get($parametros, true);
+
+        return $this->response->setJSON($produto['quantidade']);
     }
 }

@@ -2627,7 +2627,8 @@ body {
     width: calc(100% - 260px);
     min-height: 100%;
     float: right;
-    background: #f2f3f8;
+    background: #fff7f6;
+    /*background: #f2f3f8;*/
 }
 
 .main-panel .content {
