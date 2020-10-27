@@ -303,6 +303,13 @@
         });
     }
 
+    /** 
+     *selectpicker
+     */
+    function selectpicker() {
+        $('.selectpicker').selectpicker()
+    }
+
     $(document).ready(function() {
         template()
         mask()
@@ -311,5 +318,6 @@
         maskCnpj()
         maskCpf()
         validaNumero()
+        selectpicker()
     });
 </script>

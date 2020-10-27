@@ -160,7 +160,7 @@
             quantidadeEmLista = $('.produtosLista').map(function(i, el) {
                 return $(el).val()
             }).get()
-             //Pega a lista formas de pagamento
+            //Pega a lista formas de pagamento
             formasPagamento = $('.formasPagamento').map(function(i, el) {
                 return $(el).val()
             }).get()
@@ -174,7 +174,7 @@
                 toast('error', 'Insira formas de pagamento na venda.')
                 return false
             }
-            if($('#valorFormaPagamento').val() != '0,00'){
+            if ($('#valorFormaPagamento').val() != '0,00') {
                 toast('error', 'O valor da forma de pagamento está diferente do valor dos produtos.')
                 return false
             }
@@ -182,19 +182,40 @@
             return true
         })
     }
-    /** 
-     *selectpicker
+    /**
+     * Desativa o usuário
      */
-    function selectpicker() {
-        $('.selectpicker').selectpicker()
+    function desativarVenda() {
+        $(".dataTable").on("click", ".desativarVenda", function() {
+            let vendaId = $(this).val();
+            Swal.fire({
+                icon: 'info',
+                title: 'Deseja realmente extornar esta venda ?',
+                showDenyButton: true,
+                confirmButtonText: 'Sim',
+                denyButtonText: 'Não',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(BASE_URL + "/venda/desativarVenda",
+                        data = {
+                            vendaId: vendaId
+                        }, (resp) => {
+                            if (resp) {
+                                toast('success', 'Venda extornada com sucesso.')
+                                window.location.href = BASE_URL + "/venda";
+                            }
+                        });
+                }
+            })
+        })
     }
 
     $(document).ready(() => {
-        selectpicker()
         adicionarItemCarrinho()
         removerItemCarrinho()
         adicionarFormaPagamento()
         removerFormaPagamento()
         finalizarVenda()
+        desativarVenda()
     })
 </script>

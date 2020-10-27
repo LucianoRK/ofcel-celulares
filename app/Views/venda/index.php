@@ -26,7 +26,9 @@
                 <table class="table table-striped dataTable">
                     <thead>
                         <th>#</th>
-                        <th>Produto</th>
+                        <th>Data / Hora</th>
+                        <th>Vendedor</th>
+                        <th>Cliente</th>
                         <th>Valor</th>
                         <th class="text-center"></th>
                     </thead>
@@ -35,21 +37,24 @@
                             <?php foreach ($vendasAtiva as $venda) : ?>
                                 <tr class="linhaTabela">
                                     <td><?= $venda['venda_id'] ?></td>
-                                    <td>teste</td>
-                                    <td>teste</td>
+                                    <td><?= $venda['venda_data'] ?></td>
+                                    <td><?= $venda['usuario_nome'] ?></td>
+                                    <td><?= $venda['cliente_nome'] ?></td>
+                                    <td><?= $base->sqlToReal($venda['valor_venda']) ?></td>
                                     <td class="text-right">
-                                        <?php if ($base->permissao('VendaController/edit')) : ?>
-                                            <a href="<?= base_url('/venda/edit/' . $venda['venda_id']) ?>">
-                                                <button class="btn btn-primary text-white" title="Editar">
-                                                    <i class="la la-edit la-2x"></i>
-                                                </button>
-                                            </a>
-                                        <?php endif; ?>
                                         <?php if ($base->permissao('VendaController/desativarVenda')) : ?>
                                             <button class="btn btn-danger text-white desativarVenda" value="<?= $venda['venda_id'] ?>" title="Excluir">
                                                 <i class="la la-trash la-2x"></i>
                                             </button>
                                         <?php endif; ?>
+                                        <?php if ($base->permissao('VendaController/visualizar')) : ?>
+                                            <a href="<?= base_url('/venda/show/' . $venda['venda_id']) ?>">
+                                                <button class="btn btn-primary text-white" title="Mais detalhes">
+                                                    <i class="la la-eye la-2x"></i>
+                                                </button>
+                                            </a>
+                                        <?php endif; ?>
+
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -61,8 +66,10 @@
                 <table class="table table-striped dataTable">
                     <thead>
                         <th>#</th>
-                        <th>Nome</th>
-                        <th>Telefone</th>
+                        <th>Data / Hora</th>
+                        <th>Vendedor</th>
+                        <th>Cliente</th>
+                        <th>Valor</th>
                         <th class="text-center"></th>
                     </thead>
                     <tbody>
@@ -70,14 +77,11 @@
                             <?php foreach ($vendasInativa as $venda) : ?>
                                 <tr class="linhaTabela">
                                     <td><?= $venda['venda_id'] ?></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?= $venda['venda_data'] ?></td>
+                                    <td><?= $venda['usuario_nome'] ?></td>
+                                    <td><?= $venda['cliente_nome'] ?></td>
+                                    <td><?= $base->sqlToReal($venda['valor_venda']) ?></td>
                                     <td class="text-right">
-                                        <?php if ($base->permissao('VendaController/ativarVenda')) : ?>
-                                            <button class="btn btn-success text-white ativarVenda" value="<?= $venda['venda_id'] ?>" title="Ativar">
-                                                <i class="la la-arrow-circle-o-up la-2x"></i>
-                                            </button>
-                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
