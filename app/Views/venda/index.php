@@ -48,13 +48,10 @@
                                             </button>
                                         <?php endif; ?>
                                         <?php if ($base->permissao('VendaController/visualizar')) : ?>
-                                            <a href="<?= base_url('/venda/show/' . $venda['venda_id']) ?>">
-                                                <button class="btn btn-primary text-white" title="Mais detalhes">
-                                                    <i class="la la-eye la-2x"></i>
-                                                </button>
-                                            </a>
+                                            <button type="button" class="btn btn-primary text-white detalheVenda" title="Mais detalhes" value="<?= $venda['venda_id'] ?>">
+                                                <i class="la la-eye la-2x"></i>
+                                            </button>
                                         <?php endif; ?>
-
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -88,6 +85,22 @@
                         <?php endif; ?>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal" id="detalheVenda" tabindex="-1" role="dialog" aria-labelledby="detalheVenda" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Detalhes da venda</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="detalheVendaBody">
+                       
             </div>
         </div>
     </div>

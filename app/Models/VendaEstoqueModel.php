@@ -33,6 +33,19 @@ class VendaEstoqueModel extends Model
      */
     public function get($dados = [], $first = false)
     {
+        $this->select("
+            venda_estoque.valor_venda as valor_venda,
+            p.descricao as produtoNome,
+            m.nome as marcaNome,
+            c.nome as categoriaNome,
+            sc.nome as subcategoriaNome
+        ");
+        $this->join('estoque as e', 'e.estoque_id = venda_estoque.estoque_id');
+        $this->join('produto as p', 'p.produto_id = e.produto_id');
+        $this->join('marca as m', 'm.marca_id = p.marca_id');
+        $this->join('categoria as c', 'c.categoria_id = p.categoria_id');
+        $this->join('subcategoria as sc', 'sc.subcategoria_id = p.subcategoria_id');
+        
         $this->where($dados);
 
         if ($first) {

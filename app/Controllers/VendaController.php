@@ -52,7 +52,21 @@ class VendaController extends BaseController
 	 */
 	public function show()
 	{
-		//
+		//Get request
+		$request = $this->request->getVar();
+		//Carrega os modelos
+		$vendaModel 			  = new VendaModel;
+		$vendaEstoqueModel        = new VendaEstoqueModel;
+		$vendaFormaPagamentoModel = new VendaFormaPagamentoModel;
+		//prepara as variáveis
+		$dados['base']          	  = $this;
+		$dados['valorTotalProduto']   = 0.00;
+		$dados['valorTotalFormaPag']  = 0.00;
+		$dados['venda']               = $vendaModel->get(['venda.venda_id' => $request['vendaId']], true);
+		$dados['vendaEstoque']        = $vendaEstoqueModel->get(['venda_id' => $request['vendaId']]);
+		$dados['vendaFormaPagamento'] = $vendaFormaPagamentoModel->get(['venda_id' => $request['vendaId']]);
+		
+		return view('venda/show', $dados);
 	}
 
 	/**

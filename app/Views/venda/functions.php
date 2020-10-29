@@ -210,6 +210,25 @@
         })
     }
 
+    /**
+     * Abre o modal
+     */
+    function openDetalhesVenda() {
+        $(".dataTable").on("click", ".detalheVenda", function() {
+            $.post(BASE_URL + "/venda/show",
+                data = {
+                    vendaId: $(this).val()
+                }, (resp) => {
+                    if (resp) {
+                        $('#detalheVendaBody').html(resp)
+                        $('#detalheVenda').modal('show')
+                    }else{
+                        toast('error', 'Venda não localizada.')
+                    }
+                });
+        })
+    }
+
     $(document).ready(() => {
         adicionarItemCarrinho()
         removerItemCarrinho()
@@ -217,5 +236,6 @@
         removerFormaPagamento()
         finalizarVenda()
         desativarVenda()
+        openDetalhesVenda()
     })
 </script>

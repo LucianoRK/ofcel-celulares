@@ -33,6 +33,13 @@ class VendaFormaPagamentoModel extends Model
      */
     public function get($dados = [], $first = false)
     {
+        $this->select("
+            venda_forma_pagamento.valor,
+            fp.nome
+        ");
+
+        $this->join('forma_pagamento as fp', 'fp.forma_pagamento_id = venda_forma_pagamento.forma_pagamento_id');
+
         $this->where($dados);
 
         if ($first) {

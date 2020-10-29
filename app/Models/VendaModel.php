@@ -39,6 +39,7 @@ class VendaModel extends Model
             DATE_FORMAT(venda.created_at, '%d/%m/%Y %H:%i') as venda_data,
             u.nome as usuario_nome,
             c.nome as cliente_nome,
+            c.telefone as cliente_telefone,
             SUM(ve.valor_venda) as valor_venda
         ");
 

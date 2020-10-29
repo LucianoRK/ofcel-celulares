@@ -182,6 +182,7 @@ $routes->group('venda', function ($routes) {
 	// Páginas
 	$routes->get('/', 'VendaController::index');
 	$routes->get('edit/(:num)', 'VendaController::edit/$1');
+	$routes->post('show', 'VendaController::show');
 	$routes->get('create', 'VendaController::create');
 	// Funcionalidades
 	$routes->post('store', 'VendaController::store');
