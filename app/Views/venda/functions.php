@@ -16,7 +16,7 @@
                 }, (quantidadeEmEstoque) => {
                     //Verifico quanto itens tem na lista
                     quantidadeEmLista = $('.produtosLista').map(function(i, el) {
-                        if (produtoId == $(el).val()) {
+                        if (produtoEstoqueId == $(el).val()) {
                             return $(el).val()
                         }
                     }).get()
@@ -222,7 +222,7 @@
                     if (resp) {
                         $('#detalheVendaBody').html(resp)
                         $('#detalheVenda').modal('show')
-                    }else{
+                    } else {
                         toast('error', 'Venda não localizada.')
                     }
                 });

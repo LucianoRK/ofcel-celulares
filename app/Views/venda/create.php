@@ -77,6 +77,7 @@
                     <tbody>
                         <tr>
                             <td class="w-50">
+                                <label for="selectFormaPagamento">Tipo</label>
                                 <select class="form-control form-control-lg selectpicker" id="selectFormaPagamento">
                                     <?php foreach ($formasPagamento as $formaPagamento) : ?>
                                         <option texto="<?= $formaPagamento['nome'] ?>" value="<?= $formaPagamento['forma_pagamento_id'] ?>"><?= $formaPagamento['nome'] ?></option>
@@ -84,9 +85,11 @@
                                 </select>
                             </td>
                             <td class="w-50">
+                                <label for="valorFormaPagamento">Valor</label>
                                 <input type="text" class="form-control form-control-lg dinheiro" id="valorFormaPagamento" value="0,00">
                             </td>
                             <td class="text-right">
+                                <label for="btnAdicionarFormaPagamento"></label>
                                 <button class="btn btn-success text-white" id="btnAdicionarFormaPagamento" title="Adicionar forma de pagamento" type="button"><i class="la la-plus-circle la-2x"></i></button>
                             </td>
                         </tr>
@@ -113,7 +116,6 @@
         </div>
     </div>
     <div class="text-right mb-2">
-        <button class="btn btn-info btn-lg" id="salvarImprimir">Salvar e Imprimir</button>
         <button class="btn btn-danger btn-lg" id="salvar">Salvar</button>
         <?= csrf_field(); ?>
     </div>

@@ -48,6 +48,11 @@
                                             </button>
                                         <?php endif; ?>
                                         <?php if ($base->permissao('VendaController/visualizar')) : ?>
+                                            <a href="<?= base_url('venda/print').'/'.$venda['venda_id'] ?>" target="_blank">
+                                                <button type="button" class="btn btn-default text-white" title="Imprimir" value="<?= $venda['venda_id'] ?>">
+                                                    <i class="la la-print la-2x"></i>
+                                                </button>
+                                            </a>
                                             <button type="button" class="btn btn-primary text-white detalheVenda" title="Mais detalhes" value="<?= $venda['venda_id'] ?>">
                                                 <i class="la la-eye la-2x"></i>
                                             </button>
@@ -100,7 +105,7 @@
                 </button>
             </div>
             <div class="modal-body" id="detalheVendaBody">
-                       
+
             </div>
         </div>
     </div>

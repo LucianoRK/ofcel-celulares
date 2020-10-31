@@ -36,6 +36,8 @@ class VendaModel extends Model
         $this->select("
             venda.venda_id,
             venda.observacao,
+            venda.created_at as data_venda,
+            venda.empresa_id,
             DATE_FORMAT(venda.created_at, '%d/%m/%Y %H:%i') as venda_data,
             u.nome as usuario_nome,
             c.nome as cliente_nome,

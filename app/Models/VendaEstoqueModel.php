@@ -35,6 +35,7 @@ class VendaEstoqueModel extends Model
     {
         $this->select("
             venda_estoque.valor_venda as valor_venda,
+            venda_estoque.estoque_id,
             p.descricao as produtoNome,
             m.nome as marcaNome,
             c.nome as categoriaNome,

@@ -7427,6 +7427,9 @@ body {
         display: none;
     }
 }
+.widthPrint {
+    max-width: 312px;
+}
 
 
 /*# sourceMappingURL=ready.css.map */

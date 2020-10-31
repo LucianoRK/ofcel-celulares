@@ -38,7 +38,7 @@
     /**
      * DataTable
      */
-    function dataTable() {
+    function dataTable(parametros) {
         $('.dataTable').DataTable({
             "language": {
                 "sEmptyTable": "Nenhum registro encontrado",
@@ -77,7 +77,8 @@
                         "_": "%d linhas copiadas com sucesso"
                     }
                 }
-            }
+            },
+            "order": [ 0, "desc" ]
         });
     }
 

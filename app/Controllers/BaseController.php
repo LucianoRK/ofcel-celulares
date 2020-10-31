@@ -42,6 +42,12 @@ class BaseController extends Controller
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
 		$this->session = Services::session();
+		$this->router  = Services::router();
+
+		//Variaveis Globais
+		$this->controller   = str_replace('\App\Controllers\\', '', $this->router->controllerName());
+		$this->method       = $this->router->methodName();
+		$this->route        = $this->controller . '/' . $this->router->methodName();
 	}
 
 	/**
@@ -53,7 +59,6 @@ class BaseController extends Controller
 	 */
 	protected function template($pasta, $arquivo, $dados = [])
 	{
-
 		$dados['session']       = $this->session;
 		$dados['responseFlash'] = $this->session->getFlashdata('responseFlash');
 		$dados['base']          = $this;
@@ -77,8 +82,10 @@ class BaseController extends Controller
 	 */
 	protected function template_publico($pasta, $arquivo, $dados = [])
 	{
+		//Variaveis Globais
 		$dados['session']       = $this->session;
 		$dados['responseFlash'] = $this->session->getFlashdata('responseFlash');
+		$dados['base']          = $this;
 
 		echo view('template/header', $dados);
 		echo view('template/functions', $dados);
@@ -202,7 +209,7 @@ class BaseController extends Controller
 	 */
 	public function realToSql($valor)
 	{
-		return str_replace(',', '.',str_replace('.', '', $valor));
+		return str_replace(',', '.', str_replace('.', '', $valor));
 	}
 
 	/** 
@@ -224,5 +231,22 @@ class BaseController extends Controller
 	public function validarEmpty($var)
 	{
 		return !empty($var) ? $var : null;
+	}
+	/** 
+	 * Coloca a classe active no menu
+	 * 
+	 * @param $menuControllador
+	 */
+	public function addActiveMenu($menuControllador)
+	{
+		if(is_array($menuControllador)){
+			if (in_array($this->controller, $menuControllador)) {
+				return 'active';
+			}
+		}else{
+			if ($this->controller == $menuControllador) {
+				return 'active';
+			}
+		}
 	}
 }

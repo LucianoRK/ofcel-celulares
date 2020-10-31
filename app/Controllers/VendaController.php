@@ -65,8 +65,39 @@ class VendaController extends BaseController
 		$dados['venda']               = $vendaModel->get(['venda.venda_id' => $request['vendaId']], true);
 		$dados['vendaEstoque']        = $vendaEstoqueModel->get(['venda_id' => $request['vendaId']]);
 		$dados['vendaFormaPagamento'] = $vendaFormaPagamentoModel->get(['venda_id' => $request['vendaId']]);
-		
+
 		return view('venda/show', $dados);
+	}
+
+	/**
+	 * Mostra um item específico
+	 */
+	public function print($id)
+	{
+		//Carrega os modelos
+		$vendaModel 			  = new VendaModel;
+		$vendaEstoqueModel        = new VendaEstoqueModel;
+		$vendaFormaPagamentoModel = new VendaFormaPagamentoModel;
+		$empresaModel             = new EmpresaModel;
+
+		//prepara as variáveis
+		$dados['venda'] = $vendaModel->get(['venda.venda_id' => $id], true);
+	
+		if ($dados['venda']) {
+			//prepara as variáveis
+			$dados['valorTotalProduto']   = 0.00;
+			$dados['valorTotalFormaPag']  = 0.00;
+			$dados['vendaEstoque']        = $vendaEstoqueModel->get(['venda_id' => $id]);
+			$dados['vendaFormaPagamento'] = $vendaFormaPagamentoModel->get(['venda_id' => $id]);
+			$dados['empresa']             = $empresaModel->get(['empresa_id' => $dados['venda']['empresa_id']], true);
+
+			return $this->template_publico('venda', 'print', $dados);
+		} else {
+			//Mensagem de retorno
+			$this->setFlashdata('Venda não localizada.', 'error');
+			//Redireciona
+			return redirect()->to('/venda');
+		}
 	}
 
 	/**
@@ -172,7 +203,7 @@ class VendaController extends BaseController
 			//Mensagem de retorno
 			$this->setFlashdata('Preencha todos os campos obrigatório !', 'error');
 			//Redireciona
-			return redirect()->to('/usuario/create');
+			return redirect()->to('/venda/create');
 		}
 	}
 
@@ -218,6 +249,7 @@ class VendaController extends BaseController
 			//Salva
 			$estoqueModel->save($dadosEstoque);
 		}
+		$this->setFlashdata('Venda extornada com sucesso.', 'success');
 
 		return $this->response->setJSON($dados);
 	}

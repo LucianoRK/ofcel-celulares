@@ -184,6 +184,7 @@ $routes->group('venda', function ($routes) {
 	$routes->get('edit/(:num)', 'VendaController::edit/$1');
 	$routes->post('show', 'VendaController::show');
 	$routes->get('create', 'VendaController::create');
+	$routes->get('print/(:num)', 'VendaController::print/$1');
 	// Funcionalidades
 	$routes->post('store', 'VendaController::store');
 	$routes->post('update', 'VendaController::update');

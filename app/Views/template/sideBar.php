@@ -1,7 +1,7 @@
 <div class="sidebar">
     <div class="scrollbar-inner sidebar-wrapper">
         <ul class="nav">
-            <li class="nav-item active">
+            <li class="nav-item <?= $base->addActiveMenu(['LoginController', 'HomeController']); ?>">
                 <a href="/">
                     <i class="la la-home"></i>
                     <p>HOME</p>
@@ -9,7 +9,7 @@
                 </a>
             </li>
             <?php if ($base->permissao('VendaController/index')) : ?>
-                <li class="nav-item">
+                <li class="nav-item <?= $base->addActiveMenu('VendaController'); ?>">
                     <a href="<?= base_url('venda') ?>">
                         <i class="la la-cart-plus"></i>
                         <p>VENDAS</p>
@@ -18,7 +18,7 @@
                 </li>
             <?php endif; ?>
             <?php if ($base->permissao('OrdemServicoController/index')) : ?>
-                <li class="nav-item">
+                <li class="nav-item <?= $base->addActiveMenu('OrdemServicoController'); ?>">
                     <a href="">
                         <i class="la la-mobile"></i>
                         <p>O.S</p>
@@ -27,7 +27,7 @@
                 </li>
             <?php endif; ?>
             <?php if ($base->permissao('CaixaController/index')) : ?>
-                <li class="nav-item">
+                <li class="nav-item <?= $base->addActiveMenu('CaixaController'); ?>">
                     <a href="">
                         <i class="la la-money"></i>
                         <p>CAIXA</p>
@@ -36,7 +36,7 @@
                 </li>
             <?php endif; ?>
             <?php if ($base->permissao('ClienteController/index')) : ?>
-                <li class="nav-item">
+                <li class="nav-item <?= $base->addActiveMenu('ClienteController'); ?>">
                     <a href="<?= base_url('cliente') ?>">
                         <i class="la la-group"></i>
                         <p>CLIENTES</p>
@@ -45,7 +45,7 @@
                 </li>
             <?php endif; ?>
             <?php if ($base->permissao('EstoqueController/index')) : ?>
-                <li class="nav-item">
+                <li class="nav-item <?= $base->addActiveMenu(['EstoqueController', 'ProdutoController', 'MarcaController', 'CategoriaController', 'SubCategoriaController']); ?>">
                     <a class="" data-toggle="collapse" href="#collapseProdutos" aria-expanded="true">
                         <i class="la la-dropbox"></i>
                         <p>ESTOQUE</p>
@@ -86,7 +86,7 @@
                 </li>
             <?php endif; ?>
             <?php if ($base->permissao('UsuarioController/index')) : ?>
-                <li class="nav-item">
+                <li class="nav-item <?= $base->addActiveMenu('UsuarioController'); ?>">
                     <a href="<?= base_url('usuario') ?>">
                         <i class="la la-user"></i>
                         <p>USUÁRIOS</p>
@@ -95,7 +95,7 @@
                 </li>
             <?php endif; ?>
             <?php if ($base->permissao('PermissaoController/index')) : ?>
-                <li class="nav-item">
+                <li class="nav-item <?= $base->addActiveMenu('PermissaoController'); ?>">
                     <a href="<?= base_url('permissao') ?>">
                         <i class="la la-unlock"></i>
                         <p>PERMISSÕES</p>
@@ -104,7 +104,7 @@
                 </li>
             <?php endif; ?>
             <?php if ($base->permissao('RelatorioController/index')) : ?>
-                <li class="nav-item">
+                <li class="nav-item <?= $base->addActiveMenu('RelatorioController'); ?>">
                     <a class="" data-toggle="collapse" href="#collapseRelatorios" aria-expanded="true">
                         <i class="la la-pie-chart"></i>
                         <p>RELATÓRIOS</p>
