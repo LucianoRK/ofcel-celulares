@@ -45,7 +45,7 @@
         </a>
     </div>
     <div class="col-sm-4">
-        <a href="#">
+        <a href="<?= base_url('/caixa') ?>">
             <div class="card card-stats card-primary">
                 <div class="card-body ">
                     <div class="row">
@@ -167,23 +167,23 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td><strong class='text-success'>Dinheiro</strong> </td>
+                            <td><strong class='text-success'>Dinheiro</strong></td>
                             <td class="text-right">R$ 0,00</td>
                         </tr>
                         <tr>
-                            <td><strong class='text-info'>Débito</strong> </td>
+                            <td><strong class='text-info'>Débito</strong></td>
                             <td class="text-right">R$ 0,00</td>
                         </tr>
                         <tr>
-                            <td><strong class='text-warning'>Crédito</strong> </td>
+                            <td><strong class='text-warning'>Crédito</strong></td>
                             <td class="text-right">R$ 0,00</td>
                         </tr>
                         <tr>
-                            <td><strong class='text-danger'>Outros</strong> </td>
+                            <td><strong class='text-danger'>Outros</strong></td>
                             <td class="text-right">R$ 0,00</td>
                         </tr>
                         <tr>
-                            <td><strong>Total</strong> </td>
+                            <td><strong>Total</strong></td>
                             <td class="text-right">R$ 0,00</td>
                         </tr>
                     </tbody>
@@ -205,7 +205,7 @@
                                 <td class="text-enter text-success" title="Em dinheiro">R$ 0,00</td>
                                 <td class="text-right text-info" title="Débito">R$ 0,00</td>
                                 <td class="text-right text-warning" title="Crédito">R$ 0,00</td>
-                                <td class="text-right text-danger"  title="Outros">R$ 0,00</td>
+                                <td class="text-right text-danger" title="Outros">R$ 0,00</td>
                                 <td class="text-right" title="Total <?= $empresa['nome'] ?>">R$ 0,00</td>
                             </tr>
                         <?php endforeach ?>

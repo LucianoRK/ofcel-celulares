@@ -193,6 +193,17 @@ $routes->group('venda', function ($routes) {
 	$routes->post('getByCategoria', 'VendaController::getByCategoria');
 });
 
+/**
+ * --------------------------------------------------------------------
+ * Clentes
+ * --------------------------------------------------------------------
+ */
+$routes->group('caixa', function ($routes) {
+	// Páginas
+	$routes->get('/', 'CaixaController::index');
+	// Funcionalidades
+});
+
 
 /**
  * --------------------------------------------------------------------

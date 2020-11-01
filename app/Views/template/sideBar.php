@@ -28,7 +28,7 @@
             <?php endif; ?>
             <?php if ($base->permissao('CaixaController/index')) : ?>
                 <li class="nav-item <?= $base->addActiveMenu('CaixaController'); ?>">
-                    <a href="">
+                    <a href="<?= base_url('caixa') ?>">
                         <i class="la la-money"></i>
                         <p>CAIXA</p>
                         <!--<span class="badge badge-count">5</span> -->
