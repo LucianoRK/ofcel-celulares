@@ -202,6 +202,7 @@ $routes->group('caixa', function ($routes) {
 	// Páginas
 	$routes->get('/', 'CaixaController::index');
 	// Funcionalidades
+	$routes->post('store', 'CaixaController::store');
 });
 
 
