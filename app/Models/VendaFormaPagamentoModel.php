@@ -65,6 +65,7 @@ class VendaFormaPagamentoModel extends Model
         ");
         $this->join('forma_pagamento as fp', 'fp.forma_pagamento_id = venda_forma_pagamento.forma_pagamento_id');
         $this->join('venda as v', 'v.venda_id = venda_forma_pagamento.venda_id');
+        $this->where('v.deleted_at IS NULL');
         $this->where($dados);
 
         return $this->first();

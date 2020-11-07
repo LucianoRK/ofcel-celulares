@@ -201,8 +201,10 @@ $routes->group('venda', function ($routes) {
 $routes->group('caixa', function ($routes) {
 	// Páginas
 	$routes->get('/', 'CaixaController::index');
+	$routes->get('create', 'CaixaController::create');
 	// Funcionalidades
 	$routes->post('store', 'CaixaController::store');
+	$routes->post('storeLancamento', 'CaixaController::storeLancamento');
 });
 
 

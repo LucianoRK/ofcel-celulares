@@ -27,43 +27,58 @@ class CaixaController extends BaseController
 		$caixaModel    		      = new CaixaModel;
 		$vendaFormaPagamentoModel = new VendaFormaPagamentoModel;
 		$caixaLancamentoModel     = new CaixaLancamentoModel;
-
 		//Sessão
 		$empresaSessao   = $this->session->get('empresa');
 		$empresaSessaoId = $empresaSessao['empresa_id'];
-
 		//Carrega as variáveis
-		$dados['empresas'] 						 = $empresaModel->get();
-		$dados['venda']   						 = $vendaFormaPagamentoModel->getValores("v.empresa_id = $empresaSessaoId AND DATE(v.created_at) = DATE(NOW())");
-		$dados['ordemServico']   				 = $vendaFormaPagamentoModel->getValores("v.empresa_id = $empresaSessaoId AND DATE(v.created_at) = DATE('2000-01-01')"); // Alterar para ordem serviço
-		$dados['caixa']		     		 		 = $caixaModel->get("empresa_id = $empresaSessaoId AND DATE(created_at) = DATE(NOW())", true);
-		$caixaId = $dados['caixa']['caixa_id'];
-		$dados['caixaLancamentos']		   		 = $caixaLancamentoModel->get("caixa_id = $caixaId AND DATE(created_at) = DATE(NOW())");
-		$dados['venda']['total']   		 		 = array_sum($dados['venda']);
-		$dados['ordemServico']['total']    		 = array_sum($dados['ordemServico']);
-
-		//Inicia os valores totais de lançamento
-		$totalLancamento 	  = 0.00;
-		$totalRetirada   	  = 0.00;
-		$dados['totalGeral']  = 0.00;
-
-		//Verifica se existe lançamentos neste caixa
-		if ($dados['caixaLancamentos']) {
-			foreach ($dados['caixaLancamentos'] as $lancamento) {
-				//Verifica o tipo de lançamento
-				if ($lancamento['tipo'] == 1) {
-					//lançamentos
-					$totalLancamento += $lancamento['valor'];
-				} else {
-					//Retirada
-					$totalRetirada += $lancamento['valor'];
+		//Busca o caixa do dia
+		$dados['caixa']	= $caixaModel->get("empresa_id = $empresaSessaoId AND DATE(created_at) = DATE(NOW())", true);
+		//Verifica se o caixa existe, caso contrario redireciona para a criação do mesmo
+		if ($this->caixaInicializado()) {
+			//Pega carrega as variaveis da tela
+			$caixaId 						= $dados['caixa']['caixa_id'];
+			$dados['empresas'] 				= $empresaModel->get();
+			$dados['venda']   				= $vendaFormaPagamentoModel->getValores("v.empresa_id = $empresaSessaoId AND DATE(v.created_at) = DATE(NOW())");
+			$dados['ordemServico']   		= $vendaFormaPagamentoModel->getValores("v.empresa_id = $empresaSessaoId AND DATE(v.created_at) = DATE('2000-01-01')"); // Alterar para ordem serviço
+			$dados['caixaLancamentos']		= $caixaLancamentoModel->get("caixa_id = $caixaId AND DATE(created_at) = DATE(NOW())");
+			$dados['venda']['total']   		= array_sum($dados['venda']);
+			$dados['ordemServico']['total'] = array_sum($dados['ordemServico']);
+			//Inicia os valores totais de lançamento
+			$totalLancamento 	  = 0.00;
+			$totalRetirada   	  = 0.00;
+			$dados['totalGeral']  = 0.00;
+			//Verifica se existe lançamentos neste caixa
+			if ($dados['caixaLancamentos']) {
+				foreach ($dados['caixaLancamentos'] as $lancamento) {
+					//Verifica o tipo de lançamento
+					if ($lancamento['tipo'] == 1) {
+						//lançamentos
+						$totalLancamento += $lancamento['valor'];
+					} else {
+						//Retirada
+						$totalRetirada += $lancamento['valor'];
+					}
 				}
+				//Total Geral = O.s + Vendas + lançamentos - retiradas
+				$dados['totalGeral'] = ($dados['venda']['dinheiro'] + $dados['ordemServico']['total'] + $totalLancamento) - $totalRetirada;
 			}
-			//Total Geral = O.s + Vendas + lançamentos - retiradas
-			$dados['totalGeral'] = ($dados['venda']['dinheiro'] + $dados['ordemServico']['total'] + $totalLancamento) - $totalRetirada;
-		}
 
-		return $this->template('caixa', 'index', $dados);
+			return $this->template('caixa', 'index', $dados);
+		} else {
+			//Mensagem de retorno
+			$this->setFlashdata('Caixa ainda não inicializado na data de hoje', 'info');
+
+			return redirect()->to('/caixa/create');
+		}
+	}
+
+	public function create()
+	{
+		if($this->caixaInicializado()){
+			return redirect()->to('/caixa');
+		}else{
+			return $this->template('caixa', 'create');
+		}
 	}
 
 	/////////////////////////////
@@ -72,10 +87,67 @@ class CaixaController extends BaseController
 	//                         //
 	/////////////////////////////
 
+
 	/**
 	 * Salva o novo item na tabela
 	 */
 	public function store()
+	{
+		//Get request
+		$request = $this->request->getVar();
+		//Rules
+		$rules = [
+			'valor' => 'required'
+		];
+		if ($this->validate($rules)) {
+			//Carrega os modelos
+			$caixaLancamentoModel  = new CaixaLancamentoModel;
+			$caixaModel                 = new CaixaModel;
+			//Sessão
+			$empresaSessao   = $this->session->get('empresa');
+			$usuarioSessao   = $this->session->get('usuario');
+			$empresaSessaoId = $empresaSessao['empresa_id'];
+			$usuarioSessaoId = $usuarioSessao['usuario_id'];
+			//Carrega as variáveis
+			//Busca o caixa do dia
+			$caixaHoje	= $caixaModel->get("empresa_id = $empresaSessaoId AND DATE(created_at) = DATE(NOW())", true);
+			//Verifica se já existe o caixa desta empresa hoje
+			if (!$caixaHoje) {
+				//Prepara os dados 
+				$dadosCaixa = [
+					'empresa_id'	=>  $empresaSessaoId,
+					'usuario_id'	=>  $usuarioSessaoId
+				];
+				//Salva
+				$caixaModel->save($dadosCaixa);
+				//Pega o id inserido
+				$caixaId = $caixaModel->getInsertID();
+				//Prepara os dados 
+				$dadosLancamento = [
+					'caixa_id'	=>  $caixaId,
+					'nome'   	=>  'Valor Inicial de caixa',
+					'valor'  	=>  $this->validarEmpty($this->realToSql($request['valor'])),
+					'tipo'   	=>  '1'
+				];
+				//Salva os dados
+				$caixaLancamentoModel->save($dadosLancamento);
+				//Mensagem de retorno
+				$this->setFlashdata('Caixa criado com sucesso', 'success');
+
+				return redirect()->to('/caixa');
+			} else {
+				//Mensagem de retorno
+				$this->setFlashdata('Caixa já foi criado', 'info');
+
+				return redirect()->to('/caixa');
+			}
+		}
+	}
+
+	/**
+	 * Salva o novo item na tabela
+	 */
+	public function storeLancamento()
 	{
 		//Get request
 		$request = $this->request->getVar();
@@ -93,7 +165,7 @@ class CaixaController extends BaseController
 			$dadosLancamento = [
 				'caixa_id'	=>  $this->validarEmpty($request['caixaId']),
 				'nome'   	=>  $this->validarEmpty($request['nome']),
-				'valor'  	=>  $this->validarEmpty($request['valor']),
+				'valor'  	=>  $this->validarEmpty($this->realToSql($request['valor'])),
 				'tipo'   	=>  $this->validarEmpty($request['tipo'])
 			];
 			//Sobrescreve o tipo
@@ -119,7 +191,6 @@ class CaixaController extends BaseController
 			return redirect()->to('/caixa');
 		}
 	}
-
 
 	/////////////////////////////
 	//                         //

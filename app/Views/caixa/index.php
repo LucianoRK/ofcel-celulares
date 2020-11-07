@@ -23,7 +23,7 @@
 <hr>
 <div class="card cardLancamento">
     <div class="card-body">
-        <form class="form-inline" action="<?= base_url('CaixaController/store') ?>" method="post">
+        <form class="form-inline" action="<?= base_url('caixa/storeLancamento') ?>" method="post">
             <label for="nome" class="col-sm-2 col-form-label col-form-label-lg">Novo Lançamento</label>
             <div class="form-group col-md-5">
                 <input type="text" class="form-control form-control-lg w-100" name="nome" required>
@@ -43,7 +43,7 @@
 </div>
 <div class="card cardRetirada">
     <div class="card-body">
-        <form class="form-inline" action="<?= base_url('CaixaController/store') ?>" method="post">
+        <form class="form-inline" action="<?= base_url('caixa/storeLancamento') ?>" method="post">
             <label for="nome" class="col-sm-2 col-form-label col-form-label-lg">Nova Retirada</label>
             <div class="form-group col-md-5">
                 <input type="text" class="form-control form-control-lg w-100" name="nome" required>

@@ -82,7 +82,7 @@ class VendaController extends BaseController
 
 		//prepara as variáveis
 		$dados['venda'] = $vendaModel->get(['venda.venda_id' => $id], true);
-	
+
 		if ($dados['venda']) {
 			//prepara as variáveis
 			$dados['valorTotalProduto']   = 0.00;
@@ -105,20 +105,27 @@ class VendaController extends BaseController
 	 */
 	public function create()
 	{
-		//Carrega os modelos
-		$clienteModel 	= new ClienteModel;
-		$usuarioModel 	= new UsuarioModel;
-		$produtoModel 	= new ProdutoModel;
-		$formaPagamento = new FormaPagamentoModel;
-		//Sessão
-		$empresaSessao = $this->session->get('empresa');
-		//Carrega as variáveis
-		$dados['clientes'] 		  = $clienteModel->get();
-		$dados['usuarios'] 		  = $usuarioModel->get("usuario_tipo_id != 2");
-		$dados['produtos'] 		  = $produtoModel->get(['e.empresa_id' => $empresaSessao['empresa_id']]);
-		$dados['formasPagamento'] = $formaPagamento->get();
+		if ($this->caixaInicializado()) {
+			//Carrega os modelos
+			$clienteModel 	= new ClienteModel;
+			$usuarioModel 	= new UsuarioModel;
+			$produtoModel 	= new ProdutoModel;
+			$formaPagamento = new FormaPagamentoModel;
+			//Sessão
+			$empresaSessao = $this->session->get('empresa');
+			//Carrega as variáveis
+			$dados['clientes'] 		  = $clienteModel->get();
+			$dados['usuarios'] 		  = $usuarioModel->get("usuario_tipo_id != 2");
+			$dados['produtos'] 		  = $produtoModel->get(['e.empresa_id' => $empresaSessao['empresa_id']]);
+			$dados['formasPagamento'] = $formaPagamento->get();
 
-		return $this->template('venda', 'create', $dados);
+			return $this->template('venda', 'create', $dados);
+		}else{
+			//Mensagem de retorno
+			$this->setFlashdata('Caixa não inicializado', 'info');
+
+			return redirect()->to('/caixa/create');
+		}
 	}
 
 	/**

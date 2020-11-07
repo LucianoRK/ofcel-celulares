@@ -15,6 +15,7 @@ namespace App\Controllers;
  * @package CodeIgniter
  */
 
+use App\Models\CaixaModel;
 use App\Models\LogAcessoModel;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Controller;
@@ -239,14 +240,32 @@ class BaseController extends Controller
 	 */
 	public function addActiveMenu($menuControllador)
 	{
-		if(is_array($menuControllador)){
+		if (is_array($menuControllador)) {
 			if (in_array($this->controller, $menuControllador)) {
 				return 'active';
 			}
-		}else{
+		} else {
 			if ($this->controller == $menuControllador) {
 				return 'active';
 			}
+		}
+	}
+
+	/** 
+	 * Verifica se o caixa já foi inicializado
+	 */
+	public function caixaInicializado()
+	{
+		$caixaModel      = new CaixaModel;
+		//Sessão
+		$empresaSessao   = $this->session->get('empresa');
+		$empresaSessaoId = $empresaSessao['empresa_id'];
+		//Busca o caixa do dia
+		$caixaHoje	= $caixaModel->get("empresa_id = $empresaSessaoId AND DATE(created_at) = DATE(NOW())", true);
+		if($caixaHoje){
+			return true;
+		}else{
+			return false;
 		}
 	}
 }
