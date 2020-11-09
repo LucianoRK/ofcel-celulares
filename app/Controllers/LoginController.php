@@ -29,7 +29,7 @@ class LoginController extends BaseController
 		$dados['empresas']    = $empresas->get();
 
 		if ($this->session->get('logado')) {
-			return $this->template('home', 'index', $dados);
+			return redirect()->to('/home');
 		} else {
 			return $this->template_publico('login', 'index');
 		}

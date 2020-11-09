@@ -7427,7 +7427,7 @@ body {
         display: none;
     }
 }
-.widthPrint {
+.printTemplate {
     max-width: 312px;
 }
 

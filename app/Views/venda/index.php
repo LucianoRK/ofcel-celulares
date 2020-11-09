@@ -48,11 +48,9 @@
                                             </button>
                                         <?php endif; ?>
                                         <?php if ($base->permissao('VendaController/imprimir')) : ?>
-                                            <a href="<?= base_url('venda/print').'/'.$venda['venda_id'] ?>" target="_blank">
-                                                <button type="button" class="btn btn-default text-white" title="Imprimir" value="<?= $venda['venda_id'] ?>">
-                                                    <i class="la la-print la-2x"></i>
-                                                </button>
-                                            </a>
+                                            <button type="button" class="btn btn-default text-white ImprimirVenda" title="Imprimir" value="<?= $venda['venda_id'] ?>">
+                                                <i class="la la-print la-2x"></i>
+                                            </button>
                                         <?php endif; ?>
                                         <?php if ($base->permissao('VendaController/visualizar')) : ?>
                                             <button type="button" class="btn btn-primary text-white detalheVenda" title="Mais detalhes" value="<?= $venda['venda_id'] ?>">
@@ -86,6 +84,11 @@
                                     <td><?= $venda['cliente_nome'] ?></td>
                                     <td><?= $base->sqlToReal($venda['valor_venda']) ?></td>
                                     <td class="text-right">
+                                        <?php if ($base->permissao('VendaController/visualizar')) : ?>
+                                            <button type="button" class="btn btn-primary text-white detalheVenda" title="Mais detalhes" value="<?= $venda['venda_id'] ?>">
+                                                <i class="la la-eye la-2x"></i>
+                                            </button>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

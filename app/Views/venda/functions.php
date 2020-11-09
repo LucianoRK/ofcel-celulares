@@ -228,8 +228,28 @@
                 });
         })
     }
+    /**
+     * Imprimir Venda
+     */
+    function impromirVenda() {
+        $(".dataTable").on('click', '.ImprimirVenda', function() {
+            let iframe = document.createElement('iframe');
+            let vendaId = $(this).val();
+            document.body.appendChild(iframe);
+            iframe.style.width = '0px';
+            iframe.style.height = '0px';
+            iframe.onload = function() {
+                setTimeout(function() {
+                    iframe.focus();
+                    iframe.contentWindow.print();
+                }, 1);
+            };
+            iframe.src = `<?= base_url('venda/print') ?>/${vendaId}`;
+        });
+    }
 
     $(document).ready(() => {
+        impromirVenda()
         adicionarItemCarrinho()
         removerItemCarrinho()
         adicionarFormaPagamento()

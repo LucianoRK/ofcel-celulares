@@ -1,4 +1,4 @@
-<div class="widthPrint">
+<div class="printTemplate">
     <div class="text-center">
         <img width="200" src="<?= base_url('img/logo.png') ?>">
     </div>
@@ -76,6 +76,3 @@
         <p class="ml-2"><?= $venda['observacao']; ?></p>
     <?php endif; ?>
 </div>
-<script type="text/javascript">
-    window.print()
-</script>

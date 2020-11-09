@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\EmpresaModel;
+use App\Models\VendaFormaPagamentoModel;
+use App\Models\VendaModel;
 
 class HomeController extends BaseController
 {

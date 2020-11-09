@@ -94,4 +94,22 @@ class VendaModel extends Model
 
         return $this->onlyDeleted()->find();
     }
+    /**
+     * Pega a soma de valores e quantidade de venda
+     * 
+     * @param array $dados Informação para a tela
+     */
+    public function getValoresQuantidade($dados = [])
+    {
+        $this->select("
+            e.nome,
+            sum(valor) valor,
+            COUNT(venda.venda_id) as quantidade
+        ");
+        $this->join('venda_forma_pagamento as vfp', 'vfp.venda_id = venda.venda_id');
+        $this->join('empresa as e', 'e.empresa_id = venda.empresa_id');
+        $this->where($dados);
+
+        return $this->find();
+    }
 }
