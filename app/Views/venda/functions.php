@@ -222,6 +222,7 @@
                     if (resp) {
                         $('#detalheVendaBody').html(resp)
                         $('#detalheVenda').modal('show')
+                        editarObservacao()
                     } else {
                         toast('error', 'Venda não localizada.')
                     }
@@ -245,6 +246,19 @@
                 }, 1);
             };
             iframe.src = `<?= base_url('venda/print') ?>/${vendaId}`;
+        });
+    }
+
+    function editarObservacao() {
+        $("#editarObservacao").on('click', function() {
+            $.post(BASE_URL + "/venda/editObservacao",
+                data = {
+                    vendaId: $(this).attr('idVenda'),
+                    observacao: $('#observacaoText').val()
+                }, (resp) => {
+                    $('#detalheVenda').modal('hide')
+                    toast('success', 'Observação alterada com sucesso')
+                });
         });
     }
 

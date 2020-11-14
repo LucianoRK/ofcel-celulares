@@ -163,7 +163,7 @@
                         <?php endforeach ?>
                         <tr>
                             <td><strong class='h3'></strong> </td>
-                            <td class="text-right"><strong class='h3'>R$ <?= $base->sqlToReal($totalGeral) ?></strong></td>
+                            <td class="text-right"><strong class='h4'>R$ <?= $base->sqlToReal($totalGeral) ?></strong></td>
                         </tr>
                     </tbody>
                 </table>

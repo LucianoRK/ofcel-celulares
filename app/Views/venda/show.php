@@ -69,13 +69,14 @@
         </div>
     </div>
 <?php endif; ?>
-<?php if (!empty($venda['observacao'])) : ?>
-    <div class="card">
-        <div class="card-header">
-            <div class="card-title">Observações</div>
-        </div>
-        <div class="card-body">
-            <?= $venda['observacao']; ?>
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">Observações</div>
+    </div>
+    <div class="card-body">
+        <textarea class="form-control" id="observacaoText"><?= $venda['observacao']; ?></textarea>
+        <div class="col text-center mt-2">
+            <button class="btn btn-success" idVenda="<?= $venda['venda_id']; ?>" id="editarObservacao">Salvar observação</button>
         </div>
     </div>
-<?php endif; ?>
+</div>

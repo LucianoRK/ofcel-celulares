@@ -191,6 +191,7 @@ $routes->group('venda', function ($routes) {
 	$routes->post('ativarVenda', 'VendaController::ativarVenda');
 	$routes->post('desativarVenda', 'VendaController::desativarVenda');
 	$routes->post('getByCategoria', 'VendaController::getByCategoria');
+	$routes->post('editObservacao', 'VendaController::editObservacao');
 });
 
 /**

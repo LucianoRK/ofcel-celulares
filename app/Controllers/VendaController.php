@@ -120,7 +120,7 @@ class VendaController extends BaseController
 			$dados['formasPagamento'] = $formaPagamento->get();
 
 			return $this->template('venda', 'create', $dados);
-		}else{
+		} else {
 			//Mensagem de retorno
 			$this->setFlashdata('Caixa não inicializado', 'info');
 
@@ -166,7 +166,7 @@ class VendaController extends BaseController
 			$vendaId = $vendaModel->getInsertID();
 			//Percorre todos os produtos
 			foreach ($request['produtosEstoque'] as $key => $estoqueId) {
-				//Prepara os dados da empresa
+				//Prepara os dados
 				$dadosProdutoEstoque = [
 					'venda_id'       => $vendaId,
 					'estoque_id'     => $estoqueId,
@@ -212,6 +212,22 @@ class VendaController extends BaseController
 			//Redireciona
 			return redirect()->to('/venda/create');
 		}
+	}
+
+	public function editObservacao()
+	{
+		//Get request
+		$request = $this->request->getVar();
+		//Carrega os modelos
+		$vendaModel   = new VendaModel;
+		//Prepara os dados
+		$dadosVenda = [
+			'venda_id'    => $request['vendaId'],
+			'observacao'  => $request['observacao']
+		];
+		
+		return $vendaModel->save($dadosVenda);
+
 	}
 
 	/**
