@@ -87,7 +87,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center"><input type="text" class="form-control form-control-lg text-center quantidade numero" value="<?= $quantidade ?>" name="quantidades[]" required></td>
+                                <td class="text-center"><input type="text" class="form-control form-control-lg text-center quantidade numero" disabled="disabled" value="<?= $quantidade ?>" name="quantidades[]" required></td>
                                 <input type="hidden" class="form-control form-control-lg text-center" value="<?= $empresa['empresa_id'] ?>" name="empresas[]" required>
                                 <input type="hidden" class="form-control form-control-lg text-center" value="<?= $estoqueId ?>" name="estoque[]" required>
                             </tr>
