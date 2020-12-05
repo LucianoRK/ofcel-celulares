@@ -91,6 +91,7 @@ class ProdutoController extends BaseController
                 'marca_id'          => !empty($request['marca'])        ? $request['marca']         : null,
                 'categoria_id'      => !empty($request['categoria'])    ? $request['categoria']     : null,
                 'subcategoria_id'   => !empty($request['subcategoria']) ? $request['subcategoria']  : null,
+                'codigo'            => !empty($request['codigo'])       ? $request['codigo']        : null,
                 'descricao'         => !empty($request['descricao'])    ? $request['descricao']     : null
             ];
             //Salva o cliente
@@ -176,6 +177,7 @@ class ProdutoController extends BaseController
                 'marca_id'          => !empty($request['marca'])        ? $request['marca']         : null,
                 'categoria_id'      => !empty($request['categoria'])    ? $request['categoria']     : null,
                 'subcategoria_id'   => !empty($request['subcategoria']) ? $request['subcategoria']  : null,
+                'codigo'            => !empty($request['codigo'])       ? $request['codigo']        : null,
                 'descricao'         => !empty($request['descricao'])    ? $request['descricao']     : null
             ];
             //Salva o cliente

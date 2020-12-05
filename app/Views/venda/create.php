@@ -49,7 +49,7 @@
                             //Desabilita o option caso não tenha o item no estoque
                             $validadorQuantidade = $produto['quantidade'] < 1 ? 'disabled' : '';
                             ?>
-                            <option valorUnidade="<?= $valorUnidade ?>" descricaoCompleta="<?= $descricaoCompleta ?>" produtoId="<?= $produto['produto_id'] ?>" value="<?= $produto['estoque_id'] ?>" data-subtext=" [ <?= $descricaoCompleta ?> ] - R$ <?= $valorUnidade ?>" <?= $validadorQuantidade ?>> <?= $produto['descricao'] ?></option>
+                            <option valorUnidade="<?= $valorUnidade ?>" descricaoCompleta="<?= $descricaoCompleta ?>" produtoId="<?= $produto['produto_id'] ?>" value="<?= $produto['estoque_id'] ?>" <?= $validadorQuantidade ?>>  [ <?= $produto['codigo'] ?> ] - <?= $produto['descricao'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

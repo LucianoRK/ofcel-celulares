@@ -11,7 +11,7 @@
         </div>
         <div class="card-body">
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="marca">Marca</label>
                     <select class="form-control form-control-lg" id="marca" name="marca" required>
                         <option></option>
@@ -20,7 +20,7 @@
                         <?php endforeach ?>
                     </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="marca">Categoria</label>
                     <select class="form-control form-control-lg" id="categoria" name="categoria" required>
                         <option></option>
@@ -29,11 +29,15 @@
                         <?php endforeach ?>
                     </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="marca">Subcategoria</label>
                     <select class="form-control form-control-lg" id="subcategoria" name="subcategoria" required disabled>
 
                     </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="codigo">Código</label>
+                    <input type="text" class="form-control form-control-lg" id="codigo" name="codigo" required>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="descricao">Descrição (Nome do produto)</label>
@@ -59,7 +63,7 @@
                         <?php foreach ($empresas as $empresa) : ?>
                             <tr class="linhaTabela">
 
-                                
+
                                 <td class="d-none d-md-block"><?= $empresa['empresa_id'] ?></td>
                                 <td><?= $empresa['nome'] ?></td>
                                 <td class="text-center">

@@ -11,7 +11,7 @@
         </div>
         <div class="card-body">
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="marca">Marca</label>
                     <select class="form-control form-control-lg" id="marca" name="marca" required>
                         <option></option>
@@ -20,7 +20,7 @@
                         <?php endforeach ?>
                     </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="marca">Categoria</label>
                     <select class="form-control form-control-lg" id="categoria" name="categoria" required>
                         <option></option>
@@ -29,7 +29,7 @@
                         <?php endforeach ?>
                     </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="marca">Subcategoria</label>
                     <select class="form-control form-control-lg" id="subcategoria" name="subcategoria" required>
                         <option></option>
@@ -37,6 +37,10 @@
                             <option value="<?= $subcategoria['subcategoria_id'] ?>" <?= $produto['subcategoria_id'] == $subcategoria['subcategoria_id'] ? 'selected' : ''; ?>><?= $subcategoria['nome'] ?></option>
                         <?php endforeach ?>
                     </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="codigo">Código</label>
+                    <input type="text" class="form-control form-control-lg" id="codigo" name="codigo"  required value="<?= $produto['codigo'] ?>">
                 </div>
                 <div class="form-group col-md-12">
                     <label for="descricao">Descrição (Nome do produto)</label>
