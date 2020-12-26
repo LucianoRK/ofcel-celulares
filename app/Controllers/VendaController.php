@@ -122,9 +122,9 @@ class VendaController extends BaseController
 			return $this->template('venda', 'create', $dados);
 		} else {
 			//Mensagem de retorno
-			$this->setFlashdata('Caixa não inicializado', 'info');
+			$this->setFlashdata('Caixa não inicializado ou já finalizado', 'info');
 
-			return redirect()->to('/caixa/create');
+			return redirect()->to('/caixa');
 		}
 	}
 

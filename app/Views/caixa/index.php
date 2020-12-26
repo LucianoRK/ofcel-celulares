@@ -94,8 +94,12 @@
                             <td class="text-right">R$ <?= $base->sqlToReal($venda['credito']) ?></td>
                         </tr>
                         <tr>
-                            <td><strong class='text-danger'>Outros</strong> </td>
+                            <td><strong class=''>Outros</strong> </td>
                             <td class="text-right">R$ <?= $base->sqlToReal($venda['outros']) ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong class='text-danger'>Descontos</strong> </td>
+                            <td class="text-right">R$ <?= $base->sqlToReal($venda['desconto']) ?></td>
                         </tr>
                         <tr>
                             <td><strong>Total</strong> </td>
@@ -127,8 +131,12 @@
                             <td class="text-right">R$ <?= $base->sqlToReal($ordemServico['credito']) ?></td>
                         </tr>
                         <tr>
-                            <td><strong class='text-danger'>Outros</strong> </td>
+                            <td><strong class=''>Outros</strong> </td>
                             <td class="text-right">R$ <?= $base->sqlToReal($ordemServico['outros']) ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong class='text-danger'>Descontos</strong> </td>
+                            <td class="text-right">R$ <?= $base->sqlToReal($ordemServico['desconto']) ?></td>
                         </tr>
                         <tr>
                             <td><strong>Total</strong> </td>
@@ -174,10 +182,10 @@
                         <?php endforeach ?>
                         <tr>
                             <td>
-                                <?php if(!$caixaReabrir): ?>
-                                <strong class='h3'>
-                                    <button class="btn btn-danger btn-md" id="fecharCaixa">Fechar caixa</button>
-                                </strong>
+                                <?php if (!$caixaReabrir) : ?>
+                                    <strong class='h3'>
+                                        <button class="btn btn-danger btn-md" id="fecharCaixa">Fechar caixa</button>
+                                    </strong>
                                 <?php endif ?>
                             </td>
                             <td class="text-right"><strong class='h4'>R$ <?= $base->sqlToReal($totalGeral) ?></strong></td>

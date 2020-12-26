@@ -61,6 +61,7 @@ class VendaFormaPagamentoModel extends Model
             SUM(CASE WHEN fp.forma_pagamento_id = 1 THEN venda_forma_pagamento.valor ELSE 0 END) AS dinheiro,
             SUM(CASE WHEN fp.forma_pagamento_id = 2 THEN venda_forma_pagamento.valor ELSE 0 END) AS debito,
             SUM(CASE WHEN fp.forma_pagamento_id = 3 THEN venda_forma_pagamento.valor ELSE 0 END) AS credito,
+            SUM(CASE WHEN fp.forma_pagamento_id = 5 THEN venda_forma_pagamento.valor ELSE 0 END) AS desconto,
             SUM(CASE WHEN fp.forma_pagamento_id = 4 THEN venda_forma_pagamento.valor ELSE 0 END) AS outros
         ");
         $this->join('forma_pagamento as fp', 'fp.forma_pagamento_id = venda_forma_pagamento.forma_pagamento_id');

@@ -202,12 +202,16 @@
                                     <td class="text-right">R$ <?= $base->sqlToReal($empresa['vendas']['credito']) ?></td>
                                 </tr>
                                 <tr>
-                                    <td><strong class='text-danger'>Outros</strong></td>
+                                    <td><strong class=''>Outros</strong></td>
                                     <td class="text-right">R$ <?= $base->sqlToReal($empresa['vendas']['outros']) ?></td>
                                 </tr>
                                 <tr>
+                                    <td><strong class='text-danger'>Desconto</strong></td>
+                                    <td class="text-right text-danger">R$ <?= $base->sqlToReal($empresa['vendas']['desconto']) ?></td>
+                                </tr>
+                                <tr>
                                     <td><strong>Total</strong></td>
-                                    <td class="text-right">R$ <?= $base->sqlToReal(array_sum($empresa['vendas']) + $empresa['caixaLancamentos'] - $empresa['caixaRetiradas']) ?></td>
+                                    <td class="text-right">R$ <?= $base->sqlToReal(array_sum($empresa['vendas']) + $empresa['caixaLancamentos'] - $empresa['caixaRetiradas'] - $empresa['vendas']['desconto']) ?></td>
                                 </tr>
                             <?php endif ?>
                         <?php endforeach ?>
@@ -225,10 +229,11 @@
                 <table class="table">
                     <tbody>
                         <?php
-                        $totalDinheiro = 0.00;
-                        $totalDebito   = 0.00;
-                        $totalCredito  = 0.00;
-                        $totalOutros   = 0.00;
+                        $totalDinheiro  = 0.00;
+                        $totalDebito    = 0.00;
+                        $totalCredito   = 0.00;
+                        $totalOutros    = 0.00;
+                        $totalDescontos = 0.00;
                         ?>
                         <?php foreach ($empresas as $empresa) : ?>
                             <tr>
@@ -236,14 +241,16 @@
                                 <td class="text-enter" title="Em dinheiro">( <strong class='text-success'> R$ <?= $base->sqlToReal($empresa['vendas']['dinheiro'] + $empresa['caixaLancamentos']) ?> </strong> - <strong class='text-danger'> R$ <?= $base->sqlToReal($empresa['caixaRetiradas']) ?> </strong>)</td>
                                 <td class="text-right text-info" title="Débito">R$ <?= $base->sqlToReal($empresa['vendas']['debito']) ?></td>
                                 <td class="text-right text-warning" title="Crédito">R$ <?= $base->sqlToReal($empresa['vendas']['credito']) ?></td>
-                                <td class="text-right text-danger" title="Outros">R$ <?= $base->sqlToReal($empresa['vendas']['outros']) ?></td>
-                                <td class="text-right" title="Total <?= $empresa['nome'] ?>">R$ <?= $base->sqlToReal(array_sum($empresa['vendas']) + $empresa['caixaLancamentos'] - $empresa['caixaRetiradas']) ?></td>
+                                <td class="text-right" title="Outros">R$ <?= $base->sqlToReal($empresa['vendas']['outros']) ?></td>
+                                <td class="text-right text-danger" title="Descontos">R$ <?= $base->sqlToReal($empresa['vendas']['desconto']) ?></td>
+                                <td class="text-right" title="Total <?= $empresa['nome'] ?>">R$ <?= $base->sqlToReal(array_sum($empresa['vendas']) + $empresa['caixaLancamentos'] - $empresa['caixaRetiradas'] - $empresa['vendas']['desconto']) ?></td>
                             </tr>
                             <?php
                             $totalDinheiro += ($empresa['vendas']['dinheiro'] + $empresa['caixaLancamentos']) - $empresa['caixaRetiradas'];
                             $totalDebito += $empresa['vendas']['debito'];
                             $totalCredito += $empresa['vendas']['credito'];
                             $totalOutros += $empresa['vendas']['outros'];
+                            $totalDescontos += $empresa['vendas']['desconto'];
                             ?>
                         <?php endforeach ?>
                         <?php
@@ -254,7 +261,8 @@
                             <td class="text-enter text-success" title="Em dinheiro"><strong>R$ <?= $base->sqlToReal($totalDinheiro) ?></strong></td>
                             <td class="text-right text-info" title="Débito"><strong>R$ <?= $base->sqlToReal($totalDebito) ?></strong></td>
                             <td class="text-right text-warning" title="Crédito"><strong>R$ <?= $base->sqlToReal($totalCredito) ?></strong></td>
-                            <td class="text-right text-danger" title="Outros"><strong>R$ <?= $base->sqlToReal($totalOutros) ?></strong></td>
+                            <td class="text-right" title="Outros"><strong>R$ <?= $base->sqlToReal($totalOutros) ?></strong></td>
+                            <td class="text-right text-danger" title="Descontos"><strong>R$ <?= $base->sqlToReal($totalDescontos) ?></strong></td>
                             <td class="text-right" title="Total"><strong class="h6">R$ <?= $base->sqlToReal($totalGeral) ?></strong></td>
                         </tr>
                     </tbody>

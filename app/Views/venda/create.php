@@ -49,7 +49,7 @@
                             //Desabilita o option caso não tenha o item no estoque
                             $validadorQuantidade = $produto['quantidade'] < 1 ? 'disabled' : '';
                             ?>
-                            <option valorUnidade="<?= $valorUnidade ?>" descricaoCompleta="<?= $descricaoCompleta ?>" produtoId="<?= $produto['produto_id'] ?>" value="<?= $produto['estoque_id'] ?>" <?= $validadorQuantidade ?>>  [ <?= $produto['codigo'] ?> ] - <?= $produto['descricao'] ?></option>
+                            <option valorUnidade="<?= $valorUnidade ?>" descricaoCompleta="<?= $descricaoCompleta ?>" produtoId="<?= $produto['produto_id'] ?>" value="<?= $produto['estoque_id'] ?>" <?= $validadorQuantidade ?>> [ <?= $produto['codigo'] ?> ] - <?= $produto['descricao'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -97,6 +97,37 @@
                 </table>
                 <table class="table tableFormasPagamento w-100" id="tableFormasPagamento">
                     <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Desconto</div>
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="w-50">
+                                <label for="selectFormaPagamento">Tipo</label>
+                                <select class="form-control form-control-lg selectpicker" id="selectFormaPagamento">
+                                    <?php foreach ($formasPagamento as $formaPagamento) : ?>
+                                        <option texto="<?= $formaPagamento['nome'] ?>" value="<?= $formaPagamento['forma_pagamento_id'] ?>"><?= $formaPagamento['nome'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </td>
+                            <td class="w-100">
+                                <label for="desconto">Valor</label>
+                                <input type="text" class="form-control form-control-lg dinheiro" id="desconto" value="0,00">
+                            </td>
+                            <td class="text-right">
+                                <label for="btnAdicionarFormaPagamento"></label>
+                                <button class="btn btn-success text-white" id="btnAdicionarFormaPagamento" title="Adicionar forma de pagamento" type="button"><i class="la la-plus-circle la-2x"></i></button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
