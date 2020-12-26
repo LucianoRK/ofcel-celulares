@@ -26,44 +26,51 @@ class CaixaModel extends Model
     //protected $skipValidation     = false;
 
     /**
-	 * Pega todos ativos
+     * Pega todos ativos
+     * 
 	 * 
-	 * @param array $dados Informação para a tela
-	 * @param bool  $first Se quiser so traser o primeniro registro
-	 */
+     * 
+     * @param array $dados Informação para a tela
+     * @param bool  $first Se quiser so traser o primeniro registro
+     */
     public function get($dados = [], $first = false)
     {
         $this->where($dados);
-        
-        if($first){
+
+        if ($first) {
             return $this->first();
-        }else{
+        } else {
             return $this->find();
         }
-      
     }
 
     /**
-	 * Pega todos os  desativados
+     * Pega todos os  desativados
+     * 
 	 * 
-	 * @param array $dados Informação para a tela
-	 */
-    public function getDeleted($dados = [])
+     * 
+     * @param array $dados Informação para a tela
+     */
+    public function getDeleted($dados = [], $first = false)
     {
         $this->where($dados);
 
-        return $this->onlyDeleted()->find();
+        if ($first) {
+            return $this->onlyDeleted()->first();
+        } else {
+            return $this->onlyDeleted()->find();
+        }
     }
 
-	/**
-	 * Get por id
+    /**
+     * Get por id
      * 
-	 * @param string $escopo caminho da view
-	 * @param string $arquivo caminho da view
-	 * @param array  $dados Informação para a tela
-	 */
+     * @param string $escopo caminho da view
+     * @param string $arquivo caminho da view
+     * @param array  $dados Informação para a tela
+     */
     public function getById($id, $dados = [])
     {
         return $this->where($dados)->find($id);
-    } 
+    }
 }

@@ -30,17 +30,40 @@ class CaixaController extends BaseController
 		//Sessão
 		$empresaSessao   = $this->session->get('empresa');
 		$empresaSessaoId = $empresaSessao['empresa_id'];
+		$dataCaixa 		 = date('Y-m-d');
+		$dados['caixaPendente'] = '';
+		$dados['caixaReabrir'] = false;
 		//Carrega as variáveis
+		$validacaoCaixa = $this->caixaInicializado();
 		//Busca o caixa do dia
-		$dados['caixa']	= $caixaModel->get("empresa_id = $empresaSessaoId AND DATE(created_at) = DATE(NOW())", true);
+		$caixaReabrir	= $caixaModel->getDeleted("empresa_id = $empresaSessaoId AND DATE(created_at) = DATE('$dataCaixa')", true);
+
 		//Verifica se o caixa existe, caso contrario redireciona para a criação do mesmo
-		if ($this->caixaInicializado()) {
+		if ($validacaoCaixa || $caixaReabrir) {
+			//Caixa Pendente
+			if (is_array($validacaoCaixa)) {
+				//Caixa pendente
+				$dataCaixa =  $validacaoCaixa['created_at'];
+				$dados['caixaPendente'] = $validacaoCaixa;
+			}
+
+			//Busca o caixa do dia
+			$dados['caixa']	= $caixaModel->get("empresa_id = $empresaSessaoId AND DATE(created_at) = DATE('$dataCaixa')", true);
+
+			//Se o caixa de hoje já foi finalizado, permite sua reabertura
+			if(!$dados['caixa']){
+				$dados['caixa'] = $caixaReabrir;
+				$dados['caixaReabrir'] = true;
+			}
+
+
 			//Pega carrega as variaveis da tela
 			$caixaId 						= $dados['caixa']['caixa_id'];
 			$dados['empresas'] 				= $empresaModel->get();
-			$dados['venda']   				= $vendaFormaPagamentoModel->getValores("v.empresa_id = $empresaSessaoId AND DATE(v.created_at) = DATE(NOW())");
+			$dados['venda']   				= $vendaFormaPagamentoModel->getValores("v.empresa_id = $empresaSessaoId AND DATE(v.created_at) = DATE('$dataCaixa')");
 			$dados['ordemServico']   		= $vendaFormaPagamentoModel->getValores("v.empresa_id = $empresaSessaoId AND DATE(v.created_at) = DATE('2000-01-01')"); // Alterar para ordem serviço
-			$dados['caixaLancamentos']		= $caixaLancamentoModel->get("caixa_id = $caixaId AND DATE(created_at) = DATE(NOW())");
+			$dados['caixaLancamentos']		= $caixaLancamentoModel->get("caixa_id = $caixaId AND DATE(created_at) = DATE('$dataCaixa')");
+
 			$dados['venda']['total']   		= array_sum($dados['venda']);
 			$dados['ordemServico']['total'] = array_sum($dados['ordemServico']);
 			//Inicia os valores totais de lançamento
@@ -59,9 +82,9 @@ class CaixaController extends BaseController
 						$totalRetirada += $lancamento['valor'];
 					}
 				}
-				//Total Geral = O.s + Vendas + lançamentos - retiradas
-				$dados['totalGeral'] = ($dados['venda']['dinheiro'] + $dados['ordemServico']['total'] + $totalLancamento) - $totalRetirada;
 			}
+			//Total Geral = O.s + Vendas + lançamentos - retiradas
+			$dados['totalGeral'] = ($dados['venda']['dinheiro'] + $dados['ordemServico']['total'] + $totalLancamento) - $totalRetirada;
 
 			return $this->template('caixa', 'index', $dados);
 		} else {
@@ -74,11 +97,29 @@ class CaixaController extends BaseController
 
 	public function create()
 	{
-		if($this->caixaInicializado()){
+		if ($this->caixaInicializado()) {
 			return redirect()->to('/caixa');
-		}else{
+		} else {
 			return $this->template('caixa', 'create');
 		}
+	}
+
+
+	/**
+	 * Retorna a View para edição do dado
+	 */
+	public function edit()
+	{
+		//Carrega os modelos
+		$caixaModel    = new CaixaModel;
+
+		$empresaSessao   = $this->session->get('empresa');
+		$empresaSessaoId = $empresaSessao['empresa_id'];
+		$dataCaixa 		 = date('Y-m-d');
+
+		$dados['caixa'] =  $caixaModel->getDeleted("empresa_id = $empresaSessaoId AND DATE(created_at) = DATE('$dataCaixa')", true);
+
+		return $this->template('caixa', 'edit', $dados);
 	}
 
 	/////////////////////////////
@@ -102,7 +143,7 @@ class CaixaController extends BaseController
 		if ($this->validate($rules)) {
 			//Carrega os modelos
 			$caixaLancamentoModel  = new CaixaLancamentoModel;
-			$caixaModel                 = new CaixaModel;
+			$caixaModel            = new CaixaModel;
 			//Sessão
 			$empresaSessao   = $this->session->get('empresa');
 			$usuarioSessao   = $this->session->get('usuario');
@@ -190,6 +231,65 @@ class CaixaController extends BaseController
 
 			return redirect()->to('/caixa');
 		}
+	}
+
+	/**
+	 * Salva a atualização de permissões do usuário
+	 */
+	public function update($id)
+	{
+		//Get request
+		$request = $this->request->getVar();
+
+		//Carrega os modelos
+		$caixaModel  = new CaixaModel();
+
+		$rules = [
+			'motivo'  => 'required'
+		];
+		if ($this->validate($rules) && $id) {
+			$usuarioSessao   = $this->session->get('usuario');
+			$dadosCaixa = [
+				'caixa_id'		     	 => $id,
+				'motivo_reabertura'  	 => $request['motivo'],
+				'usuario_id_reabertura'  => $usuarioSessao['usuario_id'],
+				'usuario_id_fechamento'	 => null,
+				'data_reabertura'    	 => date('Y-m-d H:i:s'),
+				'deleted_at'	         => null
+			];
+
+			//Salva
+			$caixaModel->save($dadosCaixa);
+
+			$this->setFlashdata('Caixa reaberto!', 'info');
+
+			return redirect()->to('/caixa');
+		} else {
+			$this->setFlashdata('não foi possível reabrir o caixa!', 'info');
+
+			return redirect()->to('/caixa');
+		}
+	}
+
+	/**
+	 * Fecha o caixa
+	 */
+	public function fecharCaixa()
+	{
+		//Get request
+		$request = $this->request->getVar();
+
+		$usuarioSessao   = $this->session->get('usuario');
+
+		//Carrega os modelos
+		$caixaModel  = new CaixaModel();
+
+		//deleta (safe mode)
+		$dados = $caixaModel->delete($request['caixaId']);
+
+		$caixaModel->update($request['caixaId'], ['usuario_id_fechamento' => $usuarioSessao['usuario_id']]);
+
+		return $this->response->setJSON($dados);
 	}
 
 	/////////////////////////////

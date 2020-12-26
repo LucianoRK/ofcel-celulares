@@ -203,9 +203,12 @@ $routes->group('caixa', function ($routes) {
 	// Páginas
 	$routes->get('/', 'CaixaController::index');
 	$routes->get('create', 'CaixaController::create');
+	$routes->get('edit', 'CaixaController::edit');
 	// Funcionalidades
 	$routes->post('store', 'CaixaController::store');
+	$routes->post('update/(:num)', 'CaixaController::update/$1');
 	$routes->post('storeLancamento', 'CaixaController::storeLancamento');
+	$routes->post('fecharCaixa', 'CaixaController::fecharCaixa');
 });
 
 

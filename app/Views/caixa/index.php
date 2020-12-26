@@ -9,14 +9,25 @@
 </style>
 <div class="row">
     <div class="col-sm text-left d-none d-md-block">
-        <span class="h4 align-center">Caixa</span>
+        <?php if ($caixaPendente) : ?>
+            <h3 class="text-danger"><strong>Caixa pendente <?= date('d/m/Y', strtotime($caixaPendente['created_at']))  ?></strong></h3>
+        <?php else : ?>
+            <span class="h4 align-center">Caixa <?= date('d/m/Y') ?></span>
+        <?php endif; ?>
     </div>
     <div class="col-sm text-md-center text-lg-right">
-        <?php if ($base->permissao('CaixaController/lancamento')) : ?>
+        <?php if ($base->permissao('CaixaController/lancamento') && !$caixaPendente && !$caixaReabrir) : ?>
             <button class="btn btn-success btn-md" id="btnNovoLancamento">Novo Lançamento</button>
         <?php endif; ?>
-        <?php if ($base->permissao('CaixaController/retirada')) : ?>
+        <?php if ($base->permissao('CaixaController/retirada') && !$caixaPendente && !$caixaReabrir) : ?>
             <button class="btn btn-danger btn-md" id="btnNovaRetirada">Nova Retirada</button>
+        <?php endif; ?>
+        <?php if ($base->permissao('CaixaController/edit') && $caixaReabrir) : ?>
+            <div class="col-sm text-md-center text-lg-right">
+                <a href="<?= base_url('caixa/edit') ?>">
+                    <button class="btn btn-danger btn-md">Reabrir Caixa</button>
+                </a>
+            </div>
         <?php endif; ?>
     </div>
 </div>
@@ -29,7 +40,7 @@
                 <input type="text" class="form-control form-control-lg w-100" name="nome" required>
             </div>
             <div class="form-group col-md-4">
-                <input type="text" class="form-control form-control-lg w-100 dinheiro" id="valor" name="valor" value="0,00" required>
+                <input type="text" class="form-control form-control-lg w-100 dinheiro" name="valor" value="0,00" required>
                 <input type="hidden" name="tipo" value="1" required>
                 <input type="hidden" name="caixaId" value="<?= $caixa['caixa_id'] ?>" required>
             </div>
@@ -49,7 +60,7 @@
                 <input type="text" class="form-control form-control-lg w-100" name="nome" required>
             </div>
             <div class="form-group col-md-4">
-                <input type="text" class="form-control form-control-lg w-100 dinheiro" id="valor" name="valor" value="0,00" required>
+                <input type="text" class="form-control form-control-lg w-100 dinheiro" name="valor" value="0,00" required>
                 <input type="hidden" name="tipo" value="0" required>
                 <input type="hidden" name="caixaId" value="<?= $caixa['caixa_id'] ?>" required>
             </div>
@@ -148,21 +159,27 @@
                         </tr>
                         <?php foreach ($caixaLancamentos as $caixaLancamento) : ?>
                             <?php
-                                if($caixaLancamento['tipo'] == 1){
-                                    $classeIcon     = 'la-plus-circle';
-                                    $classeCorTexto = 'text-success';
-                                }else{
-                                    $classeIcon     = 'la-minus-circle';
-                                    $classeCorTexto = 'text-danger';
-                                } 
+                            if ($caixaLancamento['tipo'] == 1) {
+                                $classeIcon     = 'la-plus-circle';
+                                $classeCorTexto = 'text-success';
+                            } else {
+                                $classeIcon     = 'la-minus-circle';
+                                $classeCorTexto = 'text-danger';
+                            }
                             ?>
                             <tr>
-                                <td class="<?= $classeCorTexto?>"><?= $caixaLancamento['nome'] ?> </td>
-                                <td class="text-right <?= $classeCorTexto?>"><i class="la <?= $classeIcon?> "></i> R$ <?= $base->sqlToReal($caixaLancamento['valor']) ?></td>
+                                <td class="<?= $classeCorTexto ?>"><?= $caixaLancamento['nome'] ?> </td>
+                                <td class="text-right <?= $classeCorTexto ?>"><i class="la <?= $classeIcon ?> "></i> R$ <?= $base->sqlToReal($caixaLancamento['valor']) ?></td>
                             </tr>
                         <?php endforeach ?>
                         <tr>
-                            <td><strong class='h3'></strong> </td>
+                            <td>
+                                <?php if(!$caixaReabrir): ?>
+                                <strong class='h3'>
+                                    <button class="btn btn-danger btn-md" id="fecharCaixa">Fechar caixa</button>
+                                </strong>
+                                <?php endif ?>
+                            </td>
                             <td class="text-right"><strong class='h4'>R$ <?= $base->sqlToReal($totalGeral) ?></strong></td>
                         </tr>
                     </tbody>

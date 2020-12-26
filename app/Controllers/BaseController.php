@@ -261,11 +261,16 @@ class BaseController extends Controller
 		$empresaSessao   = $this->session->get('empresa');
 		$empresaSessaoId = $empresaSessao['empresa_id'];
 		//Busca o caixa do dia
-		$caixaHoje	= $caixaModel->get("empresa_id = $empresaSessaoId AND DATE(created_at) = DATE(NOW())", true);
-		if($caixaHoje){
-			return true;
-		}else{
-			return false;
+		$caixa	= $caixaModel->get("empresa_id = $empresaSessaoId", true);
+
+		if ($caixa) {
+			if (date('Y-m-d', strtotime($caixa['created_at'])) == date('Y-m-d')) {
+				return true; // Caixa inicializado
+			} else {
+				return $caixa; //  Caixa Pendente (dia anterior)
+			}
+		} else {
+			return false; // Caixa não iniciado ou finalizado
 		}
 	}
 }
