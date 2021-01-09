@@ -113,6 +113,9 @@ $routes->group('produto', function ($routes) {
 	$routes->get('/', 'ProdutoController::index');
 	$routes->get('edit/(:num)', 'ProdutoController::edit/$1');
 	$routes->get('create', 'ProdutoController::create');
+	$routes->get('produtoLancar', 'ProdutoController::produtoLancar');
+	$routes->get('produtoTransferir', 'ProdutoController::produtoTransferir');
+
 	// Funcionalidades
 	$routes->post('store', 'ProdutoController::store');
 	$routes->post('update/(:num)', 'ProdutoController::update/$1');

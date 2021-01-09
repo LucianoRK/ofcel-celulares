@@ -1,0 +1,101 @@
+
+#--------------------------------------------------------------------
+# ENVIRONMENT
+#--------------------------------------------------------------------
+
+#CI_ENVIRONMENT = production
+CI_ENVIRONMENT = development
+
+#--------------------------------------------------------------------
+# APP
+#--------------------------------------------------------------------
+
+app.baseURL = http://localhost:8080/
+app.forceGlobalSecureRequests = false
+
+#app.sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler'
+#app.sessionCookieName = 'ci_session'
+#app.sessionSavePath = NULL
+#app.sessionMatchIP = false
+app.sessionTimeToUpdate = 300
+app.sessionRegenerateDestroy = true
+app.sessionExpiration = 28800
+
+# app.cookiePrefix = ''
+# app.cookieDomain = ''
+# app.cookiePath = '/'
+# app.cookieSecure = false
+# app.cookieHTTPOnly = false
+
+app.CSRFProtection  = false
+app.CSRFTokenName   = 'csrf_name'
+app.CSRFCookieName  = 'csrf_cookie_name'
+app.CSRFExpire      = 7200
+app.CSRFRegenerate  = true
+app.CSRFExcludeURIs = []
+
+# app.CSPEnabled = false
+
+#--------------------------------------------------------------------
+# DATABASE
+#--------------------------------------------------------------------
+
+database.default.hostname = localhost
+database.default.database = ofcel
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+database.default.port     = 3306
+
+# database.tests.hostname = localhost
+# database.tests.database = ci4
+# database.tests.username = root
+# database.tests.password = root
+# database.tests.DBDriver = PostgreSQL
+
+#--------------------------------------------------------------------
+# CONTENT SECURITY POLICY
+#--------------------------------------------------------------------
+
+# contentsecuritypolicy.reportOnly = false
+# contentsecuritypolicy.defaultSrc = 'none'
+# contentsecuritypolicy.scriptSrc = 'self'
+# contentsecuritypolicy.styleSrc = 'self'
+# contentsecuritypolicy.imageSrc = 'self'
+# contentsecuritypolicy.base_uri = null
+# contentsecuritypolicy.childSrc = null
+# contentsecuritypolicy.connectSrc = 'self'
+# contentsecuritypolicy.fontSrc = null
+# contentsecuritypolicy.formAction = null
+# contentsecuritypolicy.frameAncestors = null
+# contentsecuritypolicy.mediaSrc = null
+# contentsecuritypolicy.objectSrc = null
+# contentsecuritypolicy.pluginTypes = null
+# contentsecuritypolicy.reportURI = null
+# contentsecuritypolicy.sandbox = false
+# contentsecuritypolicy.upgradeInsecureRequests = false
+
+#--------------------------------------------------------------------
+# ENCRYPTION
+#--------------------------------------------------------------------
+
+hashSistema = 93aa420db68755866236c8ed058189b31ba7ebcd
+
+# encryption.key = 
+# encryption.driver = OpenSSL
+
+#--------------------------------------------------------------------
+# HONEYPOT
+#--------------------------------------------------------------------
+
+honeypot.hidden = 'true'
+honeypot.label = 'Digite um texto'
+honeypot.name = 'EmailComercialhp'
+honeypot.template = '<label>{label}</label><input type="text" name="{name}" value=""/>'
+honeypot.container = '<div style="display:none">{template}</div>'
+
+#--------------------------------------------------------------------
+# viacep (https://viacep.com.br/ws/84010010/json/)
+#--------------------------------------------------------------------
+
+buscaCep = https://viacep.com.br/ws/

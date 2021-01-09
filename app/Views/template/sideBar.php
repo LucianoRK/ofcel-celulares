@@ -48,7 +48,7 @@
                 <li class="nav-item <?= $base->addActiveMenu(['EstoqueController', 'ProdutoController', 'MarcaController', 'CategoriaController', 'SubCategoriaController']); ?>">
                     <a class="" data-toggle="collapse" href="#collapseProdutos" aria-expanded="true">
                         <i class="la la-dropbox"></i>
-                        <p>ESTOQUE</p>
+                        <p>CADASTROS</p>
                         <!--<span class="badge badge-count">5</span> -->
                     </a>
                     <div class="collapse in" id="collapseProdutos">
